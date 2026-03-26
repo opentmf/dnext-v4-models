@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.opentmf.model</groupId>
     <artifactId>dnext-v4-models</artifactId>
-    <version>2.11.2-SNAPSHOT</version>
+    <version>2.11.2</version>
   </parent>
 
   <artifactId>dnext-common-v4-model</artifactId>
   <name>dnext-common-v4-model</name>
-  <version>2.11.2-SNAPSHOT</version>
+  <version>2.11.2</version>
   <description>
     - TMF-620: Product Catalog Management API, version: 2.11.2
     - TMF-622: Product Ordering Management API, version: 2.11.2

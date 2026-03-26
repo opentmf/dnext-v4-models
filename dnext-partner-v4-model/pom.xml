@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.opentmf.model</groupId>
     <artifactId>dnext-v4-models</artifactId>
-    <version>2.11.2-SNAPSHOT</version>
+    <version>2.11.2</version>
   </parent>
 
   <artifactId>dnext-partner-v4-model</artifactId>
   <name>dnext-partner-v4-model</name>
-  <version>2.11.2-SNAPSHOT</version>
+  <version>2.11.2</version>
   <description>
     - TMF-632: Party Management API, version: 2.11.2
     - TMF-651: Agreement Management API, version: 2.11.2
@@ -24,7 +24,7 @@
     <dependency>
       <groupId>org.opentmf.model</groupId>
       <artifactId>dnext-common-v4-model</artifactId>
-      <version>2.11.2-SNAPSHOT</version>
+      <version>2.11.2</version>
     </dependency>
     <dependency>
       <groupId>org.opentmf.model</groupId>
