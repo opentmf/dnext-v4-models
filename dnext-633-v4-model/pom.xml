@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.opentmf.model</groupId>
     <artifactId>dnext-v4-models</artifactId>
-    <version>2.11.2</version>
+    <version>2.11.3-SNAPSHOT</version>
   </parent>
 
   <artifactId>dnext-633-v4-model</artifactId>
   <name>dnext-633-v4-model</name>
-  <version>2.11.2</version>
+  <version>2.11.3-SNAPSHOT</version>
   <description>
 TMF-633: Service Catalog Management API, version: 2.11.2
     Hierarchical model classes with polymorphism.
@@ -20,7 +20,7 @@ TMF-633: Service Catalog Management API, version: 2.11.2
     <dependency>
       <groupId>org.opentmf.model</groupId>
       <artifactId>dnext-service-v4-model</artifactId>
-      <version>2.11.2</version>
+      <version>2.11.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opentmf.model</groupId>

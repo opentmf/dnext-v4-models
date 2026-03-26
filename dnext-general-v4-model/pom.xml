@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.opentmf.model</groupId>
     <artifactId>dnext-v4-models</artifactId>
-    <version>2.11.2</version>
+    <version>2.11.3-SNAPSHOT</version>
   </parent>
 
   <artifactId>dnext-general-v4-model</artifactId>
   <name>dnext-general-v4-model</name>
-  <version>2.11.2</version>
+  <version>2.11.3-SNAPSHOT</version>
   <description>
     - TMF-667: Document Management API, version: 2.11.2
     - TMF-673: Geographic Address Management API, version: 2.11.2
@@ -21,7 +21,7 @@
     <dependency>
       <groupId>org.opentmf.model</groupId>
       <artifactId>dnext-common-v4-model</artifactId>
-      <version>2.11.2</version>
+      <version>2.11.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opentmf.model</groupId>
