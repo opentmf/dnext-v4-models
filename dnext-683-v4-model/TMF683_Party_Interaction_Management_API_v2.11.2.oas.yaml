@@ -1,0 +1,1458 @@
+openapi: 3.1.0
+info:
+  title: Dnext Party Interaction Management API
+  description: Party Interaction captures information about past interactions in
+    order to re-use it in future ones.
+  termsOfService: https://www.gnu.org/licenses/agpl-3.0.en.html
+  contact:
+    name: PiA Bilisim Hizmetleri A.S. (DNext)
+    url: https://www.pia-team.com/contact
+    email: info@pia-team.com
+  license:
+    name: GNU AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  version: 4.6.2
+servers:
+  - url: https://uat.test.orbitant.dev/api/partyInteractionManagement/v4
+    description: Generated server url
+tags:
+  - name: partyInteraction
+    description: the partyInteraction API
+  - name: hub
+    description: the hub API
+paths:
+  /partyInteraction:
+    get:
+      tags:
+        - partyInteraction
+      summary: List or find PartyInteraction objects
+      description: This operation list or find PartyInteraction entities
+      operationId: listPartyInteraction
+      parameters:
+        - name: fields
+          in: query
+          description: Comma-separated properties to be provided in response
+          required: false
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: Requested index for start of resources to be provided in response
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Requested number of resources to be provided in response
+          required: false
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          description: Comma-separated properties to sort fields in response
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: List
+                $ref: "#/components/schemas/PartyInteraction"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "405":
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - partyInteraction
+      summary: Creates a PartyInteraction
+      description: This operation creates a PartyInteraction entity.
+      operationId: createPartyInteraction
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/PartyInteractionCreate"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/PartyInteraction"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "405":
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /hub:
+    post:
+      tags:
+        - hub
+        - events subscription
+      summary: Register a listener
+      description: Sets the communication endpoint address the service instance must
+        use to deliver information about its health state, execution state,
+        failures and metrics.
+      operationId: registerListener
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/EventSubscriptionInput"
+        required: true
+      responses:
+        "201":
+          description: Subscribed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/EventSubscription"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "405":
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/partyInteraction/{id}":
+    get:
+      tags:
+        - partyInteraction
+      summary: Retrieves a PartyInteraction by ID
+      description: This operation retrieves a PartyInteraction entity. Attribute
+        selection is enabled for all first level attributes.
+      operationId: retrievePartyInteraction
+      parameters:
+        - name: id
+          in: path
+          description: Identifier of the PartyInteraction
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: Comma-separated properties to provide in response
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/PartyInteraction"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "405":
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - partyInteraction
+      summary: Deletes a PartyInteraction
+      description: This operation deletes a PartyInteraction entity.
+      operationId: deletePartyInteraction
+      parameters:
+        - name: id
+          in: path
+          description: Identifier of the PartyInteraction
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "405":
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      tags:
+        - partyInteraction
+      summary: Updates partially a PartyInteraction
+      description: This operation updates partially a PartyInteraction entity.
+      operationId: patchPartyInteraction
+      parameters:
+        - name: id
+          in: path
+          description: Identifier of the PartyInteraction
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/merge-patch+json;charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/PartyInteractionUpdate"
+          application/json-patch+json;charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/JsonPatch"
+        required: true
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/PartyInteraction"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "405":
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/hub/{id}":
+    delete:
+      tags:
+        - hub
+        - events subscription
+      summary: Unregister a listener
+      description: Resets the communication endpoint address the service instance must
+        use to deliver information about its health state, execution state,
+        failures and metrics.
+      operationId: unregisterListener
+      parameters:
+        - name: id
+          in: path
+          description: The id of the registered listener
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+        "400":
+          description: Bad request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "405":
+          description: Method not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    AttachmentRefOrValue:
+      type: object
+      description: An attachment by value or by reference. For AttachmentRefOrValue,
+        the attribute type,schemaLocation and referredType are related to the
+        contained entity and not to AttchmentRefOrValue itself
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this particular attachment
+        href:
+          type: string
+          format: uri
+          description: URI for this Attachment
+        attachmentType:
+          type: string
+          description: Attachment type such as video, picture
+        content:
+          type: string
+          description: The actual contents of the attachment object, if embedded, encoded
+            as base64
+        description:
+          type: string
+          description: A narrative text describing the content of the attachment
+        mimeType:
+          type: string
+          description: Attachment mime type such as extension file for video, picture and
+            document
+        name:
+          type: string
+          description: The name of the attachment
+        url:
+          type: string
+          format: uri
+          description: Uniform Resource Locator, is a web page address (a subset of URI)
+        size:
+          $ref: "#/components/schemas/Quantity"
+          description: The size of the attachment.
+        validFor:
+          $ref: "#/components/schemas/TimePeriod"
+          description: The period of time for which the attachment is valid
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        "@referredType":
+          type: string
+          description: The actual type of the target instance when needed for
+            disambiguation.
+    InteractionItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the interaction item
+        creationDate:
+          type: string
+          format: date-time
+          description: Date when the interaction item is created in the system
+        reason:
+          type: string
+          description: Reason why this item is referred
+        resolution:
+          type: string
+          description: Resolution of the interaction item
+        attachment:
+          type: array
+          description: Complements the description of an element (for instance a product)
+            through video, pictures...
+          items:
+            $ref: "#/components/schemas/AttachmentRefOrValue"
+        channel:
+          type: array
+          description: "Where the interaction took place (e.g.: web, mobile app, store,
+            kiosk, etc.)"
+          items:
+            $ref: "#/components/schemas/RelatedChannel"
+        item:
+          $ref: "#/components/schemas/RelatedEntityRefOrValue"
+          description: RelatedEntity defines a reference to any entity. It uses
+            polymorphism in order to let the API client know how to treat the
+            element, as the entity type is not known beforehand.
+        itemDate:
+          $ref: "#/components/schemas/TimePeriod"
+          description: Moment this item is referred
+        note:
+          type: array
+          description: Extra information about a given entity
+          items:
+            $ref: "#/components/schemas/Note"
+        relatedParty:
+          type: array
+          description: Related Entity reference. A related party defines party or party
+            role linked to a specific entity.
+          items:
+            $ref: "#/components/schemas/RelatedParty"
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+    InteractionRelationship:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the referenced party interaction
+        href:
+          type: string
+          format: uri
+          description: Hyperlink to access the referenced party interaction
+        relationshipType:
+          type: string
+          description: Type of the interaction relationship
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+    Note:
+      type: object
+      description: Extra information about a given entity
+      properties:
+        id:
+          type: string
+          description: Identifier of the note within its containing entity (may or may not
+            be globally unique, depending on provider implementation)
+        author:
+          type: string
+          description: Author of the note
+        date:
+          type: string
+          format: date-time
+          description: Date of the note
+        text:
+          type: string
+          description: Text of the note
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+    PartyInteractionCreate:
+      type: object
+      description: The PartyInteraction to be created
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the customer
+        creationDate:
+          type: string
+          format: date-time
+          description: Date when the interaction is created in the system
+        description:
+          type: string
+          description: Description of the interaction
+        direction:
+          type: string
+          description: Specifies who started the interaction. It might be the party or the
+            enterprise exposing this API. Possible descriptions are “inbound”
+            and “outbound”
+        reason:
+          type: string
+          description: Reason why the interaction happened
+        status:
+          type: string
+          description: Status of the interaction (opened, inProgress, completed)
+        statusChangeDate:
+          type: string
+          format: date-time
+          description: Last time the status changed
+        attachment:
+          type: array
+          description: Complements the description of an element (for instance a product)
+            through video, pictures...
+          items:
+            $ref: "#/components/schemas/AttachmentRefOrValue"
+        channel:
+          type: array
+          description: Where the interaction took place (e.g. web, mobile app, store,
+            kiosk, etc.)
+          items:
+            $ref: "#/components/schemas/RelatedChannel"
+        interactionDate:
+          $ref: "#/components/schemas/TimePeriod"
+          description: The period during which the interaction took place. Start and end
+            will be different in case of a call or a store visit. They will be
+            the same (or only one will appear) in case of a message or other
+            momentary interactions.
+        interactionItem:
+          type: array
+          description: A list of interaction items
+          items:
+            $ref: "#/components/schemas/InteractionItem"
+        interactionRelationship:
+          type: array
+          description: A list of interaction relationships
+          items:
+            $ref: "#/components/schemas/InteractionRelationship"
+        note:
+          type: array
+          description: Extra information about a given entity
+          items:
+            $ref: "#/components/schemas/Note"
+        relatedParty:
+          type: array
+          description: Related Entity reference. A related party defines party or party
+            role linked to a specific entity.
+          items:
+            $ref: "#/components/schemas/RelatedParty"
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+      required:
+        - channel
+        - direction
+        - interactionDate
+        - reason
+        - status
+    Quantity:
+      type: object
+      description: An amount in a given unit
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Numeric value in a given unit
+        units:
+          type: string
+          description: Unit
+    RelatedChannel:
+      type: object
+      description: Related channel to another entity. May be online web, mobile app,
+        social ,etc.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of a related entity.
+        href:
+          type: string
+          format: uri
+          description: Reference of the related entity.
+        name:
+          type: string
+          description: Name of the channel.
+        role:
+          type: string
+          description: Role playing by the channel.
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        "@referredType":
+          type: string
+          description: The actual type of the target instance when needed for
+            disambiguation.
+      required:
+        - href
+        - id
+    RelatedEntityRefOrValue:
+      type: object
+      description: A reference to an entity, where the type of the entity is not known
+        in advance. A related entity defines a entity described by reference or
+        by value linked to a specific entity. The polymorphic attributes @type,
+        @schemaLocation & @referredType are related to the Entity and not the
+        RelatedEntityRefOrValue class itself
+      properties:
+        id:
+          type: string
+          description: Unique identifier of a related entity.
+        href:
+          type: string
+          format: uri
+          description: Reference of the related entity.
+        name:
+          type: string
+          description: Name of the related entity.
+        role:
+          type: string
+          description: A string. Role playing by the related entity.
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        "@referredType":
+          type: string
+          description: The actual type of the target instance when needed for
+            disambiguation.
+      required:
+        - role
+    RelatedParty:
+      type: object
+      description: Related Entity reference. A related party defines party or party
+        role linked to a specific entity.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of a related entity.
+        href:
+          type: string
+          format: uri
+          description: Reference of the related entity.
+        name:
+          type: string
+          description: Name of the related entity.
+        role:
+          type: string
+          description: Role played by the related party
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        "@referredType":
+          type: string
+          description: The actual type of the target instance when needed for
+            disambiguation.
+      required:
+        - "@referredType"
+        - href
+        - id
+    TimePeriod:
+      type: object
+      description: A period of time, either as a deadline (endDateTime only) a
+        startDateTime only, or both
+      properties:
+        endDateTime:
+          type: string
+          format: date-time
+          description: End of the time period, using IETC-RFC-3339 format
+        startDateTime:
+          type: string
+          format: date-time
+          description: Start of the time period, using IETC-RFC-3339 format. If you define
+            a start, you must also define an end
+    PartyInteraction:
+      type: object
+      properties:
+        revision:
+          type: integer
+          description: Version number of the entity
+        createdDate:
+          type: string
+          format: date-time
+          description: Date of creation
+        updatedDate:
+          type: string
+          format: date-time
+          description: Date of update
+        createdBy:
+          type: string
+          description: Name of created by user
+        updatedBy:
+          type: string
+          description: Name of updated by user
+        id:
+          type: string
+          description: Unique identifier of the party interaction
+        href:
+          type: string
+          format: uri
+          description: Hyperlink to access the party interaction
+        description:
+          type: string
+          description: Description of the interaction
+        direction:
+          type: string
+          description: Specifies who started the interaction. It might be the party or the
+            enterprise exposing this API. Possible values are “inbound” and
+            “outbound”
+        reason:
+          type: string
+          description: Reason why the interaction happened
+        status:
+          type: string
+          description: Status of the interaction (opened, inProgress, completed)
+        statusChangeDate:
+          type: string
+          format: date-time
+          description: Last time the status changed
+        attachment:
+          type: array
+          description: Complements the description of an element (for instance a product)
+            through video, pictures...
+          items:
+            $ref: "#/components/schemas/AttachmentRefOrValue"
+        channel:
+          type: array
+          description: Where the interaction took place (e.g. web, mobile app, store,
+            kiosk, etc.)
+          items:
+            $ref: "#/components/schemas/RelatedChannel"
+        interactionDate:
+          $ref: "#/components/schemas/TimePeriod"
+          description: The period during which the interaction took place. Start and end
+            will be different in case of a call or a store visit. They will be
+            the same (or only one will appear) in case of a message or other
+            momentary interactions.
+        interactionItem:
+          type: array
+          description: A list of interaction items
+          items:
+            $ref: "#/components/schemas/InteractionItem"
+        interactionRelationship:
+          type: array
+          description: A list of interaction relationships
+          items:
+            $ref: "#/components/schemas/InteractionRelationship"
+        note:
+          type: array
+          description: Extra information about a given entity
+          items:
+            $ref: "#/components/schemas/Note"
+        relatedParty:
+          type: array
+          description: Related Entity reference. A related party defines party or party
+            role linked to a specific entity.
+          items:
+            $ref: "#/components/schemas/RelatedParty"
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        creationDate:
+          type: string
+          format: date-time
+          description: Party Interaction Creation Date
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        reason:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+        referenceError:
+          type: string
+          format: uri
+        baseType:
+          type: string
+        schemaLocation:
+          type: string
+        type:
+          type: string
+    EventSubscriptionInput:
+      type: object
+      description: Data containing the callback endpoint to deliver the information
+      properties:
+        callback:
+          type: string
+          description: The callback being registered.
+          minLength: 1
+        query:
+          type: string
+          description: additional data to be passed
+      required:
+        - callback
+    EventSubscription:
+      type: object
+      description: Sets the communication endpoint address the service instance must
+        use to deliver notification information
+      properties:
+        revision:
+          type: integer
+          description: Version number of the entity
+        createdDate:
+          type: string
+          format: date-time
+          description: Date of creation
+        updatedDate:
+          type: string
+          format: date-time
+          description: Date of update
+        createdBy:
+          type: string
+          description: Name of created by user
+        updatedBy:
+          type: string
+          description: Name of updated by user
+        id:
+          type: string
+          description: Id of the listener
+          minLength: 1
+        callback:
+          type: string
+          description: The callback being registered.
+          minLength: 1
+        query:
+          type: string
+          description: additional data to be passed
+      required:
+        - callback
+        - id
+    PartyInteractionUpdate:
+      type: object
+      description: The PartyInteraction to be updated
+      properties:
+        creationDate:
+          type: string
+          format: date-time
+          description: Date when the interaction is created in the system
+        description:
+          type: string
+          description: Description of the interaction
+        reason:
+          type: string
+          description: Reason why the interaction happened
+        status:
+          type: string
+          description: Status of the interaction (opened, inProgress, completed)
+        statusChangeDate:
+          type: string
+          format: date-time
+          description: Last time the status changed
+        attachment:
+          type: array
+          description: Complements the description of an element (for instance a product)
+            through video, pictures...
+          items:
+            $ref: "#/components/schemas/AttachmentRefOrValue"
+        channel:
+          type: array
+          description: Where the interaction took place (e.g. web, mobile app, store,
+            kiosk, etc.)
+          items:
+            $ref: "#/components/schemas/RelatedChannel"
+        interactionDate:
+          $ref: "#/components/schemas/TimePeriod"
+          description: The period during which the interaction took place. Start and end
+            will be different in case of a call or a store visit. They will be
+            the same (or only one will appear) in case of a message or other
+            momentary interactions.
+        interactionItem:
+          type: array
+          description: A list of interaction items
+          items:
+            $ref: "#/components/schemas/InteractionItem"
+        interactionRelationship:
+          type: array
+          description: A list of interaction relationships
+          items:
+            $ref: "#/components/schemas/InteractionRelationship"
+        note:
+          type: array
+          description: Extra information about a given entity
+          items:
+            $ref: "#/components/schemas/Note"
+        relatedParty:
+          type: array
+          description: Related Entity reference. A related party defines party or party
+            role linked to a specific entity.
+          items:
+            $ref: "#/components/schemas/RelatedParty"
+        "@baseType":
+          type: string
+          description: When sub-classing, this defines the super-class
+        "@schemaLocation":
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and
+            relationships
+        "@type":
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+    JsonPatch:
+      description: The PartyInteraction to be updated
+    PartyInteractionCreateEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        id:
+          type: string
+          description: Identifier of the Process flow
+        href:
+          type: string
+          format: uri
+          description: Reference of the ProcessFlow
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        event:
+          $ref: "#/components/schemas/PartyInteractionCreateEventPayload"
+        auth:
+          $ref: "#/components/schemas/Auth"
+        trace:
+          $ref: "#/components/schemas/Trace"
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccessPolicyConstraintData"
+    PartyInteractionCreateEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        partyInteraction:
+          $ref: "#/components/schemas/PartyInteraction"
+    PartyInteractionAttributeValueChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        fieldPath:
+          type: string
+          description: The path identifying the object field concerned by this notification.
+        event:
+          $ref: "#/components/schemas/PartyInteractionAttributeValueChangeEventPayload"
+        auth:
+          $ref: "#/components/schemas/Auth"
+        trace:
+          $ref: "#/components/schemas/Trace"
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccessPolicyConstraintData"
+    PartyInteractionAttributeValueChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        partyInteraction:
+          $ref: "#/components/schemas/PartyInteraction"
+    PartyInteractionDeleteEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        id:
+          type: string
+          description: Identifier of the Process flow
+        href:
+          type: string
+          format: uri
+          description: Reference of the ProcessFlow
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        event:
+          $ref: "#/components/schemas/PartyInteractionDeleteEventPayload"
+        auth:
+          $ref: "#/components/schemas/Auth"
+        trace:
+          $ref: "#/components/schemas/Trace"
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccessPolicyConstraintData"
+    PartyInteractionDeleteEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        partyInteraction:
+          $ref: "#/components/schemas/PartyInteraction"
+    PartyInteractionStatusChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        id:
+          type: string
+          description: Identifier of the Process flow
+        href:
+          type: string
+          format: uri
+          description: Reference of the ProcessFlow
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        event:
+          $ref: "#/components/schemas/PartyInteractionStatusChangeEventPayload"
+        auth:
+          $ref: "#/components/schemas/Auth"
+        trace:
+          $ref: "#/components/schemas/Trace"
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccessPolicyConstraintData"
+    PartyInteractionStatusChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        partyInteraction:
+          $ref: "#/components/schemas/PartyInteraction"
+    DNextEventBase:
+      type: object
+      description: Abstract base class for DNext event notifications. Contains both standard TMF event fields and DNext-specific extensions.
+      properties:
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explanatory text of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occurred.
+        auth:
+          $ref: "#/components/schemas/Auth"
+        trace:
+          $ref: "#/components/schemas/Trace"
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccessPolicyConstraintData"
+    Auth:
+      type: object
+      description: Authentication context of the event.
+      properties:
+        userId:
+          type: string
+        organizationId:
+          type: string
+        tenantId:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        groups:
+          type: array
+          items:
+            type: string
+        tokenIssuer:
+          type: string
+        tokenIssuedTime:
+          type: string
+        tokenExpiryTime:
+          type: string
+        authenticationToken:
+          type: string
+    Trace:
+      type: object
+      description: Trace context of the event.
+      properties:
+        site:
+          type: string
+        company:
+          type: string
+        channel:
+          type: string
+        application:
+          type: string
+        sessionId:
+          type: string
+        businessInteractionId:
+          type: string
+        transactionId:
+          type: string
+        businessInteractionType:
+          type: string
+    AccessPolicyConstraintData:
+      type: object
+      description: Access policy constraint data.
+      properties:
+        role:
+          type: string
+        name:
+          type: string
+        referredType:
+          type: string
+          default: accessRole

@@ -1,0 +1,2344 @@
+openapi: 3.1.0
+info:
+  title: Resource Inventory Management
+  description: This is Swagger UI environment generated for the TMF Resource Inventory Management specification
+  contact:
+    name: PiA(people in action)
+    url: http://www.pia-team.com/
+    email: info@pia-team.com
+  license:
+    name: PiA License
+    url: http://www.pia-team.com
+  version: 2.20.0
+servers:
+- url: https://uat.test.orbitant.dev/api/resourceInventoryManagement/v4
+  description: Generated server url
+security:
+- BearerAuthentication: []
+tags:
+- name: resource
+  description: the resource API
+- name: hub
+  description: the hub API
+paths:
+  /resource:
+    get:
+      tags:
+      - resource
+      summary: List or find Resource objects
+      description: This operation list or find Resource entities
+      operationId: listResource
+      parameters:
+      - name: fields
+        in: query
+        description: Comma-separated properties to be provided in response
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: Requested index for start of resources to be provided in response
+        required: false
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: Requested number of resources to be provided in response
+        required: false
+        schema:
+          type: integer
+      - name: sort
+        in: query
+        description: Sort field of resources to be provided in response
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: List
+                $ref: '#/components/schemas/Resource'
+        '400':
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - resource
+      summary: Creates a Resource
+      description: This operation creates a Resource entity.
+      operationId: createResource
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              description: The Resource to be created
+              oneOf:
+              - $ref: '#/components/schemas/LogicalResourceCreate'
+              - $ref: '#/components/schemas/PhysicalResourceCreate'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '400':
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /hub:
+    post:
+      tags:
+      - hub
+      - events subscription
+      summary: Register a listener
+      description: Sets the communication endpoint address the service instance must use to deliver information about its
+        health state, execution state, failures and metrics.
+      operationId: registerListener
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/EventSubscriptionInput'
+        required: true
+      responses:
+        '201':
+          description: Subscribed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/EventSubscription'
+        '400':
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /bulkResourceStatusUpdate:
+    post:
+      tags:
+      - resource
+      summary: Bulk Updates Resource States
+      description: This operation issues Bulk resource status update.
+      operationId: bulkResourceStatusUpdate
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/BulkResourceStatusUpdate'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /bulkResourceCreate:
+    post:
+      tags:
+      - resource
+      summary: Creates a  Bulk Resource
+      description: This operation creates a Bulk resource entity.
+      operationId: bulkResourceCreateJob
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/BulkResourceCreate'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /resource/{id}:
+    get:
+      tags:
+      - resource
+      summary: Retrieves a Resource by ID
+      description: This operation retrieves a Resource entity. Attribute selection is enabled for all first level attributes.
+      operationId: retrieveResource
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the Resource
+        required: true
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: Comma-separated properties to provide in response
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '400':
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - resource
+      summary: Deletes a Resource
+      description: This operation deletes a Resource entity.
+      operationId: deleteResource
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the Resource
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '400':
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      tags:
+      - resource
+      summary: Updates partially a Resource
+      description: This operation updates partially a Resource entity.
+      operationId: patchResource
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the Resource
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/merge-patch+json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/ResourceUpdate'
+          application/json-patch+json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/JsonPatch'
+        required: true
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '400':
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /hub/{id}:
+    delete:
+      tags:
+      - hub
+      - events subscription
+      summary: Unregister a listener
+      description: Resets the communication endpoint address the service instance must use to deliver information about its
+        health state, execution state, failures and metrics.
+      operationId: unregisterListener
+      parameters:
+      - name: id
+        in: path
+        description: The id of the registered listener
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '400':
+          description: Bad request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AttachmentRefOrValue:
+      type: object
+      description: An attachment by value or by reference. For AttachmentRefOrValue, the attribute type,schemaLocation and
+        referredType are related to the contained entity and not to AttchmentRefOrValue itself
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        id:
+          type: string
+          description: Unique identifier for this particular attachment
+        href:
+          type: string
+          format: uri
+          description: URI for this Attachment
+        attachmentType:
+          type: string
+          description: Attachment type such as video, picture
+        content:
+          type: string
+          description: The actual contents of the attachment object, if embedded, encoded as base64
+          format: base64
+        description:
+          type: string
+          description: A narrative text describing the content of the attachment
+        mimeType:
+          type: string
+          description: Attachment mime type such as extension file for video, picture and document
+        name:
+          type: string
+          description: The name of the attachment
+        url:
+          type: string
+          format: uri
+          description: Uniform Resource Locator, is a web page address (a subset of URI)
+        size:
+          $ref: '#/components/schemas/Quantity'
+          description: The size of the attachment.
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+          description: The period of time for which the attachment is valid
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+    Characteristic:
+      type: object
+      description: Describes a given characteristic of an object or entity through a name/value pair.
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        id:
+          type: string
+          description: Unique identifier of the characteristic
+        name:
+          type: string
+          description: Name of the characteristic
+        valueType:
+          type: string
+          description: Data type of the value of the characteristic
+        characteristicRelationship:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacteristicRelationship'
+        value:
+          description: The value of the characteristic
+          $ref: '#/components/schemas/Any'
+      required:
+      - name
+      - value
+    CharacteristicRelationship:
+      type: object
+      description: Another Characteristic that is related to the current Characteristic;
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the characteristic
+        relationshipType:
+          type: string
+          description: The type of relationship
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+    ConstraintRef:
+      type: object
+      description: Constraint reference. The Constraint resource represents a policy/rule applied to an entity or entity spec.
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        id:
+          type: string
+          description: reference id to the target constraint
+        href:
+          type: string
+          format: uri
+          description: Hyperlink reference to the target constraint
+        name:
+          type: string
+          description: Name given to the constraint
+        version:
+          type: string
+          description: constraint version
+        '@referredType':
+          type: string
+          description: The (class) type of the referred constraint
+      required:
+      - id
+    ExternalReference:
+      type: object
+      description: External reference of the individual or reference in other system
+      properties:
+        id:
+          type: string
+          description: External reference id
+        href:
+          type: string
+          format: uri
+        externalReferenceType:
+          type: string
+          description: Type of the external reference
+        name:
+          type: string
+          description: External reference name
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+      required:
+      - name
+    Feature:
+      type: object
+      description: Configuration feature.
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        id:
+          type: string
+          description: Unique identifier of the feature.
+        isBundle:
+          type: boolean
+          description: True if this is a feature group. Default is false.
+        isEnabled:
+          type: boolean
+          description: True if this feature is enabled. Default is true.
+        name:
+          type: string
+          description: This is the name for the feature.
+        constraint:
+          type: array
+          description: This is a list of feature constraints.
+          items:
+            $ref: '#/components/schemas/ConstraintRef'
+        featureCharacteristic:
+          type: array
+          description: This is a list of Characteristics for a particular feature.
+          items:
+            $ref: '#/components/schemas/Characteristic'
+          maxItems: 2147483647
+          minItems: 1
+        featureRelationship:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureRelationship'
+        featureBundle:
+          type: array
+          description: Bundled feature specification
+          items:
+            $ref: '#/components/schemas/FeatureBundle'
+      required:
+      - featureCharacteristic
+      - name
+    FeatureBundle:
+      type: object
+      description: A type of FeatureSpecification that belongs to a grouping of FeatureSpecifications made available to the
+        market. It inherits of all attributes of FeatureSpecification.
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        href:
+          type: string
+          format: uri
+          description: Unique reference of the FeatureBundle
+        id:
+          type: string
+          description: Unique identifier of the FeatureBundle
+        lifecycleStatus:
+          type: string
+          description: Used to indicate the current lifecycle status
+        name:
+          type: string
+          description: Name of the FeatureBundle
+    FeatureRelationship:
+      type: object
+      description: Configuration feature
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the target feature.
+        name:
+          type: string
+          description: This is the name of the target feature.
+        relationshipType:
+          type: string
+          description: This is the type of the feature relationship.
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+          description: The period for which this feature relationship is valid.
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+      required:
+      - name
+      - relationshipType
+    GeographicLocationRefOrValue:
+      type: object
+      description: A GeographicLocation is a pure-virtual super-class to the GeoJSON-aligned geometries of Point (addresses
+        and locations), MultiPoint, LineString (streets, highways and boundaries), MultiLineString and Polygon (countries,
+        provinces, tracts of land). Use the @type attribute to specify which of these is being specified by the geometry attribute.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the place
+        href:
+          type: string
+          format: uri
+          description: Unique reference of the place
+        name:
+          type: string
+          description: A user-friendly name for the place, such as [Paris Store], [London Store], [Main Home]
+        bbox:
+          type: array
+          description: A bounding box array that contains the geometry. The axes order follows the axes order of the geometry
+          items:
+            type: number
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+      required:
+      - '@type'
+    GeographicSubAddress:
+      type: object
+      description: Representation of a GeographicSubAddress  It is used for addressing within a property in an urban area
+        (country properties are often defined differently). It may refer to a building, a building cluster, or a floor of
+        a multistory building.
+      properties:
+        id:
+          type: string
+          description: Unique Identifier of the subAddress
+        href:
+          type: string
+          format: uri
+          description: Link to the subAddress
+        buildingName:
+          type: string
+          description: allows for buildings that have well-known names
+        levelNumber:
+          type: string
+          description: used where a level type may be repeated e.g. BASEMENT 1, BASEMENT 2
+        levelType:
+          type: string
+          description: describes level types within a building
+        name:
+          type: string
+          description: Name of the subAddress to identify it with a meaningful identification
+        privateStreetName:
+          type: string
+          description: private streets internal to a property (e.g. a university) may have internal names that are not recorded
+            by the land title office.
+        privateStreetNumber:
+          type: string
+          description: private streets numbers internal to a private street
+        subAddressType:
+          type: string
+          description: 'Type of subAddress : it can be a subunit or a private street'
+        subUnitNumber:
+          type: string
+          description: the discriminator used for the subunit often just a simple number e.g. FLAT 5, may also be a range
+        subUnitType:
+          type: string
+          description: the type of subunit e.g.BERTH, FLAT, PIER, SUITE, SHOP, TOWER, UNIT, WHARF
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+    LogicalResourceCreate:
+      allOf:
+      - $ref: '#/components/schemas/ResourceCreate'
+      - type: object
+        properties:
+          resourceRelationship:
+            type: array
+            items:
+              type: object
+              properties:
+                '@baseType':
+                  type: string
+                  description: When sub-classing, this defines the super-class
+                '@schemaLocation':
+                  type: string
+                  format: uri
+                  description: A URI to a JSON-Schema file that defines additional attributes and relationships
+                '@type':
+                  type: string
+                  description: When sub-classing, this defines the sub-class entity name
+                relationshipType:
+                  type: string
+                resource:
+                  $ref: '#/components/schemas/ResourceRefOrValue'
+              required:
+              - resource
+          value:
+            type: string
+            description: the value of the logical resource. E.g '0746712345' for  MSISDN's
+          '@referredType':
+            type: string
+            description: The actual type of the target instance when needed for disambiguation.
+      description: Logical Resource entity
+      required:
+      - name
+    Note:
+      type: object
+      description: Extra information about a given entity
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        id:
+          type: string
+          description: Identifier of the note within its containing entity (may or may not be globally unique, depending on
+            provider implementation)
+        author:
+          type: string
+          description: Author of the note
+        date:
+          type: string
+          format: date-time
+          description: Date of the note
+        text:
+          type: string
+          description: Text of the note
+    PhysicalResourceCreate:
+      allOf:
+      - $ref: '#/components/schemas/ResourceCreate'
+      - type: object
+        properties:
+          resourceRelationship:
+            type: array
+            items:
+              type: object
+              properties:
+                '@baseType':
+                  type: string
+                  description: When sub-classing, this defines the super-class
+                '@schemaLocation':
+                  type: string
+                  format: uri
+                  description: A URI to a JSON-Schema file that defines additional attributes and relationships
+                '@type':
+                  type: string
+                  description: When sub-classing, this defines the sub-class entity name
+                relationshipType:
+                  type: string
+                resource:
+                  $ref: '#/components/schemas/ResourceRefOrValue'
+              required:
+              - resource
+          manufactureDate:
+            type: string
+            format: date-time
+            description: This is a string attribute that defines the date of manufacture of this item in the fixed format
+              "dd/mm/yyyy". This is an optional attribute.
+          powerState:
+            type: string
+            description: 'This defines the current power status of the hardware item. Values include:    0:  Unknown   1:  Not
+              Applicable   2:  No Power Applied   3: Full Power Applied   4:  Power Save - Normal   5:  Power Save - Degraded   6:  Power
+              Save - Standby   7:  Power Save - Critical   8:  Power Save - Low Power Mode   9:  Power Save - Unknown  10:
+              Power Cycle  11: Power Warning  12: Power Off'
+          serialNumber:
+            type: string
+            description: This is a string that represents a manufacturer-allocated number used to identify different instances
+              of the same hardware item. The ModelNumber and PartNumber attributes are used to identify different types of
+              hardware items. This is a REQUIRED attribute.
+          versionNumber:
+            type: string
+            description: This is a string that identifies the version of this physical resource. This is an optional attribute.
+          '@referredType':
+            type: string
+            description: The actual type of the target instance when needed for disambiguation.
+      description: Pyhsical Resource entity
+      required:
+      - name
+    Quantity:
+      type: object
+      description: An amount in a given unit
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Numeric value in a given unit
+        units:
+          type: string
+          description: Unit
+    RelatedEntityRefOrValue:
+      type: object
+      description: A reference to an entity, where the type of the entity is not known in advance. A related entity defines
+        a entity described by reference or by value linked to a specific entity. The polymorphic attributes @type, @schemaLocation
+        & @referredType are related to the Entity and not the RelatedEntityRefOrValue class itself
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+          example: ResourceSpecification
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+          example: https://mycsp.com:8080/tmf-api/schema/Resource/LogicalResourceSpecification.schema.json
+        '@type':
+          type: string
+          example: RelatedEntityRefOrValue
+        id:
+          type: string
+          description: Unique identifier of a related entity.
+        href:
+          type: string
+          format: uri
+          description: Reference of the related entity.
+        name:
+          type: string
+          description: Name of the related entity.
+        role:
+          type: string
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - '@type'
+      - role
+    RelatedParty:
+      type: object
+      description: Related Entity reference. A related party defines party or party role linked to a specific entity.
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        id:
+          type: string
+          description: Unique identifier of a related entity.
+        href:
+          type: string
+          format: uri
+          description: Reference of the related entity.
+        name:
+          type: string
+          description: Name of the related entity.
+        role:
+          type: string
+          description: Role played by the related party
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - '@referredType'
+      - id
+    RelatedPlaceRefOrValue:
+      type: object
+      description: Related Entity reference. A related place defines a place described by reference or by value linked to
+        a specific entity. The polymorphic attributes @type, @schemaLocation & @referredType are related to the place entity
+        and not the RelatedPlaceRefOrValue class itself
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        id:
+          type: string
+          description: Unique identifier of the place
+        href:
+          type: string
+          format: uri
+          description: Unique reference of the place
+        city:
+          type: string
+          description: City that the address is in
+        country:
+          type: string
+          description: Country that the address is in
+        locality:
+          type: string
+          description: An area of defined or undefined boundaries within a local authority or other legislatively defined
+            area, usually rural or semi rural in nature. [ANZLIC-STREET], or a suburb, a bounded locality within a city, town
+            or shire principally of urban character [ANZLICSTREET]
+        name:
+          type: string
+          description: A user-friendly name for the place, such as "Paris Store", "London Store", "Main Home"
+        postcode:
+          type: string
+          description: descriptor for a postal delivery area, used to speed and simplify the delivery of mail (also know as
+            zipcode)
+        stateOrProvince:
+          type: string
+          description: the State or Province that the address is in
+        streetName:
+          type: string
+          description: Name of the street or other street type
+        streetNr:
+          type: string
+          description: Number identifying a specific property on a public street. It may be combined with streetNrLast for
+            ranged addresses
+        streetNrLast:
+          type: string
+          description: Last number in a range of street numbers allocated to a property
+        streetNrLastSuffix:
+          type: string
+          description: Last street number suffix for a ranged address
+        streetNrSuffix:
+          type: string
+          description: the first street number suffix
+        streetSuffix:
+          type: string
+          description: A modifier denoting a relative direction
+        streetType:
+          type: string
+          description: 'alley, avenue, boulevard, brae, crescent, drive, highway, lane, terrace, parade, place, tarn, way,
+            wharf '
+        geographicLocation:
+          $ref: '#/components/schemas/GeographicLocationRefOrValue'
+        geographicSubAddress:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeographicSubAddress'
+        externalReference:
+          type: array
+          description: External reference of the shopping cart or reference in other system
+          items:
+            $ref: '#/components/schemas/ExternalReference'
+        role:
+          type: string
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - role
+    RelatedProductOrderItem:
+      type: object
+      properties:
+        orderItemAction:
+          type: string
+        orderItemId:
+          type: string
+        productOrderHref:
+          type: string
+          format: uri
+        productOrderId:
+          type: string
+        role:
+          type: string
+        '@type':
+          type: string
+        '@schemaLocation':
+          type: string
+          format: uri
+        '@referredType':
+          type: string
+        '@baseType':
+          type: string
+    RelatedResourceOrderItem:
+      type: object
+      description: RelatedResourceOrderItem (a ResourceOrder item) .The resource order item which triggered resource creation/change/termination.
+      properties:
+        itemId:
+          type: string
+          description: Identifier of the order item where the resource was managed
+        role:
+          type: string
+          description: Role of the resource order item for this resource
+        resourceOrderHref:
+          type: string
+          format: uri
+          description: Reference of the related entity.
+        resourceOrderId:
+          type: string
+          description: Unique identifier of a related entity.
+        itemAction:
+          type: string
+          description: Action of the order item for this resource
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - itemId
+      - resourceOrderId
+    RelatedServiceOrderItem:
+      type: object
+      properties:
+        itemAction:
+          type: string
+        itemId:
+          type: string
+        serviceOrderHref:
+          type: string
+          format: uri
+        serviceOrderId:
+          type: string
+        role:
+          type: string
+        '@type':
+          type: string
+        '@schemaLocation':
+          type: string
+          format: uri
+        '@referredType':
+          type: string
+        '@baseType':
+          type: string
+    ResourceCreate:
+      type: object
+      description: 'Resource is an abstract entity that describes the common set of attributes shared by all concrete resources
+        (e.g. TPE, EQUIPMENT) in the inventory. Skipped properties: id,href'
+      discriminator:
+        propertyName: '@type'
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the account
+        category:
+          type: string
+          description: Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource
+        description:
+          type: string
+          description: free-text description of the resource
+        endOperatingDate:
+          type: string
+          format: date-time
+          description: A date time( DateTime). The date till the resource is operating
+        name:
+          type: string
+          description: A string used to give a name to the resource
+        resourceVersion:
+          type: string
+          description: A field that identifies the specific version of an instance of a resource.
+        startOperatingDate:
+          type: string
+          format: date-time
+          description: A date time( DateTime). The date from which the resource is operating
+        administrativeState:
+          type: string
+          description: Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and
+            so on.
+        attachment:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentRefOrValue'
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        operationalState:
+          type: string
+          description: Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and
+            so on.
+        place:
+          $ref: '#/components/schemas/RelatedPlaceRefOrValue'
+        externalReference:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalReference'
+        relatedParty:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedParty'
+        resourceCharacteristic:
+          type: array
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        resourceRelationship:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceRelationship'
+        resourceSpecification:
+          $ref: '#/components/schemas/ResourceSpecificationRef'
+        resourceStatus:
+          type: string
+          description: Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and
+            so on.
+        usageState:
+          type: string
+          description: Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and
+            so on.
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        activationFeature:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        statusReason:
+          type: string
+          description: Reason explanation of the product status
+        resourceOrderItem:
+          type: array
+          description: A list of resource order items related to this resource
+          items:
+            $ref: '#/components/schemas/RelatedResourceOrderItem'
+        productOrderItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedProductOrderItem'
+        serviceOrderItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedServiceOrderItem'
+        relatedEntity:
+          type: array
+          description: A list of related  entity in relationship with this service order item
+          items:
+            $ref: '#/components/schemas/RelatedEntityRefOrValue'
+        aclRelatedParty:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedParty'
+        extensions:
+          type: object
+          description: Extensions to support resource pooling management
+          $ref: '#/components/schemas/IdentifierRange'
+      required:
+      - name
+    IdentifierRange:
+      type: object
+      properties:
+        quantity:
+          type: integer
+          format: int32
+          description: Number of identifiers in the range
+          minimum: 1
+        rangeStart:
+          type: string
+          description: Starting value of the identifier range
+        rangeEnd:
+          type: string
+          description: Ending value of the identifier range
+      required:
+        - quantity
+        - rangeStart
+        - rangeEnd
+    ResourceRefOrValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifier of an instance of the resource. Required to be unique within the resource type.  Used in
+            URIs as the identifier for specific instances of a type.
+        href:
+          type: string
+          format: uri
+          description: The URI for the object itself.
+        category:
+          type: string
+          description: Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource
+        description:
+          type: string
+          description: free-text description of the resource
+        endOperatingDate:
+          type: string
+          format: date-time
+          description: A date time( DateTime). The date till the resource is operating
+        name:
+          type: string
+          description: A string used to give a name to the resource
+        resourceVersion:
+          type: string
+          description: A field that identifies the specific version of an instance of a resource.
+        startOperatingDate:
+          type: string
+          format: date-time
+          description: A date time( DateTime). The date from which the resource is operating
+        administrativeState:
+          type: string
+        attachment:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentRefOrValue'
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        operationalState:
+          type: string
+        place:
+          $ref: '#/components/schemas/RelatedPlaceRefOrValue'
+        relatedParty:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedParty'
+        resourceCharacteristic:
+          type: array
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        resourceSpecification:
+          $ref: '#/components/schemas/ResourceSpecificationRef'
+        resourceStatus:
+          type: string
+        usageState:
+          type: string
+        activationFeature:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+        statusReason:
+          type: string
+          description: Reason explanation of the product status
+        resourceOrderItem:
+          type: array
+          description: A list of resource order items related to this resource
+          items:
+            $ref: '#/components/schemas/RelatedResourceOrderItem'
+        serviceOrderItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedServiceOrderItem'
+        productOrderItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedProductOrderItem'
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        relatedEntity:
+          type: array
+          description: A list of related  entity in relationship with this service order item
+          items:
+            $ref: '#/components/schemas/RelatedEntityRefOrValue'
+    ResourceRelationship:
+      type: object
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        relationshipType:
+          type: string
+        resource:
+          $ref: '#/components/schemas/ResourceRefOrValue'
+      required:
+      - resource
+    ResourceSpecificationRef:
+      type: object
+      description: 'Resource Specification reference: The ResourceSpecification is required to realize a ProductSpecification.'
+      properties:
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        id:
+          type: string
+          description: Unique identifier of the resource specification
+        href:
+          type: string
+          format: uri
+          description: Reference of the resource specification
+        name:
+          type: string
+          description: Name of the requiredResourceSpecification
+        version:
+          type: string
+          description: Resource specification version
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - href
+      - id
+    TimePeriod:
+      type: object
+      description: A period of time, either as a deadline (endOffsetDateTime only) a startOffsetDateTime only, or both
+      properties:
+        endDateTime:
+          type: string
+          format: date-time
+          description: End of the time period, using IETC-RFC-3339 format
+          example: 1985-04-12 23:20:50.520000+00:00
+        startDateTime:
+          type: string
+          format: date-time
+          description: Start of the time period, using IETC-RFC-3339 format
+          example: 1985-04-12 23:20:50.520000+00:00
+    Resource:
+      type: object
+      description: Resource is an abstract entity that describes the common set of attributes shared by all concrete resources
+        (e.g. TPE, EQUIPMENT) in the inventory.
+      properties:
+        revision:
+          type: integer
+          description: Version number of the entity
+        createdDate:
+          type: string
+          format: date-time
+        updatedDate:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        id:
+          type: string
+          description: Identifier of an instance of the resource. Required to be unique within the resource type.  Used in
+            URIs as the identifier for specific instances of a type.
+        href:
+          type: string
+          format: uri
+          description: The URI for the object itself.
+        category:
+          type: string
+          description: Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource
+        description:
+          type: string
+          description: free-text description of the resource
+        endOperatingDate:
+          type: string
+          format: date-time
+          description: A date time( DateTime). The date till the resource is operating
+        name:
+          type: string
+          description: A string used to give a name to the resource
+        resourceVersion:
+          type: string
+          description: A field that identifies the specific version of an instance of a resource.
+        startOperatingDate:
+          type: string
+          format: date-time
+          description: A date time( DateTime). The date from which the resource is operating
+        administrativeState:
+          type: string
+        attachment:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentRefOrValue'
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        operationalState:
+          type: string
+        place:
+          $ref: '#/components/schemas/RelatedPlaceRefOrValue'
+        externalReference:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalReference'
+        relatedParty:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedParty'
+        resourceCharacteristic:
+          type: array
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        resourceRelationship:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceRelationship'
+        resourceSpecification:
+          $ref: '#/components/schemas/ResourceSpecificationRef'
+        resourceStatus:
+          type: string
+          description: Tracks the lifecycle status of the resource, such as standby ,Avilable ,suspended ,terminated ,cancelled
+            and so on
+        usageState:
+          type: string
+        activationFeature:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        statusReason:
+          type: string
+          description: Reason explanation of the product status
+        resourceOrderItem:
+          type: array
+          description: A list of resource order items related to this resource
+          items:
+            $ref: '#/components/schemas/RelatedResourceOrderItem'
+        productOrderItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedProductOrderItem'
+        serviceOrderItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedServiceOrderItem'
+        relatedEntity:
+          type: array
+          description: A list of related  entity in relationship with this service order item
+          items:
+            $ref: '#/components/schemas/RelatedEntityRefOrValue'
+        aclRelatedParty:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedParty'
+        extensions:
+          type: object
+          description: Extensions to support resource pooling management
+          $ref: '#/components/schemas/IdentifierRange'
+      required:
+      - href
+      - id
+    Error:
+      type: object
+      description: Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)
+      properties:
+        code:
+          type: string
+        reason:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+        referenceError:
+          type: string
+          format: uri
+        '@baseType':
+          type: string
+        '@schemaLocation':
+          type: string
+          format: uri
+        '@type':
+          type: string
+    EventSubscriptionInput:
+      type: object
+      description: Data containing the callback endpoint to deliver the information
+      properties:
+        callback:
+          type: string
+          description: The callback being registered.
+          minLength: 1
+        query:
+          type: string
+          description: additional data to be passed
+      required:
+      - callback
+    EventSubscription:
+      type: object
+      description: Sets the communication endpoint address the service instance must use to deliver notification information
+      properties:
+        revision:
+          type: integer
+          description: Version number of the entity
+        createdDate:
+          type: string
+          format: date-time
+          description: Date of creation
+        updatedDate:
+          type: string
+          format: date-time
+          description: Date of update
+        createdBy:
+          type: string
+          description: Name of created by user
+        updatedBy:
+          type: string
+          description: Name of updated by user
+        id:
+          type: string
+          description: Id of the listener
+          minLength: 1
+        callback:
+          type: string
+          description: The callback being registered.
+          minLength: 1
+        query:
+          type: string
+          description: additional data to be passed
+      required:
+      - callback
+      - id
+    BulkCharacteristic:
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        name:
+          type: string
+          description: The name of the characteristic
+        isUnique:
+          type: boolean
+        isVisible:
+          type: boolean
+        isIdentifier:
+          type: boolean
+        counterType:
+          type: string
+        valueMask:
+          type: string
+          description: A mask value that indicates which part of the valueFrom will be replaced with the encoded counter
+        valueFrom:
+          type: string
+          description: A template string that contains an arbitrary number of characters
+        valueTo:
+          type: string
+          description: A template string that contains an arbitrary number of characters
+        isPopulateCharacteristicValueToResourceName:
+          type: boolean
+          description: A boolean to decide if characteristic value must be populated to resource name
+      required:
+      - name
+      - valueFrom
+      - valueMask
+      - valueTo
+    BulkResourceStatusUpdate:
+      type: object
+      description: The Bulk Resource to be updated
+      properties:
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        resourceStatus:
+          type: string
+        jobReference:
+          type: string
+          description: An arbitrary string that is added to all the created resources as an external reference
+        itemCount:
+          type: integer
+          description: The number of resources that will be created
+        bulkCharacteristic:
+          $ref: '#/components/schemas/BulkCharacteristic'
+      required:
+      - itemCount
+    BulkResourceCreate:
+      type: object
+      description: The Bulk Resource to be created
+      properties:
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        jobReference:
+          type: string
+          description: An arbitrary string that is added to all the created resources as an external reference
+        itemCount:
+          type: integer
+          description: The number of resources that will be created
+        baseResource:
+          description: The base part of the resource that will be present in all created entities
+          oneOf:
+          - $ref: '#/components/schemas/LogicalResourceCreate'
+          - $ref: '#/components/schemas/PhysicalResourceCreate'
+        bulkCharacteristic:
+          type: array
+          description: An array of ResourceCharacteristicTemplate objects that will be used to generate a ResourceCharacteristic
+            type object for each entity
+          items:
+            $ref: '#/components/schemas/BulkCharacteristic'
+      required:
+      - baseResource
+      - bulkCharacteristic
+      - itemCount
+    ResourceUpdate:
+      type: object
+      description: The Resource to be updated
+      properties:
+        category:
+          type: string
+          description: Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource
+        description:
+          type: string
+          description: free-text description of the resource
+        endOperatingDate:
+          type: string
+          format: date-time
+          description: A date time( DateTime). The date till the resource is operating
+        name:
+          type: string
+          description: A string used to give a name to the resource
+        resourceVersion:
+          type: string
+          description: A field that identifies the specific version of an instance of a resource.
+        startOperatingDate:
+          type: string
+          format: date-time
+          description: A date time( DateTime). The date from which the resource is operating
+        administrativeState:
+          type: string
+          description: Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and
+            so on.
+        attachment:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentRefOrValue'
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        operationalState:
+          type: string
+          description: Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and
+            so on.
+        place:
+          $ref: '#/components/schemas/RelatedPlaceRefOrValue'
+        externalReference:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalReference'
+        relatedParty:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedParty'
+        resourceCharacteristic:
+          type: array
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        resourceRelationship:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceRelationship'
+        resourceSpecification:
+          $ref: '#/components/schemas/ResourceSpecificationRef'
+        resourceStatus:
+          type: string
+          description: Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and
+            so on.
+        usageState:
+          type: string
+          description: Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and
+            so on.
+        activationFeature:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        statusReason:
+          type: string
+          description: Reason explanation of the product status
+        resourceOrderItem:
+          type: array
+          description: A list of resource order items related to this resource
+          items:
+            $ref: '#/components/schemas/RelatedResourceOrderItem'
+        productOrderItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedProductOrderItem'
+        serviceOrderItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedServiceOrderItem'
+        relatedEntity:
+          type: array
+          description: A list of related  entity in relationship with this service order item
+          items:
+            $ref: '#/components/schemas/RelatedEntityRefOrValue'
+        aclRelatedParty:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedParty'
+        extensions:
+          type: object
+          description: Extensions to support resource pooling management
+          $ref: '#/components/schemas/IdentifierRange'
+    JsonPatch:
+      description: The Resource to be updated
+    ResourceCreateEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        event:
+          $ref: '#/components/schemas/ResourceCreateEventPayload'
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    ResourceCreateEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        resource:
+          $ref: '#/components/schemas/Resource'
+    ResourceAttributeValueChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        fieldPath:
+          type: string
+          description: The path identifying the object field concerned by this notification.
+        event:
+          $ref: '#/components/schemas/ResourceAttributeValueChangeEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    ResourceAttributeValueChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        resource:
+          $ref: '#/components/schemas/Resource'
+    ResourceStateChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        event:
+          $ref: '#/components/schemas/ResourceStateChangeEventPayload'
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    ResourceStateChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        resource:
+          $ref: '#/components/schemas/Resource'
+    ResourceDeleteEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        event:
+          $ref: '#/components/schemas/ResourceDeleteEventPayload'
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    ResourceDeleteEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        resource:
+          $ref: '#/components/schemas/Resource'
+    DNextEventBase:
+      type: object
+      description: Abstract base class for DNext event notifications. Contains both standard TMF event fields and DNext-specific
+        extensions.
+      properties:
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explanatory text of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occurred.
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    Auth:
+      type: object
+      description: Authentication context of the event.
+      properties:
+        userId:
+          type: string
+        organizationId:
+          type: string
+        tenantId:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        groups:
+          type: array
+          items:
+            type: string
+        tokenIssuer:
+          type: string
+        tokenIssuedTime:
+          type: string
+        tokenExpiryTime:
+          type: string
+        authenticationToken:
+          type: string
+    Trace:
+      type: object
+      description: Trace context of the event.
+      properties:
+        site:
+          type: string
+        company:
+          type: string
+        channel:
+          type: string
+        application:
+          type: string
+        sessionId:
+          type: string
+        businessInteractionId:
+          type: string
+        transactionId:
+          type: string
+        businessInteractionType:
+          type: string
+    AccessPolicyConstraintData:
+      type: object
+      description: Access policy constraint data.
+      properties:
+        role:
+          type: string
+        name:
+          type: string
+        referredType:
+          type: string
+          default: accessRole
+    Any: {}
+  securitySchemes:
+    BearerAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

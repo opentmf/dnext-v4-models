@@ -1,0 +1,1509 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://uat.test.orbitant.dev/api/paymentMethod/v4
+  description: Generated server url
+paths:
+  /paymentMethod:
+    get:
+      tags:
+      - paymentMethod
+      summary: List or find PaymentMethod objects
+      description: This operation list or find PaymentMethod entities
+      operationId: listPaymentMethod
+      parameters:
+      - name: fields
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: Requested index for start of resources to be provided in response
+        required: false
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: Requested number of resources to be provided in response
+        required: false
+        schema:
+          type: integer
+      - name: sort
+        in: query
+        description: Sort field of resources to be provided in response
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentMethod'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - paymentMethod
+      summary: Creates a PaymentMethod
+      description: This operation creates a PaymentMethod entity.
+      operationId: createPaymentMethod
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              description: The PaymentMethod to be created
+              oneOf:
+              - $ref: '#/components/schemas/AccountPaymentMethod_Create'
+              - $ref: '#/components/schemas/BankAccountDebit_Create'
+              - $ref: '#/components/schemas/BankAccountTransfer_Create'
+              - $ref: '#/components/schemas/BankCard_Create'
+              - $ref: '#/components/schemas/BucketPaymentMethod_Create'
+              - $ref: '#/components/schemas/Cash_Create'
+              - $ref: '#/components/schemas/Check_Create'
+              - $ref: '#/components/schemas/DigitalWallet_Create'
+              - $ref: '#/components/schemas/DirectDebit_Create'
+              - $ref: '#/components/schemas/LoyaltyPaymentMethod_Create'
+              - $ref: '#/components/schemas/Other_Create'
+              - $ref: '#/components/schemas/TokenizedCard_Create'
+              - $ref: '#/components/schemas/Voucher_Create'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /hub:
+    post:
+      tags:
+      - events subscription
+      summary: Register a listener
+      description: Sets the communication endpoint address the service instance must use to deliver information about its
+        health state, execution state, failures and metrics.
+      operationId: registerListener
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/EventSubscriptionInput'
+        required: true
+      responses:
+        '201':
+          description: Subscribed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSubscription'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /paymentMethod/{id}:
+    get:
+      tags:
+      - paymentMethod
+      summary: Retrieves a PaymentMethod by ID
+      description: This operation retrieves a PaymentMethod entity. Attribute selection is enabled for all first level attributes.
+      operationId: retrievePaymentMethod
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the PaymentMethod
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - paymentMethod
+      summary: Deletes a PaymentMethod
+      description: This operation deletes a PaymentMethod entity.
+      operationId: deletePaymentMethod
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the PaymentMethod
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      tags:
+      - paymentMethod
+      summary: Partially updates a PaymentMethod
+      description: This operation partially updates a PaymentMethod entity.
+      operationId: patchPaymentMethod
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the PaymentMethod
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/merge-patch+json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/PaymentMethod_Update'
+        required: true
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /hub/{id}:
+    delete:
+      tags:
+      - events subscription
+      summary: Unregister a listener
+      description: Resets the communication endpoint address the service instance must use to deliver information about its
+        health state, execution state, failures and metrics.
+      operationId: unregisterListener
+      parameters:
+      - name: id
+        in: path
+        description: The id of the registered listener
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AccountRef:
+      type: object
+      description: Account reference. A account may be a party account or a financial account.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the account
+        href:
+          type: string
+          format: uri
+          description: Reference of the account
+        description:
+          type: string
+          description: Detailed description of the account
+        name:
+          type: string
+          description: Name of the account
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - id
+    AttachmentRefOrValue:
+      type: object
+      description: An attachment by value or by reference. An attachment complements the description of an element, for example
+        through a document, a video, a picture.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this particular attachment
+        href:
+          type: string
+          format: uri
+          description: URI for this Attachment
+        attachmentType:
+          type: string
+          description: Attachment type such as video, picture
+        content:
+          type: string
+          description: The actual contents of the attachment object, if embedded, encoded as base64
+          format: base64
+        description:
+          type: string
+          description: A narrative text describing the content of the attachment
+        mimeType:
+          type: string
+          description: Attachment mime type such as extension file for video, picture and document
+        name:
+          type: string
+          description: The name of the attachment
+        url:
+          type: string
+          format: uri
+          description: Uniform Resource Locator, is a web page address (a subset of URI)
+        size:
+          $ref: '#/components/schemas/Quantity'
+          description: The size of the attachment.
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+          description: The period of time for which the attachment is valid
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+    PaymentMethod:
+      type: object
+      description: Defines a specific method of payment (e.g. direct debit with all details associated)
+      discriminator:
+        propertyName: '@type'
+      properties:
+        revision:
+          type: integer
+          description: Version number of the entity
+        createdDate:
+          type: string
+          format: date-time
+          description: Date of creation
+        updatedDate:
+          type: string
+          format: date-time
+          description: Date of update
+        createdBy:
+          type: string
+          description: Name of created by user
+        updatedBy:
+          type: string
+          description: Name of updated by user
+        id:
+          type: string
+          description: unique identifier
+        href:
+          type: string
+          format: uri
+          description: Hyperlink reference
+        name:
+          type: string
+          description: Friendly name assigned to the payment method
+        description:
+          type: string
+          description: Text description of the contents of the payment method
+        isPreferred:
+          type: boolean
+          description: If the method is the preferred one by the owner. Typically used when querying for the payment methods
+            of a specific customer or account
+        authorizationCode:
+          type: string
+          description: 'Review: Authorization code provided by a financial institution. Typically this would be populated
+            for recurring payments using the method, as payments have an authorization code of their own.'
+        status:
+          type: string
+          description: Status of the payment method
+        statusDate:
+          type: string
+          format: date-time
+          description: The last time the payment method status changed.
+        statusReason:
+          type: string
+          description: The reason for the last status change.
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+          description: Date interval in which the payment method is valid
+        relatedParty:
+          $ref: '#/components/schemas/RelatedParty'
+          description: Reference to the customer or party that owns that payment method or can use it.
+        relatedPlace:
+          $ref: '#/components/schemas/RelatedPlace'
+          description: Reference to a place for billing or delivery address, if different to that of the related party.
+        account:
+          type: array
+          description: Reference to the accounts that are linked to the payment method. May be a party account or a financial
+            account.
+          items:
+            $ref: '#/components/schemas/AccountRef'
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: 'Type of payment method (e.g.: bank card, cash, voucher, etc). The details field type depends on the
+            value assigned to this one.'
+      required:
+      - '@type'
+      - name
+    Quantity:
+      type: object
+      description: An amount in a given unit
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Numeric value in a given unit
+        units:
+          type: string
+          description: Unit
+    RelatedParty:
+      type: object
+      description: Related Entity reference. A related party defines party or party role linked to a specific entity.
+      properties:
+        id:
+          type: string
+          description: unique identifier
+        href:
+          type: string
+          format: uri
+          description: Hyperlink reference
+        name:
+          type: string
+          description: Name of the related entity.
+        role:
+          type: string
+          description: Role played by the related party
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - '@referredType'
+      - id
+    RelatedPlace:
+      type: object
+      description: A  Place and an associated role as installation adress, delivery address, etc....
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the place
+        href:
+          type: string
+          format: uri
+          description: Unique reference of the place
+        name:
+          type: string
+          description: A user-friendly name for the place, such as [Paris Store], [London Store], [Main Home]
+        role:
+          type: string
+          description: 'Role of the place, such as: [home delivery], [shop retrieval])'
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+    TimePeriod:
+      type: object
+      description: A period of time, either as a deadline (endDateTime only) a startDateTime only, or both
+      properties:
+        endDateTime:
+          type: string
+          format: date-time
+          description: End of the time period, using IETC-RFC-3339 format
+          example: 1985-04-12 23:20:50.520000+00:00
+        startDateTime:
+          type: string
+          format: date-time
+          description: Start of the time period, using IETC-RFC-3339 format
+          example: 1985-04-12 23:20:50.520000+00:00
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        reason:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+        referenceError:
+          type: string
+          format: uri
+        baseType:
+          type: string
+        schemaLocation:
+          type: string
+        type:
+          type: string
+    AccountPaymentMethod_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      required:
+      - '@type'
+    BankAccountDebit_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      - type: object
+        properties:
+          accountNumber:
+            type: string
+            description: The Bank Account Number (this could refer to the IBAN or SWIFT number)
+          accountNumberType:
+            type: string
+            description: 'The type of account number (e.g.: IBAN, SWIFT, ...)'
+          BIC:
+            type: string
+            description: The Business Identifier Code/Swift code of the financial institution where the account is located.
+          owner:
+            type: string
+            description: The owner of the bank account. This is also the account name.
+          bank:
+            type: string
+            description: The display name of the bank.
+      description: A bank account debit method of payment. This could be extended to add any required authorization fields
+        to allow recurring payments
+      required:
+      - '@type'
+    BankAccountTransfer_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      - type: object
+        properties:
+          accountNumber:
+            type: string
+            description: The bank account number, this could refer to the iban or swift number.
+          accountNumberType:
+            type: string
+            description: 'The type of account number (e.g.: IBAN, SWIFT, ...)'
+          BIC:
+            type: string
+            description: The Business Identifier Code/Swift code of the financial institution where the account is located.
+          owner:
+            type: string
+            description: The owner of the bank account. This is also the account name.
+          bank:
+            type: string
+            description: The display name of the bank.
+      description: A bank transfer method of payment.
+      required:
+      - '@type'
+    BankCard_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      - type: object
+        properties:
+          brand:
+            type: string
+            description: The card brand
+          cardType:
+            type: string
+            description: The type of card e.g. Credit, debit etc.
+          cardNumber:
+            type: string
+            description: The bank card number.
+          expirationDate:
+            type: string
+            format: date-time
+            description: Expiration date of the bank card.
+          cvv:
+            type: string
+            description: 'The security code (e.g.: CVV, CVV2) of the card.'
+          lastFourDigits:
+            type: string
+            description: The last four digits of the credit card.
+          nameOnCard:
+            type: string
+            description: The name on the card.
+          bank:
+            type: string
+            description: The bank that issued the card.
+      description: A bank card method of payment.
+      required:
+      - '@type'
+    BucketPaymentMethod_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      required:
+      - '@type'
+    Cash_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      description: 'A cash method of payment. It has no additional data, but it could be extended to add information e.g.:
+        the cashier who took the payment, the person who paid, etc'
+      required:
+      - '@type'
+    Check_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      - type: object
+        properties:
+          checkId:
+            type: string
+            description: Unique identifier of the check.
+          drawer:
+            type: string
+            description: Person or entity writing the check.
+          payee:
+            type: string
+            description: Person or entity the check is addressed to.
+          signedDate:
+            type: string
+            format: date-time
+            description: Date when the check was signed.
+          bank:
+            type: string
+            description: Bank performing the payment of the check.
+      description: A check method of payment.
+      required:
+      - '@type'
+    DigitalWallet_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      - type: object
+        properties:
+          service:
+            type: string
+            description: 'Organization, platform or currency backing the wallet (e.g.: PayPal, Yandex, BitCoin…).'
+          walletId:
+            type: string
+            description: Account identifier in that service.
+          walletUrl:
+            type: string
+            description: 'URI pointing at the digital wallet (e.g.: //paypal.me/johndoe).'
+      description: A digital wallet method of payment.
+      required:
+      - '@type'
+    DirectDebit_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      - type: object
+        properties:
+          mandateId:
+            type: string
+            description: Unique mandate reference
+          mandateStatus:
+            type: string
+            description: The status of the mandate(Active/Inactive/Pending)
+          mandateType:
+            type: string
+            description: The type of mandate e.g., single-use(single)/multi-use(recurring)
+          mandateCategory:
+            type: string
+            description: The identification code of the Scheme e.g., core/b2b
+          signature:
+            type: string
+            description: The (e)Mandate electronic signature data
+          signatureDate:
+            type: string
+            format: date-time
+            description: The date of signing of the (e)Mandate
+          mandateStatusDate:
+            type: string
+            format: date-time
+            description: The date of the mandate status change
+          firstDebitDate:
+            type: string
+            format: date-time
+            description: The first debit date. The debit date of the collection is the day when the payment of the Debtor
+              is due to the Creditor
+          lastDebitDate:
+            type: string
+            format: date-time
+            description: The last debit date. The debit date of the collection is the day when the payment of the Debtor is
+              due to the Creditor
+          cancellationDate:
+            type: string
+            format: date-time
+            description: The date on which the (e)Mandate has been cancelled by the Debtor or the Creditor.
+          accountNumber:
+            type: string
+            description: The bank account number, this could refer to the iban or swift number.
+          accountNumberType:
+            type: string
+            description: 'The type of account number (e.g.: IBAN, SWIFT, ...)'
+          reference:
+            type: string
+            description: A reference that the party can later use to identify the direct debit.
+          BIC:
+            type: string
+            description: The Business Identifier Code/Swift code of the financial institution where the account is located.
+          owner:
+            type: string
+            description: The owner of the bank account. This is also the account name.
+          bank:
+            type: string
+            description: The display name of the bank.
+          attachment:
+            type: array
+            description: attachment
+            items:
+              $ref: '#/components/schemas/AttachmentRefOrValue'
+      description: Direct Debit is a fully automated payment instrument which is generally used for recurrent payments. It
+        allows a creditor to initiate the payment order. In doing so, it exempts the debtor from having to send a separate
+        payment order at each due date
+      required:
+      - '@type'
+    LoyaltyPaymentMethod_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      required:
+      - '@type'
+    Other_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      description: Other method of payment.c
+      required:
+      - '@type'
+    PaymentMethod_Create:
+      type: object
+      description: 'Defines a specific method of payment (e.g. direct debit with all details associated) Skipped properties:
+        id,href'
+      discriminator:
+        propertyName: '@type'
+      properties:
+        authorizationCode:
+          type: string
+          description: 'Review: Authorization code provided by a financial institution. Typically this would be populated
+            for recurring payments using the method, as payments have an authorization code of their own.'
+          example: 1234567890
+        description:
+          type: string
+          description: Text description of the contents of the payment method
+          example: My gold mastercard.
+        isPreferred:
+          type: boolean
+          description: If the method is the preferred one by the owner. Typically used when querying for the payment methods
+            of a specific customer or account
+          example: true
+        status:
+          type: string
+          description: Status of the payment method
+          example: Active
+        statusDate:
+          type: string
+          format: date-time
+          description: The last time the payment method status changed.
+          example: 1985-04-12 23:20:50.520000+00:00
+        statusReason:
+          type: string
+          description: The reason for the last status change.
+          example: This payment method has expired, therefore its status is now inactive.
+        account:
+          type: array
+          description: Reference to the accounts that are linked to the payment method. May be a party account or a financial
+            account.
+          items:
+            $ref: '#/components/schemas/AccountRef'
+        relatedParty:
+          $ref: '#/components/schemas/RelatedParty'
+          description: Reference to the customer or party that owns that payment method or can use it.
+        relatedPlace:
+          $ref: '#/components/schemas/RelatedPlace'
+          description: Reference to a place for billing or delivery address, if different to that of the related party.
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+          description: Date interval in which the payment method is valid
+        id:
+          type: string
+          description: unique identifier
+        name:
+          type: string
+          description: Friendly name assigned to the payment method
+          example: Main credit card
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@type':
+          type: string
+          description: 'Type of payment method (e.g.: bank card, cash, voucher, etc). The details field type depends on the
+            value assigned to this one.'
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+      required:
+      - '@type'
+    TokenizedCard_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      - type: object
+        properties:
+          brand:
+            type: string
+            description: Card brand. Might be used for display purposes
+          cardType:
+            type: string
+            description: Card type. Might be used for display purposes.
+          lastFourDigits:
+            type: string
+            description: The last four digits of the credit card.
+          tokenType:
+            type: string
+            description: 'Token type (e.g.: emv).'
+          token:
+            type: string
+            description: The token. A series of randomly generated numbers.
+          issuer:
+            type: string
+            description: The entity that issued the token.
+          expirationDate:
+            type: string
+            format: date-time
+            description: The tokenized card's expiration date.
+      description: A Tokenized Card method of payment.
+      required:
+      - '@type'
+    Voucher_Create:
+      allOf:
+      - $ref: '#/components/schemas/PaymentMethod_Create'
+      - type: object
+        properties:
+          code:
+            type: string
+            description: Code that identifies the voucher.
+          value:
+            $ref: '#/components/schemas/Quantity'
+            description: The value of the voucher.
+          discount:
+            type: string
+            description: The discount that the voucher applies when it's a discount voucher.
+          expirationDate:
+            type: string
+            format: date-time
+            description: The voucher's expiration date.
+          campaign:
+            type: string
+            description: Campaign this voucher belongs to.
+      description: A voucher method of payment.
+      required:
+      - '@type'
+    EventSubscription:
+      type: object
+      description: Sets the communication endpoint address the service instance must use to deliver notification information
+      properties:
+        revision:
+          type: integer
+          description: Version number of the entity
+        createdDate:
+          type: string
+          format: date-time
+          description: Date of creation
+        updatedDate:
+          type: string
+          format: date-time
+          description: Date of update
+        createdBy:
+          type: string
+          description: Name of created by user
+        updatedBy:
+          type: string
+          description: Name of updated by user
+        id:
+          type: string
+          description: Id of the listener
+          minLength: 1
+        callback:
+          type: string
+          description: The callback being registered.
+          minLength: 1
+        query:
+          type: string
+          description: additional data to be passed
+      required:
+      - callback
+      - id
+    EventSubscriptionInput:
+      type: object
+      description: Data containing the callback endpoint to deliver the information
+      properties:
+        callback:
+          type: string
+          description: The callback being registered.
+          minLength: 1
+        query:
+          type: string
+          description: additional data to be passed
+      required:
+      - callback
+    PaymentMethod_Update:
+      type: object
+      description: The PaymentMethod to be updated
+      properties:
+        authorizationCode:
+          type: string
+          description: 'Review: Authorization code provided by a financial institution. Typically this would be populated
+            for recurring payments using the method, as payments have an authorization code of their own.'
+          example: 1234567890
+        description:
+          type: string
+          description: Text description of the contents of the payment method
+          example: My gold mastercard.
+        isPreferred:
+          type: boolean
+          description: If the method is the preferred one by the owner. Typically used when querying for the payment methods
+            of a specific customer or account
+          example: true
+        status:
+          type: string
+          description: Status of the payment method
+          example: Active
+        statusDate:
+          type: string
+          format: date-time
+          description: The last time the payment method status changed.
+          example: 1985-04-12 23:20:50.520000+00:00
+        statusReason:
+          type: string
+          description: The reason for the last status change.
+          example: This payment method has expired, therefore its status is now inactive.
+        account:
+          type: array
+          description: Reference to the accounts that are linked to the payment method. May be a party account or a financial
+            account.
+          items:
+            $ref: '#/components/schemas/AccountRef'
+        relatedParty:
+          $ref: '#/components/schemas/RelatedParty'
+          description: Reference to the customer or party that owns that payment method or can use it.
+        relatedPlace:
+          $ref: '#/components/schemas/RelatedPlace'
+          description: Reference to a place for billing or delivery address, if different to that of the related party.
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+          description: Date interval in which the payment method is valid
+        name:
+          type: string
+          description: Friendly name assigned to the payment method
+          example: Main credit card
+    PaymentMethodCreateEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        event:
+          $ref: '#/components/schemas/PaymentMethodCreateEventPayload'
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    PaymentMethodCreateEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+    PaymentMethodAttributeValueChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        fieldPath:
+          type: string
+          description: The path identifying the object field concerned by this notification.
+        event:
+          $ref: '#/components/schemas/PaymentMethodAttributeValueChangeEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    PaymentMethodAttributeValueChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+    PaymentMethodStatusChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        event:
+          $ref: '#/components/schemas/PaymentMethodStatusChangeEventPayload'
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    PaymentMethodStatusChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+    PaymentMethodDeleteEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        event:
+          $ref: '#/components/schemas/PaymentMethodDeleteEventPayload'
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    PaymentMethodDeleteEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+    DNextEventBase:
+      type: object
+      description: Abstract base class for DNext event notifications. Contains both standard TMF event fields and DNext-specific
+        extensions.
+      properties:
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explanatory text of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occurred.
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    Auth:
+      type: object
+      description: Authentication context of the event.
+      properties:
+        userId:
+          type: string
+        organizationId:
+          type: string
+        tenantId:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        groups:
+          type: array
+          items:
+            type: string
+        tokenIssuer:
+          type: string
+        tokenIssuedTime:
+          type: string
+        tokenExpiryTime:
+          type: string
+        authenticationToken:
+          type: string
+    Trace:
+      type: object
+      description: Trace context of the event.
+      properties:
+        site:
+          type: string
+        company:
+          type: string
+        channel:
+          type: string
+        application:
+          type: string
+        sessionId:
+          type: string
+        businessInteractionId:
+          type: string
+        transactionId:
+          type: string
+        businessInteractionType:
+          type: string
+    AccessPolicyConstraintData:
+      type: object
+      description: Access policy constraint data.
+      properties:
+        role:
+          type: string
+        name:
+          type: string
+        referredType:
+          type: string
+          default: accessRole

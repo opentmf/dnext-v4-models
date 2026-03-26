@@ -1,0 +1,53 @@
+package org.opentmf.dnext.tmf681.model;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * MessageType values for CommunicationMessage.
+ *
+ * <p><br/>
+ * <strong>Referring TMF artifacts:</strong>
+ * <ul>
+ *   <li>TMF-681: Communication Management API</li>
+ * </ul>
+ * </p>
+ *
+ * @author Gökhan Demir
+ */
+public enum CommunicationMessageMessageTypeType {
+
+  EMAIL("email"),
+  SMS("sms"),
+  APPLE_PUSH_NOTIFICATION("applePushNotification"),
+  GOOGLE_FIREBASE_CLOUD_MESSAGING("googleFirebaseCloudMessaging");
+
+  private final String value;
+
+  CommunicationMessageMessageTypeType(String value) {
+    this.value = value;
+  }
+
+  @JsonValue
+  public String getValue() {
+    return value;
+  }
+
+  private static final Map<String, CommunicationMessageMessageTypeType> REVERSE_MAP = new HashMap<>();
+
+  static {
+    for (CommunicationMessageMessageTypeType communicationMessageMessageTypeType : values()) {
+      REVERSE_MAP.put(communicationMessageMessageTypeType.getValue(), communicationMessageMessageTypeType);
+    }
+  }
+
+  @JsonCreator
+  public static CommunicationMessageMessageTypeType resolve(String value) {
+    if (REVERSE_MAP.containsKey(value)) {
+      return REVERSE_MAP.get(value);
+    }
+    throw new IllegalArgumentException("Provided value '" + value + "' is not supported");
+  }
+}

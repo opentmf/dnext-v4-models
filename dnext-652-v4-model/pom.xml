@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.opentmf.model</groupId>
+    <artifactId>dnext-v4-models</artifactId>
+    <version>2.11.2-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>dnext-652-v4-model</artifactId>
+  <name>dnext-652-v4-model</name>
+  <version>2.11.2-SNAPSHOT</version>
+  <description>
+TMF-652: Resource Order Management API, version: 2.11.2
+    Hierarchical model classes with polymorphism.
+  </description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.opentmf.model</groupId>
+      <artifactId>dnext-resource-v4-model</artifactId>
+      <version>2.11.2-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opentmf.model</groupId>
+      <artifactId>opentmf-652-v4-api</artifactId>
+      <version>4.0.0.10</version>
+    </dependency>
+  </dependencies>
+
+</project>

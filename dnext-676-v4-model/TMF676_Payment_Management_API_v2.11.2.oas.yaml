@@ -1,0 +1,2179 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://uat.test.orbitant.dev/api/payment/v4
+  description: Generated server url
+paths:
+  /refund:
+    get:
+      tags:
+      - refund
+      summary: List or find Refund objects
+      description: This operation list or find Refund entities
+      operationId: listRefund
+      parameters:
+      - name: fields
+        in: query
+        description: Comma-separated properties to be provided in response
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: Requested index for start of resources to be provided in response
+        required: false
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: Requested number of resources to be provided in response
+        required: false
+        schema:
+          type: integer
+      - name: sort
+        in: query
+        description: Sort field of resources to be provided in response
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Refund'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - refund
+      summary: Creates a Refund
+      description: This operation creates a Refund entity.
+      operationId: createRefund
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/Refund_Create'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payment:
+    get:
+      tags:
+      - payment
+      summary: List or find Payment objects
+      description: This operation list or find Payment entities
+      operationId: listPayment
+      parameters:
+      - name: fields
+        in: query
+        description: Comma-separated properties to be provided in response
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: Requested index for start of resources to be provided in response
+        required: false
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: Requested number of resources to be provided in response
+        required: false
+        schema:
+          type: integer
+      - name: sort
+        in: query
+        description: Sort field of resources to be provided in response
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - payment
+      summary: Creates a Payment
+      description: This operation creates a Payment entity.
+      operationId: createPayment
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/Payment_Create'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /hub:
+    post:
+      tags:
+      - events subscription
+      summary: Register a listener
+      description: Sets the communication endpoint address the service instance must use to deliver information about its
+        health state, execution state, failures and metrics.
+      operationId: registerListener
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/EventSubscriptionInput'
+        required: true
+      responses:
+        '201':
+          description: Subscribed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSubscription'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /refund/{id}:
+    get:
+      tags:
+      - refund
+      summary: Retrieves a Refund by ID
+      description: This operation retrieves a Refund entity. Attribute selection is enabled for all first level attributes.
+      operationId: retrieveRefund
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the Refund
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - refund
+      summary: Deletes a Refund
+      description: This operation deletes a Refund entity.
+      operationId: deleteRefund
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the Refund
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      tags:
+      - refund
+      summary: Partially updates a Refund
+      description: This operation partially updates a Refund entity.
+      operationId: patchRefund
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the Refund
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/merge-patch+json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/Refund_Update'
+        required: true
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payment/{id}:
+    get:
+      tags:
+      - payment
+      summary: Retrieves a Payment by ID
+      description: This operation retrieves a Payment entity. Attribute selection is enabled for all first level attributes.
+      operationId: retrievePayment
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the Payment
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - payment
+      summary: Deletes a Payment
+      description: This operation deletes a Payment entity.
+      operationId: deletePayment
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the Payment
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      tags:
+      - payment
+      summary: Partially updates a Payment
+      description: This operation partially updates a Payment entity.
+      operationId: patchPayment
+      parameters:
+      - name: id
+        in: path
+        description: Identifier of the Payment
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/merge-patch+json;charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/Payment_Update'
+        required: true
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /hub/{id}:
+    delete:
+      tags:
+      - events subscription
+      summary: Unregister a listener
+      description: Resets the communication endpoint address the service instance must use to deliver information about its
+        health state, execution state, failures and metrics.
+      operationId: unregisterListener
+      parameters:
+      - name: id
+        in: path
+        description: The id of the registered listener
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AccountRef:
+      type: object
+      description: Account reference. A account may be a party account or a financial account.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the account
+        href:
+          type: string
+          format: uri
+          description: Reference of the account
+        description:
+          type: string
+          description: Detailed description of the account
+        name:
+          type: string
+          description: Name of the account
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - id
+    ChannelRef:
+      type: object
+      description: The channel to which the resource reference to. e.g. channel for selling product offerings, channel for
+        opening a trouble ticket etc..
+      properties:
+        id:
+          type: string
+          description: Unique identifier of a related entity.
+        href:
+          type: string
+          format: uri
+          description: Reference of the related entity.
+        name:
+          type: string
+          description: Name of the channel.
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - id
+    Characteristic:
+      type: object
+      description: Describes a given characteristic of an object or entity through a name/value pair.
+      properties:
+        name:
+          type: string
+          description: Name of the characteristic
+        valueType:
+          type: string
+          description: Data type of the value of the characteristic
+        value:
+          description: The value of the characteristic
+          $ref: '#/components/schemas/Any'
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+      required:
+      - name
+      - value
+    Money:
+      type: object
+      description: A base / value business entity used to represent money
+      properties:
+        unit:
+          type: string
+          description: Currency (ISO4217 norm uses 3 letters to define the currency)
+        value:
+          type: number
+          format: float
+          description: A positive floating point number
+      required:
+      - unit
+      - value
+    PaymentMethodRefOrValue:
+      type: object
+      description: link to the resource that holds information about the payment mean used to complete the operation
+      properties:
+        id:
+          type: string
+          description: Unique Identifier within the server for the payment method.
+        href:
+          type: string
+          format: uri
+          description: A resource URI pointing to the resource in the server that stores the detailed information. This is
+            typically the resource url to retrieve individual details for the specific payment method
+        description:
+          type: string
+          description: Text describing the contents of the payment method
+        isPreferred:
+          type: boolean
+          description: If the method is the preferred one by the owner. Typically used when querying for the payment methods
+            of a specific customer or account
+        name:
+          type: string
+          description: Friendly name assigned to the payment method
+        status:
+          type: string
+        statusDate:
+          type: string
+          format: date-time
+        account:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountRef'
+        relatedParty:
+          $ref: '#/components/schemas/RelatedParty'
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+          description: Date interval in which the payment method is valid
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+    PaymentRef:
+      type: object
+      description: If an immediate payment has been done at the product order submission, the payment information are captured
+        and stored (as a reference) in the order.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of a related entity.
+        href:
+          type: string
+          format: uri
+          description: Reference of the related entity.
+        name:
+          type: string
+          description: A name for the payment
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - id
+    Refund:
+      type: object
+      description: The Refund resource represents a performed Refund. It contains both information about the refund and the
+        payment method used to perform it.
+      properties:
+        revision:
+          type: integer
+          description: Version number of the entity
+        createdDate:
+          type: string
+          format: date-time
+          description: Date of creation
+        updatedDate:
+          type: string
+          format: date-time
+          description: Date of update
+        createdBy:
+          type: string
+          description: Name of created by user
+        updatedBy:
+          type: string
+          description: Name of updated by user
+        id:
+          type: string
+          description: Unique identifier of Refund
+        href:
+          type: string
+          format: uri
+          description: Hypertext Reference of the refund
+        authorizationCode:
+          type: string
+          description: Authorization code retrieved from an external payment gateway that could be used for conciliation
+        correlatorId:
+          type: string
+          description: Unique identifier in the client for the refund in case it is needed to correlate
+        description:
+          type: string
+          description: Text describing the contents of the refund
+        name:
+          type: string
+          description: Screen name of the refund
+        refundDate:
+          type: string
+          format: date-time
+          description: Date when the refund was performed
+        status:
+          type: string
+          description: Status of the refund
+        statusDate:
+          type: string
+          format: date-time
+          description: Date when the status was recorded
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be refunded (net of taxes)
+        channel:
+          $ref: '#/components/schemas/ChannelRef'
+        payment:
+          $ref: '#/components/schemas/PaymentRef'
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethodRefOrValue'
+        requestor:
+          $ref: '#/components/schemas/RelatedParty'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+          description: Tax applied
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (including taxes)
+        characteristic:
+          type: array
+          description: A list of characteristics
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+      required:
+      - account
+      - paymentMethod
+      - totalAmount
+    RelatedParty:
+      type: object
+      description: Related Entity reference. A related party defines party or party role linked to a specific entity.
+      properties:
+        id:
+          type: string
+          description: unique identifier
+        href:
+          type: string
+          format: uri
+          description: Hyperlink reference
+        name:
+          type: string
+          description: Name of the related entity.
+        role:
+          type: string
+          description: Role played by the related party
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - '@referredType'
+      - id
+    TimePeriod:
+      type: object
+      description: A period of time, either as a deadline (endDateTime only) a startDateTime only, or both
+      properties:
+        endDateTime:
+          type: string
+          format: date-time
+          description: End of the time period, using IETC-RFC-3339 format
+          example: 1985-04-12 23:20:50.520000+00:00
+        startDateTime:
+          type: string
+          format: date-time
+          description: Start of the time period, using IETC-RFC-3339 format
+          example: 1985-04-12 23:20:50.520000+00:00
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        reason:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+        referenceError:
+          type: string
+          format: uri
+        baseType:
+          type: string
+        schemaLocation:
+          type: string
+        type:
+          type: string
+    Refund_Create:
+      type: object
+      description: The Refund to be created
+      properties:
+        authorizationCode:
+          type: string
+          description: Authorization code retrieved from an external payment gateway that could be used for conciliation
+        correlatorId:
+          type: string
+          description: Unique identifier in the client for the refund in case it is needed to correlate
+        description:
+          type: string
+          description: Text describing the contents of the refund
+        name:
+          type: string
+          description: Screen name of the refund
+        refundDate:
+          type: string
+          format: date-time
+          description: Date when the refund was performed
+        status:
+          type: string
+          description: Status of the refund
+        statusDate:
+          type: string
+          format: date-time
+          description: Date when the status was recorded
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be refunded (net of taxes)
+        channel:
+          $ref: '#/components/schemas/ChannelRef'
+        payment:
+          $ref: '#/components/schemas/PaymentRef'
+        requestor:
+          $ref: '#/components/schemas/RelatedParty'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+          description: Tax applied
+        characteristic:
+          type: array
+          description: A list of characteristics
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        id:
+          type: string
+          description: Unique identifier of Payment
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethodRefOrValue'
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (including taxes)
+      required:
+      - account
+      - paymentMethod
+      - totalAmount
+    EntityRef:
+      type: object
+      description: Entity reference schema to be use for all entityRef class.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of a related entity.
+        href:
+          type: string
+          format: uri
+          description: Reference of the related entity.
+        name:
+          type: string
+          description: Name of the related entity.
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name
+        '@referredType':
+          type: string
+          description: The actual type of the target instance when needed for disambiguation.
+      required:
+      - id
+    Payment:
+      type: object
+      description: The Payment resource represents a performed payment. It contains both information about the payment and
+        the payment method used to perform it.
+      properties:
+        revision:
+          type: integer
+          description: Version number of the entity
+        createdDate:
+          type: string
+          format: date-time
+          description: Date of creation
+        updatedDate:
+          type: string
+          format: date-time
+          description: Date of update
+        createdBy:
+          type: string
+          description: Name of created by user
+        updatedBy:
+          type: string
+          description: Name of updated by user
+        id:
+          type: string
+          description: Unique identifier of Payment
+        href:
+          type: string
+          format: uri
+          description: Hypertext Reference of the Payment
+        authorizationCode:
+          type: string
+          description: Authorization code retrieved from an external payment gateway that could be used for conciliation
+        correlatorId:
+          type: string
+          description: Unique identifier in the client for the payment in case it is needed to correlate
+        description:
+          type: string
+          description: Text describing the contents of the payment
+        name:
+          type: string
+          description: Screen name of the payment
+        paymentDate:
+          type: string
+          format: date-time
+          description: Date when the payment was performed
+        status:
+          type: string
+          description: Status of the payment
+        statusDate:
+          type: string
+          format: date-time
+          description: Date when the status was recorded
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (net of taxes)
+        channel:
+          $ref: '#/components/schemas/ChannelRef'
+        payer:
+          $ref: '#/components/schemas/RelatedParty'
+        paymentItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentItem'
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethodRefOrValue'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+          description: Tax applied
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (including taxes)
+        characteristic:
+          type: array
+          description: A list of characteristics
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+        pointOfInteraction:
+          $ref: '#/components/schemas/PointOfInteraction'
+        relatedParty:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedParty'
+      required:
+      - account
+      - paymentMethod
+      - totalAmount
+    PaymentItem:
+      type: object
+      description: The paymentItem is the result of lettering process. It enables to assign automatically or manually part
+        of incoming payment amount to a bill
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the payment Item
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (net of taxes)
+        item:
+          $ref: '#/components/schemas/EntityRef'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+          description: Tax applied
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (including taxes)
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+          example: Document
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+          example: https://serverRoot/api/documentManagement/v4/characteristic
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class entity name
+          example: Characteristic
+      required:
+      - item
+    Payment_Create:
+      type: object
+      description: The Payment to be created
+      properties:
+        authorizationCode:
+          type: string
+          description: Authorization code retrieved from an external payment gateway that could be used for conciliation
+        correlatorId:
+          type: string
+          description: Unique identifier in the client for the payment in case it is needed to correlate
+        description:
+          type: string
+          description: Text describing the contents of the payment
+        name:
+          type: string
+          description: Screen name of the payment
+        paymentDate:
+          type: string
+          format: date-time
+          description: Date when the payment was performed
+        status:
+          type: string
+          description: Status of the payment
+        statusDate:
+          type: string
+          format: date-time
+          description: Date when the status was recorded
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (net of taxes)
+        channel:
+          $ref: '#/components/schemas/ChannelRef'
+        payer:
+          $ref: '#/components/schemas/RelatedParty'
+        paymentItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentItem'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+          description: Tax applied
+        characteristic:
+          type: array
+          description: A list of characteristics
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        id:
+          type: string
+          description: Unique identifier of Payment
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethodRefOrValue'
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (including taxes)
+      required:
+      - account
+      - paymentMethod
+      - totalAmount
+    EventSubscription:
+      type: object
+      description: Sets the communication endpoint address the service instance must use to deliver notification information
+      properties:
+        revision:
+          type: integer
+          description: Version number of the entity
+        createdDate:
+          type: string
+          format: date-time
+          description: Date of creation
+        updatedDate:
+          type: string
+          format: date-time
+          description: Date of update
+        createdBy:
+          type: string
+          description: Name of created by user
+        updatedBy:
+          type: string
+          description: Name of updated by user
+        id:
+          type: string
+          description: Id of the listener
+          minLength: 1
+        callback:
+          type: string
+          description: The callback being registered.
+          minLength: 1
+        query:
+          type: string
+          description: additional data to be passed
+      required:
+      - callback
+      - id
+    EventSubscriptionInput:
+      type: object
+      description: Data containing the callback endpoint to deliver the information
+      properties:
+        callback:
+          type: string
+          description: The callback being registered.
+          minLength: 1
+        query:
+          type: string
+          description: additional data to be passed
+      required:
+      - callback
+    Refund_Update:
+      type: object
+      description: The Refund to be updated
+      properties:
+        authorizationCode:
+          type: string
+          description: Authorization code retrieved from an external payment gateway that could be used for conciliation
+        correlatorId:
+          type: string
+          description: Unique identifier in the client for the refund in case it is needed to correlate
+        description:
+          type: string
+          description: Text describing the contents of the refund
+        name:
+          type: string
+          description: Screen name of the refund
+        refundDate:
+          type: string
+          format: date-time
+          description: Date when the refund was performed
+        status:
+          type: string
+          description: Status of the refund
+        statusDate:
+          type: string
+          format: date-time
+          description: Date when the status was recorded
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be refunded (net of taxes)
+        channel:
+          $ref: '#/components/schemas/ChannelRef'
+        payment:
+          $ref: '#/components/schemas/PaymentRef'
+        requestor:
+          $ref: '#/components/schemas/RelatedParty'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+          description: Tax applied
+        characteristic:
+          type: array
+          description: A list of characteristics
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethodRefOrValue'
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (including taxes)
+    Payment_Update:
+      type: object
+      description: The Payment to be updated
+      properties:
+        authorizationCode:
+          type: string
+          description: Authorization code retrieved from an external payment gateway that could be used for conciliation
+        correlatorId:
+          type: string
+          description: Unique identifier in the client for the payment in case it is needed to correlate
+        description:
+          type: string
+          description: Text describing the contents of the payment
+        name:
+          type: string
+          description: Screen name of the payment
+        paymentDate:
+          type: string
+          format: date-time
+          description: Date when the payment was performed
+        status:
+          type: string
+          description: Status of the payment
+        statusDate:
+          type: string
+          format: date-time
+          description: Date when the status was recorded
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (net of taxes)
+        channel:
+          $ref: '#/components/schemas/ChannelRef'
+        payer:
+          $ref: '#/components/schemas/RelatedParty'
+        paymentItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentItem'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+          description: Tax applied
+        characteristic:
+          type: array
+          description: A list of characteristics
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethodRefOrValue'
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount to be paid (including taxes)
+    PaymentCreateEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        id:
+          type: string
+          description: Identifier of the Process flow
+        href:
+          type: string
+          format: uri
+          description: Reference of the ProcessFlow
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        event:
+          $ref: '#/components/schemas/PaymentCreateEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    PaymentCreateEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+    PaymentAttributeValueChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        fieldPath:
+          type: string
+          description: The path identifying the object field concerned by this notification.
+        event:
+          $ref: '#/components/schemas/PaymentAttributeValueChangeEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    PaymentAttributeValueChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+    PaymentStateChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        id:
+          type: string
+          description: Identifier of the Process flow
+        href:
+          type: string
+          format: uri
+          description: Reference of the ProcessFlow
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        event:
+          $ref: '#/components/schemas/PaymentStateChangeEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    PaymentStateChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+    PaymentDeleteEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        id:
+          type: string
+          description: Identifier of the Process flow
+        href:
+          type: string
+          format: uri
+          description: Reference of the ProcessFlow
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        event:
+          $ref: '#/components/schemas/PaymentDeleteEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    PaymentDeleteEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+    RefundCreateEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        id:
+          type: string
+          description: Identifier of the Process flow
+        href:
+          type: string
+          format: uri
+          description: Reference of the ProcessFlow
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        event:
+          $ref: '#/components/schemas/RefundCreateEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    RefundCreateEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+    RefundAttributeValueChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        fieldPath:
+          type: string
+          description: The path identifying the object field concerned by this notification.
+        event:
+          $ref: '#/components/schemas/RefundAttributeValueChangeEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    RefundAttributeValueChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+    RefundStateChangeEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        id:
+          type: string
+          description: Identifier of the Process flow
+        href:
+          type: string
+          format: uri
+          description: Reference of the ProcessFlow
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        event:
+          $ref: '#/components/schemas/RefundStateChangeEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    RefundStateChangeEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+    RefundDeleteEvent:
+      type: object
+      description: The notification data structure
+      properties:
+        id:
+          type: string
+          description: Identifier of the Process flow
+        href:
+          type: string
+          format: uri
+          description: Reference of the ProcessFlow
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explnatory of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occured.
+        event:
+          $ref: '#/components/schemas/RefundDeleteEventPayload'
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    RefundDeleteEventPayload:
+      type: object
+      description: The event data structure
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+    DNextEventBase:
+      type: object
+      description: Abstract base class for DNext event notifications. Contains both standard TMF event fields and DNext-specific
+        extensions.
+      properties:
+        eventId:
+          type: string
+          description: The identifier of the notification.
+        eventTime:
+          type: string
+          format: date-time
+          description: Time of the event occurrence.
+        eventType:
+          type: string
+          description: The type of the notification.
+        correlationId:
+          type: string
+          description: The correlation id for this event.
+        domain:
+          type: string
+          description: The domain of the event.
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: An explanatory text of the event.
+        priority:
+          type: string
+          description: A priority.
+        timeOccurred:
+          type: string
+          format: date-time
+          description: The time the event occurred.
+        auth:
+          $ref: '#/components/schemas/Auth'
+        trace:
+          $ref: '#/components/schemas/Trace'
+        originIp:
+          type: string
+          description: The IP address of the origin of the event.
+        objectName:
+          type: string
+          description: The name of the object related to the event.
+        accessPolicyConstraint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraintData'
+    Auth:
+      type: object
+      description: Authentication context of the event.
+      properties:
+        userId:
+          type: string
+        organizationId:
+          type: string
+        tenantId:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        groups:
+          type: array
+          items:
+            type: string
+        tokenIssuer:
+          type: string
+        tokenIssuedTime:
+          type: string
+        tokenExpiryTime:
+          type: string
+        authenticationToken:
+          type: string
+    Trace:
+      type: object
+      description: Trace context of the event.
+      properties:
+        site:
+          type: string
+        company:
+          type: string
+        channel:
+          type: string
+        application:
+          type: string
+        sessionId:
+          type: string
+        businessInteractionId:
+          type: string
+        transactionId:
+          type: string
+        businessInteractionType:
+          type: string
+    AccessPolicyConstraintData:
+      type: object
+      description: Access policy constraint data.
+      properties:
+        role:
+          type: string
+        name:
+          type: string
+        referredType:
+          type: string
+          default: accessRole
+    Any: {}
+    PointOfInteraction:
+      type: object
+      description: POI consists of hardware and software which enables a Cardholder and/or an Acceptor to perform a Local
+        Card transaction. This is also referred to as a Physical/EMV Terminal. It may be Attended or Unattended.
+      properties:
+        id:
+          type: string
+          description: unique identifier
+        href:
+          type: string
+          format: uri
+          description: Hyperlink reference
+        modeOfEntry:
+          type: string
+          description: Key entry code that tells the processor how the transaction was captured.
+        retrievalReferenceNumber:
+          type: string
+          description: The reference number used to identify a given transaction that allow the Acceptor or Acquirer to keep
+            track of their transactions
+        transactionDate:
+          type: string
+          format: date-time
+          description: Date time related to the POI transaction.
+        resource:
+          $ref: '#/components/schemas/ResourceRef'
+        '@baseType':
+          type: string
+          description: When sub-classing, this defines the super-class
+        '@schemaLocation':
+          type: string
+          format: uri
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        '@type':
+          type: string
+          description: When sub-classing, this defines the sub-class Extensible name

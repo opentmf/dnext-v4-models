@@ -1,0 +1,85 @@
+package org.opentmf.dnext.common.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.Valid;
+import lombok.Getter;
+import lombok.Setter;
+import org.opentmf.commons.validation.constraints.SafeText;
+
+/**
+ *
+ * <p><br/>
+ * <strong>Referring TMF artifacts:</strong>
+ * <ul>
+ *   <li>TMF-620: Product Catalog Management API</li>
+ *   <li>TMF-633: Service Catalog Management API</li>
+ *   <li>TMF-634: Resource Catalog Management API</li>
+ * </ul>
+ * </p>
+ *
+ * @author Gökhan Demir
+ */
+@Getter
+@Setter
+public class FulfillmentSpecification {
+
+  /**
+   * Add FulfillmentSpecification.
+   */
+  private @SafeText String add;
+
+  /**
+   * Delete FulfillmentSpecification.
+   */
+  private @SafeText String delete;
+
+  /**
+   * Modify FulfillmentSpecification.
+   */
+  private @SafeText String modify;
+
+  /**
+   * Modify Migration FulfillmentSpecification.
+   */
+  @JsonProperty("modify.Migration")
+  private @SafeText String modifyMigration;
+
+  /**
+   * Modify Relocation FulfillmentSpecification.
+   */
+  @JsonProperty("modify.Relocation")
+  private @SafeText String modifyRelocation;
+
+  /**
+   * Modify Takeover FulfillmentSpecification.
+   */
+  @JsonProperty("modify.Takeover")
+  private @SafeText String modifyTakeover;
+
+  /**
+   * Post Flow FulfillmentSpecification.
+   */
+  private @Valid PostFlow postFlow;
+
+  /**
+   * Pre Flow FulfillmentSpecification.
+   */
+  private @Valid PreFlow preFlow;
+
+  /**
+   * Status Change FulfillmentSpecification.
+   */
+  private @SafeText String statusChange;
+
+  /**
+   * Status Change Resume FulfillmentSpecification.
+   */
+  @JsonProperty("statusChange.Resume")
+  private @SafeText String statusChangeResume;
+
+  /**
+   * Status Change Suspend FulfillmentSpecification.
+   */
+  @JsonProperty("statusChange.Suspend")
+  private @SafeText String statusChangeSuspend;
+}

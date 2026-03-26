@@ -1,0 +1,42 @@
+@startuml dnext-v4-models
+title dnext v4 models
+caption TMF -> group-common -> common
+
+top to bottom direction
+
+skinparam defaultTextAlignment center
+skinparam defaultFontStyle plain
+skinparam shadowing true
+skinparam shadowColor #E0E0E0
+skinparam rectangle {
+  RoundCorner 20
+  BorderThickness 1
+  FontStyle plain
+}
+skinparam arrow {
+  Color #BBBBBB
+  Thickness 1
+}
+
+rectangle "<b>common</b>" as Common #C5E0B4
+
+rectangle "<b>customer</b>\n\n622 Product Ordering Management ..\n629 Customer Management API\n648 Quote Management API\n663 Shopping Cart Management API\n670 Payment Method Management API\n676 Payment Management API\n" as customer #DAE8FC
+
+rectangle "<b>general</b>\n\n667 Document Management API\n673 Geographic Address Managemen..\n681 Communication Management API\n" as general #D5E8D4
+
+rectangle "<b>partner</b>\n\n632 Party Management API\n651 Agreement Management API\n666 Account Management API\n668 Partnership Type\n669 Party Role Management API\n683 Party Interaction Management..\n" as partner #FFE6CC
+
+rectangle "<b>product</b>\n\n620 Product Catalog Management API\n637 Product Inventory Management..\n658 Loyalty\n671 Promotion Management API\n" as product #E1D5E7
+
+rectangle "<b>resource</b>\n\n634 Resource Catalog Management ..\n639 Resource Inventory Managemen..\n652 Resource Order Management API\n" as resource #FFF2CC
+
+rectangle "<b>service</b>\n\n633 Service Catalog Management API\n638 Service Inventory Management..\n641 Service Ordering Management ..\n" as service #F8CECC
+
+customer --> Common
+general --> Common
+partner --> Common
+product --> Common
+resource --> Common
+service --> Common
+
+@enduml

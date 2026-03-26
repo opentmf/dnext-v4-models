@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.opentmf.model</groupId>
+    <artifactId>dnext-v4-models</artifactId>
+    <version>2.11.2-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>dnext-common-v4-model</artifactId>
+  <name>dnext-common-v4-model</name>
+  <version>2.11.2-SNAPSHOT</version>
+  <description>
+    - TMF-620: Product Catalog Management API, version: 2.11.2
+    - TMF-622: Product Ordering Management API, version: 2.11.2
+    - TMF-629: Customer Management API, version: 2.11.2
+    - TMF-632: Party Management API, version: 2.11.2
+    - TMF-633: Service Catalog Management API, version: 2.11.2
+    - TMF-634: Resource Catalog Management API, version: 2.11.2
+    - TMF-637: Product Inventory Management API, version: 2.11.2
+    - TMF-638: Service Inventory Management API, version: 2.11.2
+    - TMF-639: Resource Inventory Management API, version: 2.11.2
+    - TMF-641: Service Ordering Management API, version: 2.11.2
+    - TMF-648: Quote Management API, version: 2.11.2
+    - TMF-651: Agreement Management API, version: 2.11.2
+    - TMF-652: Resource Order Management API, version: 2.11.2
+    - TMF-658: Loyalty, version: 2.11.2
+    - TMF-663: Shopping Cart Management API, version: 2.11.2
+    - TMF-666: Account Management API, version: 2.11.2
+    - TMF-667: Document Management API, version: 2.11.2
+    - TMF-668: Partnership Type, version: 2.11.2
+    - TMF-669: Party Role Management API, version: 2.11.2
+    - TMF-670: Payment Method Management API, version: 2.11.2
+    - TMF-671: Promotion Management API, version: 2.11.2
+    - TMF-673: Geographic Address Management API, version: 2.11.2
+    - TMF-676: Payment Management API, version: 2.11.2
+    - TMF-681: Communication Management API, version: 2.11.2
+    - TMF-683: Party Interaction Management API, version: 2.11.2
+  </description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.opentmf.model</groupId>
+      <artifactId>opentmf-common-v4-api</artifactId>
+      <version>4.2.0.10</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

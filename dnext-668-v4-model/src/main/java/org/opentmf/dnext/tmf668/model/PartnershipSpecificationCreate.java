@@ -1,0 +1,60 @@
+package org.opentmf.dnext.tmf668.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.Valid;
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.AclRelatedParty;
+import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.tmf668.model.IPartnershipSpecificationCreate;
+
+/**
+ * The PartnershipSpecification to be created.
+ *
+ * <p><br/>
+ * <strong>Required:</strong> name<br/>
+ * </p>
+ *
+ * <p><br/>
+ * <strong>Referring TMF artifacts:</strong>
+ * <ul>
+ *   <li>TMF-668: Partnership Type</li>
+ * </ul>
+ * </p>
+ *
+ * @author Gökhan Demir
+ */
+@Getter
+@Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = PartnershipSpecificationCreate.class
+)
+@Required(fields = {"name"})
+public class PartnershipSpecificationCreate extends NamedEntity implements IPartnershipSpecificationCreate {
+
+  /**
+   * List of: Related Entity reference. A related party defines party or party
+   * role linked to a specific entity.
+   */
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid AclRelatedParty> aclRelatedParties;
+
+  /**
+   * An explanatory text regarding this partnership specification.
+   */
+  private @SafeText String description;
+
+  /**
+   * The list of roles specifications a engaged party will be able to play for
+   * this kind of partnership.
+   */
+  @JsonProperty("roleSpecification")
+  private List<@Valid PartnershipRoleSpecification> roleSpecifications;
+}
