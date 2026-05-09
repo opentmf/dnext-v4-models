@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.CartTermBase;
 import org.opentmf.dnext.common.model.Duration;
-import org.opentmf.dnext.common.model.NamedEntity;
 import org.opentmf.dnext.common.model.Quantity;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf620.model.IPOPAlteration;
@@ -38,18 +38,12 @@ import org.opentmf.tmf620.model.IPOPAlteration;
     defaultImpl = POPAlteration.class
 )
 @Required(fields = {"price", "priceType"})
-public class POPAlteration extends NamedEntity implements IPOPAlteration {
+public class POPAlteration extends CartTermBase implements IPOPAlteration {
 
   /**
    * A time interval in a given unit of time.
    */
   private @Valid Duration applicationDuration;
-
-  /**
-   * A narrative that explains in detail the semantics of this order item price
-   * alteration.
-   */
-  private @SafeText String description;
 
   /**
    * Provides all amounts (tax included, duty free, tax rate), used currency and

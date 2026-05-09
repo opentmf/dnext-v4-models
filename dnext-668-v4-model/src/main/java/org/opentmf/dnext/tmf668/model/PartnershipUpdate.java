@@ -6,11 +6,10 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AclRelatedParty;
-import org.opentmf.dnext.common.model.ExternalReference;
-import org.opentmf.dnext.common.model.NamedEntity;
 import org.opentmf.dnext.common.model.Partner;
+import org.opentmf.dnext.common.model.PartnershipSpecificationRef;
+import org.opentmf.dnext.common.model.ServiceUpdateBase;
 import org.opentmf.tmf668.model.IPartnershipUpdate;
 
 /**
@@ -33,7 +32,7 @@ import org.opentmf.tmf668.model.IPartnershipUpdate;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = PartnershipUpdate.class
 )
-public class PartnershipUpdate extends NamedEntity implements IPartnershipUpdate {
+public class PartnershipUpdate extends ServiceUpdateBase implements IPartnershipUpdate {
 
   /**
    * List of: Related Entity reference. A related party defines party or party
@@ -41,17 +40,6 @@ public class PartnershipUpdate extends NamedEntity implements IPartnershipUpdate
    */
   @JsonProperty("aclRelatedParty")
   private List<@Valid AclRelatedParty> aclRelatedParties;
-
-  /**
-   * An explanatory text regarding this partnership.
-   */
-  private @SafeText String description;
-
-  /**
-   * A list of external references.
-   */
-  @JsonProperty("externalReference")
-  private List<@Valid ExternalReference> externalReferences;
 
   /**
    * The list of partners of the partnership, where a partner represents a party

@@ -1,12 +1,11 @@
 package org.opentmf.dnext.tmf683.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.tmf683.model.IPartyInteractionCreate;
 
 /**
  * The PartyInteraction to be created.
@@ -33,7 +32,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = PartyInteractionCreate.class
 )
 @Required(fields = {"interactionDate", "reason", "channel", "direction", "status"})
-public class PartyInteractionCreate extends PartyInteractionUpdate {
+public class PartyInteractionCreate extends PartyInteractionUpdate implements IPartyInteractionCreate {
 
   /**
    * Specifies who started the interaction. It might be the party or the
@@ -41,11 +40,4 @@ public class PartyInteractionCreate extends PartyInteractionUpdate {
    * “outbound”.
    */
   private @SafeText String direction;
-
-  /**
-   * Unique identifier of the customer.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
 }

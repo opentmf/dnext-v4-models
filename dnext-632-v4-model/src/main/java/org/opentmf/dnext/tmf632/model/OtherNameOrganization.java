@@ -1,12 +1,10 @@
 package org.opentmf.dnext.tmf632.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.NamedEntity;
-import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.dnext.common.model.TaxDefinitionBase;
 import org.opentmf.tmf632.model.IOtherNameOrganization;
 
 /**
@@ -29,7 +27,7 @@ import org.opentmf.tmf632.model.IOtherNameOrganization;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = OtherNameOrganization.class
 )
-public class OtherNameOrganization extends NamedEntity implements IOtherNameOrganization {
+public class OtherNameOrganization extends TaxDefinitionBase implements IOtherNameOrganization {
 
   /**
    * Co. , Inc. , Ltd. , Pty Ltd. , Plc; , Gmbh.
@@ -40,6 +38,4 @@ public class OtherNameOrganization extends NamedEntity implements IOtherNameOrga
    * The name that the organization trades under.
    */
   private @SafeText String tradingName;
-
-  private @Valid TimePeriod validFor;
 }

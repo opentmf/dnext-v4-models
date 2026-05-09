@@ -3,12 +3,15 @@ package org.opentmf.dnext.tmf671.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.tmf671.model.IPromotionCriteriaGroup;
 
 /**
@@ -37,7 +40,7 @@ import org.opentmf.tmf671.model.IPromotionCriteriaGroup;
     defaultImpl = PromotionCriteriaGroup.class
 )
 @Required(fields = {"criteria"})
-public class PromotionCriteriaGroup extends Entity implements IPromotionCriteriaGroup {
+public class PromotionCriteriaGroup extends Extensible implements IPromotionCriteriaGroup {
 
   /**
    * List of: Set of criteria to be followed by all parties.
@@ -54,4 +57,16 @@ public class PromotionCriteriaGroup extends Entity implements IPromotionCriteria
    * Name of the group to be easily identified.
    */
   private @SafeText String groupName;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique Identifier.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 }

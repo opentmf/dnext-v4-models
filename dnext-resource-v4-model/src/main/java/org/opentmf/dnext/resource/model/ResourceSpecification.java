@@ -1,16 +1,9 @@
 package org.opentmf.dnext.resource.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
-import java.time.OffsetDateTime;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.BundledResourceSpecification;
-import org.opentmf.dnext.common.model.ResourceSpecificationExtension;
 import org.opentmf.resource.model.IResourceSpecification;
 
 /**
@@ -49,43 +42,5 @@ import org.opentmf.resource.model.IResourceSpecification;
     defaultImpl = ResourceSpecification.class
 )
 @Required(fields = {"atType"})
-public class ResourceSpecification extends ResourceSpecificationBase implements IResourceSpecification {
-
-  /**
-   * A type of ResourceSpecification that belongs to a grouping of
-   * ResourceSpecifications made available to the market. It inherits of all
-   * attributes of ResourceSpecification.
-   */
-  @JsonProperty("bundledResourceSpecification")
-  private List<@Valid BundledResourceSpecification> bundledResourceSpecifications;
-
-  /**
-   * Name of created by user.
-   */
-  private @SafeText String createdBy;
-
-  /**
-   * Date of creation.
-   */
-  private OffsetDateTime createdDate;
-
-  /**
-   * ResourceSpecification model has been extended.
-   */
-  private @Valid ResourceSpecificationExtension pExtension;
-
-  /**
-   * Version number of the entity.
-   */
-  private Integer revision;
-
-  /**
-   * Name of updated by user.
-   */
-  private @SafeText String updatedBy;
-
-  /**
-   * Date of update.
-   */
-  private OffsetDateTime updatedDate;
+public class ResourceSpecification extends LogicalResourceSpecification implements IResourceSpecification {
 }

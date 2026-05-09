@@ -1,6 +1,5 @@
 package org.opentmf.dnext.common.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,13 +36,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = AppointmentRef.class
 )
 @Required(fields = {"id"})
-public class AppointmentRef extends Entity implements IAppointmentRef {
-
-  /**
-   * The actual type of the target instance when needed for disambiguation.
-   */
-  @JsonProperty("@referredType")
-  private @SafeText String atReferredType;
+public class AppointmentRef extends ResourceOrderRef implements IAppointmentRef {
 
   /**
    * An explanatory text regarding the appointment made with a party.

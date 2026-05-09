@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
@@ -12,11 +13,12 @@ import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AccessPolicyConstraintData;
 import org.opentmf.dnext.common.model.Auth;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.LoyaltyProgramMemberRef;
+import org.opentmf.dnext.common.model.LoyaltyProgramPartnerRef;
+import org.opentmf.dnext.common.model.LoyaltyProgramProductRef;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.Trace;
-import org.opentmf.tmf658.model.ILoyaltyEvent;
 
 /**
  * A loyalty event notification.
@@ -38,7 +40,7 @@ import org.opentmf.tmf658.model.ILoyaltyEvent;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = LoyaltyEvent.class
 )
-public class LoyaltyEvent extends Entity implements ILoyaltyEvent {
+public class LoyaltyEvent extends Extensible {
 
   /**
    * List of: Access policy constraint data.
@@ -102,6 +104,18 @@ public class LoyaltyEvent extends Entity implements ILoyaltyEvent {
    * The incoming loyalty event type.
    */
   private @SafeText String eventType;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * unique identifier.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   private @Valid LoyaltyProgramMemberRef member;
 

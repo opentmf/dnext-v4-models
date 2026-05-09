@@ -9,8 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.Attachment;
-import org.opentmf.dnext.common.model.Characteristic;
-import org.opentmf.dnext.common.model.Extensible;
+import org.opentmf.dnext.common.model.RefundCreateBase;
 import org.opentmf.dnext.common.model.RelatedParty;
 
 /**
@@ -33,7 +32,7 @@ import org.opentmf.dnext.common.model.RelatedParty;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = CommunicationMessageUpdate.class
 )
-public class CommunicationMessageUpdate extends Extensible {
+public class CommunicationMessageUpdate extends RefundCreateBase {
 
   /**
    * DNext Access-Control RelatedParty List like ownership etc.
@@ -48,20 +47,9 @@ public class CommunicationMessageUpdate extends Extensible {
   private List<@Valid Attachment> attachments;
 
   /**
-   * Any additional characteristic(s) of this message.
-   */
-  @JsonProperty("characteristic")
-  private List<@Valid Characteristic> characteristics;
-
-  /**
    * The content of the communication message.
    */
   private @SafeText String content;
-
-  /**
-   * Description for the whole object.
-   */
-  private @SafeText String description;
 
   private Boolean logFlag;
 

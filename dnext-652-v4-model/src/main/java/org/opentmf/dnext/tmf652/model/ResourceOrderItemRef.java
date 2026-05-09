@@ -1,11 +1,14 @@
 package org.opentmf.dnext.tmf652.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.constraints.Size;
 import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeId;
+import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.tmf652.model.IResourceOrderItemRef;
 
 /**
@@ -27,7 +30,25 @@ import org.opentmf.tmf652.model.IResourceOrderItemRef;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ResourceOrderItemRef.class
 )
-public class ResourceOrderItemRef extends ResourceOrderRef implements IResourceOrderItemRef {
+public class ResourceOrderItemRef extends Extensible implements IResourceOrderItemRef {
+
+  /**
+   * The actual type of the target instance when needed for disambiguation.
+   */
+  @JsonProperty("@referredType")
+  private @SafeText String atReferredType;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Identifier of the line item.

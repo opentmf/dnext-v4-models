@@ -1,15 +1,11 @@
 package org.opentmf.dnext.tmf666.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
-import java.util.List;
+import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.FinancialAccountRef;
-import org.opentmf.dnext.common.model.PaymentMethodRef;
 import org.opentmf.tmf666.model.IPartyAccount;
 
 /**
@@ -38,35 +34,30 @@ import org.opentmf.tmf666.model.IPartyAccount;
     defaultImpl = PartyAccount.class
 )
 @Required(fields = {"name", "relatedParty"})
-public class PartyAccount extends FinancialAccount implements IPartyAccount {
+public class PartyAccount extends BillingAccountCreate implements IPartyAccount {
 
   /**
-   * The structure of the bill for party accounts.
+   * Name of created by user.
    */
-  private @Valid BillStructure billStructure;
+  private @SafeText String createdBy;
 
   /**
-   * A payment method defines a specific mean of payment (e.g. direct debit).
+   * Date of creation.
    */
-  private @Valid PaymentMethodRef defaultPaymentMethod;
+  private OffsetDateTime createdDate;
 
   /**
-   * An account of money owed by a party to another entity in exchange for goods
-   * or services that have been delivered or used. An account receivable
-   * aggregates the amounts of one or more party accounts (billing or settlement)
-   * owned by a given party.
+   * Version number of the entity.
    */
-  private @Valid FinancialAccountRef financialAccount;
+  private Integer revision;
 
   /**
-   * List of: Defines a plan for payment (when a party wants to spread his
-   * payments).
+   * Name of updated by user.
    */
-  @JsonProperty("paymentPlan")
-  private List<@Valid PaymentPlan> paymentPlans;
+  private @SafeText String updatedBy;
 
   /**
-   * The condition of the account, such as due, paid, in arrears.
+   * Date of update.
    */
-  private @SafeText String paymentStatus;
+  private OffsetDateTime updatedDate;
 }

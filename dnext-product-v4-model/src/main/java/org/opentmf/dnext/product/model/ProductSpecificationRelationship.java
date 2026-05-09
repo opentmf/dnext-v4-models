@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.ServiceSpecificationRef;
+import org.opentmf.dnext.common.model.CategoryRef;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.product.model.IProductSpecificationRelationship;
 
@@ -35,7 +35,7 @@ import org.opentmf.product.model.IProductSpecificationRelationship;
     defaultImpl = ProductSpecificationRelationship.class
 )
 @Required(fields = {"id"})
-public class ProductSpecificationRelationship extends ServiceSpecificationRef implements IProductSpecificationRelationship {
+public class ProductSpecificationRelationship extends CategoryRef implements IProductSpecificationRelationship {
 
   /**
    * Type of relationship such as migration, substitution, dependency,

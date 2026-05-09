@@ -1,6 +1,7 @@
 package org.opentmf.dnext.tmf658.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.Getter;
@@ -12,10 +13,13 @@ import org.opentmf.dnext.common.model.AgreementRef;
 import org.opentmf.dnext.common.model.Characteristic;
 import org.opentmf.dnext.common.model.ContactMedium;
 import org.opentmf.dnext.common.model.CreditProfile;
+import org.opentmf.dnext.common.model.LoyaltyProgramProductRef;
+import org.opentmf.dnext.common.model.NamedEntity;
 import org.opentmf.dnext.common.model.PaymentMethodRef;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.RoleTypeRef;
 import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.tmf658.model.ILoyaltyProgramMemberCreate;
 
 /**
  * The LoyaltyProgramMember to be created.
@@ -35,8 +39,14 @@ import org.opentmf.dnext.common.model.TimePeriod;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = LoyaltyProgramMemberCreate.class
+)
 @Required(fields = {"name", "roleType"})
-public class LoyaltyProgramMemberCreate {
+public class LoyaltyProgramMemberCreate extends NamedEntity implements ILoyaltyProgramMemberCreate {
 
   /**
    * The period during which the loyalty member is valid for.
@@ -93,11 +103,6 @@ public class LoyaltyProgramMemberCreate {
    */
   @JsonProperty("loyltyProgramProduct")
   private List<@Valid LoyaltyProgramProductRef> loyltyProgramProducts;
-
-  /**
-   * The loyalty members name.
-   */
-  private @SafeText String name;
 
   /**
    * List of: PaymentMethod reference. A payment method defines a specific mean of

@@ -1,14 +1,10 @@
 package org.opentmf.dnext.tmf673.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeId;
-import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.DNextEventBase;
+import org.opentmf.dnext.common.model.QuoteCreateEventBase;
 import org.opentmf.tmf673.model.IGeographicAddressValidationStateChangeEvent;
 
 /**
@@ -25,41 +21,16 @@ import org.opentmf.tmf673.model.IGeographicAddressValidationStateChangeEvent;
  */
 @Getter
 @Setter
-public class GeographicAddressValidationStateChangeEvent extends DNextEventBase implements IGeographicAddressValidationStateChangeEvent {
-
-  /**
-   * When subclassing, this defines the super-class.
-   */
-  @JsonProperty("@baseType")
-  private @SafeText String atBaseType;
-
-  /**
-   * A URI to a JSON-Schema file that defines additional attributes and
-   * relationships.
-   */
-  @JsonProperty("@schemaLocation")
-  private URI atSchemaLocation;
-
-  /**
-   * When subclassing, this defines the subclass Extensible name.
-   */
-  @JsonProperty("@type")
-  private @SafeText String atType;
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = GeographicAddressValidationStateChangeEvent.class
+)
+public class GeographicAddressValidationStateChangeEvent extends QuoteCreateEventBase implements IGeographicAddressValidationStateChangeEvent {
 
   /**
    * The event data structure.
    */
   private @Valid GeographicAddressValidationStateChangeEventPayload event;
-
-  /**
-   * Hyperlink reference.
-   */
-  private URI href;
-
-  /**
-   * Unique identifier of the entity.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
 }

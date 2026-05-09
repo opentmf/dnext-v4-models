@@ -1,6 +1,6 @@
 package org.opentmf.dnext.tmf671.model;
 
-import java.net.URI;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +27,12 @@ import org.opentmf.tmf671.model.IPromotion;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = Promotion.class
+)
 public class Promotion extends PromotionCreate implements IPromotion {
 
   /**
@@ -38,11 +44,6 @@ public class Promotion extends PromotionCreate implements IPromotion {
    * Date of creation.
    */
   private OffsetDateTime createdDate;
-
-  /**
-   * Hyperlink to access the promotion.
-   */
-  private URI href;
 
   /**
    * Version number of the entity.

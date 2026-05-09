@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IProductTerm;
-import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
  * Description of a productTerm linked to this product. This represents a
@@ -32,12 +31,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ProductTerm.class
 )
-public class ProductTerm extends NamedEntity implements IProductTerm {
-
-  /**
-   * Description of the productTerm.
-   */
-  private @SafeText String description;
+public class ProductTerm extends CartTermBase implements IProductTerm {
 
   /**
    * Duration of the productTerm.

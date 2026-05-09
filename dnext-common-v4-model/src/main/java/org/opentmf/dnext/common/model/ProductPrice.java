@@ -41,7 +41,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = ProductPrice.class
 )
 @Required(fields = {"price", "priceType"})
-public class ProductPrice extends PriceBase implements IProductPrice {
+public class ProductPrice extends CartPriceBase implements IProductPrice {
 
   /**
    * BillingAccount reference. A BillingAccount is a detailed description of a
@@ -54,6 +54,8 @@ public class ProductPrice extends PriceBase implements IProductPrice {
    * percentage to apply for Price Alteration.
    */
   private @Valid Price price;
+
+  private @Valid ProductOfferingPriceRef productOfferingPrice;
 
   /**
    * List of: Is an amount, usually of money, that modifies the price charged for

@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.CharacteristicRelationship;
+import org.opentmf.dnext.common.model.ResourceGraphSpecificationRef;
 import org.opentmf.resource.model.IResourceGraphSpecificationRelationship;
 
 /**
@@ -28,12 +28,7 @@ import org.opentmf.resource.model.IResourceGraphSpecificationRelationship;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ResourceGraphSpecificationRelationship.class
 )
-public class ResourceGraphSpecificationRelationship extends Entity implements IResourceGraphSpecificationRelationship {
-
-  /**
-   * Semantic of the relationship.
-   */
-  private @SafeText String relationshipType;
+public class ResourceGraphSpecificationRelationship extends CharacteristicRelationship implements IResourceGraphSpecificationRelationship {
 
   /**
    * A reference to the related resource graph specification.

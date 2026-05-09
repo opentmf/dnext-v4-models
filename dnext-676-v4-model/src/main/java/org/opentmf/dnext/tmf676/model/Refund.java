@@ -1,5 +1,6 @@
 package org.opentmf.dnext.tmf676.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,12 @@ import org.opentmf.tmf676.model.IRefund;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = Refund.class
+)
 @Required(fields = {"totalAmount", "paymentMethod", "account"})
 public class Refund extends RefundCreate implements IRefund {
 

@@ -3,6 +3,7 @@ package org.opentmf.dnext.common.model;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +39,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = IndividualIdentification.class
 )
 @Required(fields = {"identificationType", "identificationId"})
-public class IndividualIdentification extends Entity implements IIndividualIdentification {
+public class IndividualIdentification extends Extensible implements IIndividualIdentification {
 
   /**
    * An attachment by value or by reference. An attachment complements the
@@ -51,6 +52,18 @@ public class IndividualIdentification extends Entity implements IIndividualIdent
    * The identity card document number.
    */
   private @SafeText String documentNumber;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Identifier.
@@ -70,6 +83,11 @@ public class IndividualIdentification extends Entity implements IIndividualIdent
    * hall.
    */
   private @SafeText String issuingAuthority;
+
+  /**
+   * Country which has issued the identifier.
+   */
+  private @SafeText String issuingCountry;
 
   /**
    * Date at which the identifier was issued.

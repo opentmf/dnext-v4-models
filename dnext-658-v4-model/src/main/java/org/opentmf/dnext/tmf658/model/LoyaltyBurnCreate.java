@@ -17,6 +17,7 @@ import org.opentmf.dnext.common.model.Money;
 import org.opentmf.dnext.common.model.PaymentItem;
 import org.opentmf.dnext.common.model.PaymentMethodRefOrValue;
 import org.opentmf.dnext.common.model.PointOfInteraction;
+import org.opentmf.tmf658.model.ILoyaltyBurnCreate;
 
 /**
  * The LoyaltyBurn to be created.
@@ -43,7 +44,7 @@ import org.opentmf.dnext.common.model.PointOfInteraction;
     defaultImpl = LoyaltyBurnCreate.class
 )
 @Required(fields = {"quantity", "loyaltyProgramProduct", "loyaltyProgramMember", "description", "paymentMethod", "account"})
-public class LoyaltyBurnCreate extends LoyaltyEarnCreate {
+public class LoyaltyBurnCreate extends LoyaltyEarnCreate implements ILoyaltyBurnCreate {
 
   /**
    * Account reference. An account may be a party account or a financial account.

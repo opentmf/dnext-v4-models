@@ -7,7 +7,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Extensible;
+import org.opentmf.dnext.common.model.NamedEntity;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.TimePeriod;
 
@@ -15,10 +15,12 @@ import org.opentmf.dnext.common.model.TimePeriod;
  * Synthesized abstract parent for 4 model classes.
  *
  * <p><br/>
- * <strong>Referring TMF artifacts:</strong>
+ * <strong>Direct descendants:</strong>
  * <ul>
- *   <li>TMF-620: Product Catalog Management API</li>
- *   <li>TMF-658: Loyalty</li>
+ *   <li>CatalogUpdate (620)</li>
+ *   <li>CategoryUpdate (620)</li>
+ *   <li>ProductOfferingPriceUpdate (620)</li>
+ *   <li>ProductSpecificationUpdate (620)</li>
  * </ul>
  * </p>
  *
@@ -32,7 +34,10 @@ import org.opentmf.dnext.common.model.TimePeriod;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = CatalogUpdateBase.class
 )
-public abstract class CatalogUpdateBase extends Extensible {
+public abstract class CatalogUpdateBase extends NamedEntity {
+
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid RelatedParty> aclRelatedParties;
 
   /**
    * Description of this catalog.
@@ -43,17 +48,6 @@ public abstract class CatalogUpdateBase extends Extensible {
    * Used to indicate the current lifecycle status.
    */
   private @SafeText String lifecycleStatus;
-
-  /**
-   * Name of the catalog.
-   */
-  private @SafeText String name;
-
-  /**
-   * List of parties involved in this catalog.
-   */
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * The period for which the catalog is valid.

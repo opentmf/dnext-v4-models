@@ -1,12 +1,16 @@
 package org.opentmf.dnext.tmf673.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeId;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.general.model.GeographicAddress;
+import org.opentmf.tmf673.model.IGeographicAddressValidationCreate;
 
 /**
  * The GeographicAddressValidation to be created.
@@ -26,8 +30,19 @@ import org.opentmf.dnext.general.model.GeographicAddress;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = GeographicAddressValidationCreate.class
+)
 @Required(fields = {"provideAlternative", "submittedGeographicAddress"})
-public class GeographicAddressValidationCreate {
+public class GeographicAddressValidationCreate extends Extensible implements IGeographicAddressValidationCreate {
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
 
   /**
    * Unique identifier of the Address Validation.

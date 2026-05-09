@@ -1,5 +1,6 @@
 package org.opentmf.dnext.common.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,7 +48,13 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = ExternalReference.class
 )
 @Required(fields = {"externalReferenceType", "name", "id"})
-public class ExternalReference extends EntityRef implements IExternalReference {
+public class ExternalReference extends NamedEntity implements IExternalReference {
+
+  /**
+   * The class type of the referred.
+   */
+  @JsonProperty("@referredType")
+  private @SafeText String atReferredType;
 
   /**
    * Type of the external reference.

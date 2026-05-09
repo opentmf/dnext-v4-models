@@ -34,7 +34,7 @@ import org.opentmf.commons.validation.constraints.Required;
     defaultImpl = AccountRelationship.class
 )
 @Required(fields = {"relationshipType", "validFor"})
-public class AccountRelationship extends CharacteristicRelationship implements IAccountRelationship {
+public class AccountRelationship extends InteractionRelationship implements IAccountRelationship {
 
   /**
    * Account reference. An account may be a party account or a financial account.

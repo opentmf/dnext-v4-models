@@ -3,13 +3,11 @@ package org.opentmf.dnext.tmf622.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AgreementRef;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
@@ -17,13 +15,14 @@ import org.opentmf.dnext.common.model.BillingAccountRef;
 import org.opentmf.dnext.common.model.Characteristic;
 import org.opentmf.dnext.common.model.Contact;
 import org.opentmf.dnext.common.model.ContactMedium;
-import org.opentmf.dnext.common.model.InflightOrderChangeUpdate;
-import org.opentmf.dnext.common.model.Note;
+import org.opentmf.dnext.common.model.ExternalIdentifier;
+import org.opentmf.dnext.common.model.ProductOfferingQualificationRef;
+import org.opentmf.dnext.common.model.QuoteRef;
+import org.opentmf.dnext.common.model.QuoteUpdateBase;
 import org.opentmf.dnext.common.model.RelatedChannel;
 import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.ShoppingCartRef;
 import org.opentmf.dnext.customer.model.PaymentRef;
-import org.opentmf.dnext.customer.model.ProductOfferingQualificationRef;
-import org.opentmf.dnext.customer.model.ShoppingCartRef;
 
 /**
  * The ProductOrder to be created.
@@ -50,7 +49,7 @@ import org.opentmf.dnext.customer.model.ShoppingCartRef;
     defaultImpl = ProductOrderCreate.class
 )
 @Required(fields = {"productOrderItem"})
-public class ProductOrderCreate extends InflightOrderChangeUpdate {
+public class ProductOrderCreate extends QuoteUpdateBase {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -103,31 +102,8 @@ public class ProductOrderCreate extends InflightOrderChangeUpdate {
   @JsonProperty("contactMedium")
   private List<@Valid ContactMedium> contactMediums;
 
-  /**
-   * Description of the product order.
-   */
-  private @SafeText String description;
-
-  /**
-   * ID given by the consumer and only understandable by him (to facilitate his
-   * searches afterwards).
-   */
-  @SafeId
-  @Size(max = 100)
-  private String externalId;
-
-  /**
-   * Unique identifier of a product Order entity.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
-
-  /**
-   * List of: Extra information about a given entity.
-   */
-  @JsonProperty("note")
-  private List<@Valid Note> notes;
+  @JsonProperty("externalIdentifier")
+  private List<@Valid ExternalIdentifier> externalIdentifiers;
 
   /**
    * Contact attached to the order to send back information regarding this order.
@@ -154,6 +130,8 @@ public class ProductOrderCreate extends InflightOrderChangeUpdate {
    */
   @JsonProperty("payment")
   private List<@Valid PaymentRef> payments;
+
+  private Boolean pointOfNoChange;
 
   private Boolean pointOfNoReturn;
 
@@ -200,9 +178,6 @@ public class ProductOrderCreate extends InflightOrderChangeUpdate {
    */
   @JsonProperty("quote")
   private List<@Valid QuoteRef> quotes;
-
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * Requested delivery date from the requester perspective.

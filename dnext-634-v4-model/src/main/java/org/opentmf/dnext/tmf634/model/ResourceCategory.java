@@ -1,14 +1,10 @@
 package org.opentmf.dnext.tmf634.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.util.List;
+import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeId;
-import org.opentmf.dnext.common.model.ResourceCandidateRef;
+import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.tmf634.model.IResourceCategory;
 
 /**
@@ -32,28 +28,30 @@ import org.opentmf.tmf634.model.IResourceCategory;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ResourceCategory.class
 )
-public class ResourceCategory extends ResourceCatalog implements IResourceCategory {
+public class ResourceCategory extends ResourceCategoryUpdate implements IResourceCategory {
 
   /**
-   * If true, this Boolean indicates that the category is a root of categories.
+   * Name of created by user.
    */
-  private Boolean isRoot;
+  private @SafeText String createdBy;
 
   /**
-   * parent category.
+   * Date of creation.
    */
-  private @Valid ResourceCategoryRef parent;
+  private OffsetDateTime createdDate;
 
   /**
-   * Unique identifier of the parent category.
+   * Version number of the entity.
    */
-  @SafeId
-  @Size(max = 100)
-  private String parentId;
+  private Integer revision;
 
   /**
-   * List of resource candidates accessible via this category.
+   * Name of updated by user.
    */
-  @JsonProperty("resourceCandidate")
-  private List<@Valid ResourceCandidateRef> resourceCandidates;
+  private @SafeText String updatedBy;
+
+  /**
+   * Date of update.
+   */
+  private OffsetDateTime updatedDate;
 }

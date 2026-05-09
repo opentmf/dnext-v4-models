@@ -1,13 +1,12 @@
 package org.opentmf.dnext.common.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IResourceRelationship;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
  *
@@ -34,19 +33,9 @@ import org.opentmf.commons.validation.constraints.Required;
     defaultImpl = ResourceRelationship.class
 )
 @Required(fields = {"resource"})
-public class ResourceRelationship extends CharacteristicRelationship implements IResourceRelationship {
+public class ResourceRelationship extends Entity implements IResourceRelationship {
 
-  /**
-   * When the related resource is a ResourceSpecificationRef, this field is
-   * populated with the ResourceSpecificationRef. When the related resource is a
-   * ResourceOrderItemRef, this field is populated with the ResourceOrderItemRef.
-   */
+  private @SafeText String relationshipType;
+
   private @Valid ResourceRefOrValue resource;
-
-  /**
-   * List of: Describes a given characteristic of an object or entity through a
-   * name/value pair.
-   */
-  @JsonProperty("resourceRelationshipCharacteristic")
-  private List<@Valid Characteristic> resourceRelationshipCharacteristics;
 }

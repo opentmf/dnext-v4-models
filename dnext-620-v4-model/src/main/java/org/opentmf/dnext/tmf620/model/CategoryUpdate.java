@@ -8,13 +8,10 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeId;
-import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.CategoryRef;
-import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.ExternalReference;
 import org.opentmf.dnext.common.model.ProductOfferingRef;
-import org.opentmf.dnext.common.model.RelatedParty;
-import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.dnext.product.model.CatalogUpdateBase;
 
 /**
  * The Category to be updated.
@@ -36,15 +33,7 @@ import org.opentmf.dnext.common.model.TimePeriod;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = CategoryUpdate.class
 )
-public class CategoryUpdate extends Extensible {
-
-  @JsonProperty("aclRelatedParty")
-  private List<@Valid RelatedParty> aclRelatedParties;
-
-  /**
-   * Description of the category.
-   */
-  private @SafeText String description;
+public class CategoryUpdate extends CatalogUpdateBase {
 
   /**
    * External reference of the individual or reference in other system.
@@ -56,16 +45,6 @@ public class CategoryUpdate extends Extensible {
    * If true, this Boolean indicates that the category is a root of categories.
    */
   private Boolean isRoot;
-
-  /**
-   * Used to indicate the current lifecycle status.
-   */
-  private @SafeText String lifecycleStatus;
-
-  /**
-   * Name of the category.
-   */
-  private @SafeText String name;
 
   /**
    * parent category.
@@ -93,9 +72,4 @@ public class CategoryUpdate extends Extensible {
    */
   @JsonProperty("subCategory")
   private List<@Valid CategoryRef> subCategories;
-
-  /**
-   * The period for which the category is valid.
-   */
-  private @Valid TimePeriod validFor;
 }

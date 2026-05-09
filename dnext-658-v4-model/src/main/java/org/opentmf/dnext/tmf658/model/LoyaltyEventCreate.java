@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
@@ -12,6 +13,8 @@ import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.LoyaltyProgramMemberRef;
+import org.opentmf.dnext.common.model.LoyaltyProgramPartnerRef;
+import org.opentmf.dnext.common.model.LoyaltyProgramProductRef;
 import org.opentmf.dnext.common.model.RelatedParty;
 
 /**
@@ -77,6 +80,18 @@ public class LoyaltyEventCreate extends Extensible {
    * The incoming loyalty event type.
    */
   private @SafeText String eventType;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   private @Valid LoyaltyProgramMemberRef member;
 

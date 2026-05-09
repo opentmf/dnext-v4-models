@@ -3,6 +3,7 @@ package org.opentmf.dnext.tmf632.model;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf632.model.IOrganizationIdentification;
 
@@ -40,7 +41,7 @@ import org.opentmf.tmf632.model.IOrganizationIdentification;
     defaultImpl = OrganizationIdentification.class
 )
 @Required(fields = {"identificationType", "identificationId"})
-public class OrganizationIdentification extends Entity implements IOrganizationIdentification {
+public class OrganizationIdentification extends Extensible implements IOrganizationIdentification {
 
   /**
    * An attachment by value or by reference. An attachment complements the
@@ -53,6 +54,18 @@ public class OrganizationIdentification extends Entity implements IOrganizationI
    * The identity card document number.
    */
   private @SafeText String documentNumber;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Identifier.

@@ -1,10 +1,7 @@
 package org.opentmf.dnext.common.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IAgreementSpecification;
@@ -36,61 +33,30 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = AgreementSpecification.class
 )
 @Required(fields = {"attachment", "name"})
-public class AgreementSpecification extends PaymentBase implements IAgreementSpecification {
+public class AgreementSpecification extends AgreementSpecificationUpdate implements IAgreementSpecification {
 
   /**
-   * List of: Related Entity reference. A related party defines party or party
-   * role linked to a specific entity.
+   * Name of created by user.
    */
-  @JsonProperty("aclRelatedParty")
-  private List<@Valid AclRelatedParty> aclRelatedParties;
+  private @SafeText String createdBy;
 
   /**
-   * List of: An attachment by value or by reference. An attachment complements
-   * the description of an element, for example through a document, a video, a
-   * picture.
+   * Date of creation.
    */
-  @JsonProperty("attachment")
-  private List<@Valid AttachmentRefOrValue> attachments;
+  private OffsetDateTime createdDate;
 
   /**
-   * If true, this agreement specification is a grouping of other agreement
-   * specifications. The list of bundled agreement specifications is provided by
-   * the specificationRelationship property.
+   * Version number of the entity.
    */
-  private Boolean isBundle;
+  private Integer revision;
 
   /**
-   * Date and time of the last update.
+   * Name of updated by user.
    */
-  private OffsetDateTime lastUpdate;
+  private @SafeText String updatedBy;
 
   /**
-   * Indicates the current lifecycle status.
+   * Date of update.
    */
-  private @SafeText String lifecycleStatus;
-
-  /**
-   * A string providing an explanation on the value of the lifecycle status.
-   */
-  private @SafeText String lifecycleStatusReason;
-
-  private @Valid CategoryRef serviceCategory;
-
-  /**
-   * List of: A characteristic quality or distinctive feature of an agreement.
-   */
-  @JsonProperty("specificationCharacteristic")
-  private List<@Valid AgreementSpecCharacteristic> specificationCharacteristics;
-
-  /**
-   * List of: A relationship between agreement specifications. Typical
-   * relationships are substitution and dependency.
-   */
-  @JsonProperty("specificationRelationship")
-  private List<@Valid AgreementSpecificationRelationship> specificationRelationships;
-
-  private @Valid TimePeriod validFor;
-
-  private @SafeText String version;
+  private OffsetDateTime updatedDate;
 }

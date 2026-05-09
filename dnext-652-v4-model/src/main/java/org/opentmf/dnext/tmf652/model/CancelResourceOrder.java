@@ -1,11 +1,18 @@
 package org.opentmf.dnext.tmf652.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.CancelProductOrderBase;
+import org.opentmf.dnext.common.model.CompletionCallback;
+import org.opentmf.dnext.common.model.Note;
+import org.opentmf.dnext.common.model.ResourceOrderRef;
 import org.opentmf.tmf652.model.ICancelResourceOrder;
 
 /**
@@ -33,11 +40,22 @@ import org.opentmf.tmf652.model.ICancelResourceOrder;
     defaultImpl = CancelResourceOrder.class
 )
 @Required(fields = {"resourceOrder"})
-public class CancelResourceOrder extends CancelResourceOrderCreate implements ICancelResourceOrder {
+public class CancelResourceOrder extends CancelProductOrderBase implements ICancelResourceOrder {
 
-  private @SafeText String createdBy;
+  /**
+   * Reason why the order is cancelled.
+   */
+  private @SafeText String cancellationReason;
 
-  private OffsetDateTime createdDate;
+  /**
+   * gracefulCancel.
+   */
+  private @SafeText String cancellationType;
+
+  /**
+   * The context provided in callbackContext field of completionCallback.
+   */
+  private @Valid CompletionCallback completionCallback;
 
   /**
    * Date when the order is cancelled.
@@ -45,21 +63,20 @@ public class CancelResourceOrder extends CancelResourceOrderCreate implements IC
   private OffsetDateTime effectiveCancellationDate;
 
   /**
+   * Extra information about a given entity.
+   */
+  @JsonProperty("note")
+  private List<@Valid Note> notes;
+
+  /**
+   * Date when the submitter wants the order to be cancelled.
+   */
+  private OffsetDateTime requestedCancellationDate;
+
+  private @Valid ResourceOrderRef resourceOrder;
+
+  /**
    * Version number of the entity.
    */
   private Integer revision;
-
-  /**
-   * Tracks the lifecycle status of the cancellation request, such as
-   * Acknowledged, Rejected, InProgress, Pending and so on.
-   * <br/><p>Recommended values: acknowledged, terminatedWithError, inProgress,
-   * done, rejected.
-   *
-   * @see org.opentmf.dnext.tmf652.model.CancelResourceOrderStateType
-   */
-  private @SafeText String state;
-
-  private @SafeText String updatedBy;
-
-  private OffsetDateTime updatedDate;
 }

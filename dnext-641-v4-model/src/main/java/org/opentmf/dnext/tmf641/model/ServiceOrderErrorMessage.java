@@ -8,6 +8,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.opentmf.dnext.common.model.ServiceOrderItemRef;
 import org.opentmf.tmf641.model.IServiceOrderErrorMessage;
 
 /**

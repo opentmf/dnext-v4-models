@@ -3,13 +3,15 @@ package org.opentmf.dnext.tmf658.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.LoyaltyActionBase;
+import org.opentmf.dnext.common.model.PartnershipRef;
 import org.opentmf.dnext.common.model.ProductOfferingRef;
 import org.opentmf.dnext.common.model.RelatedParty;
-import org.opentmf.dnext.product.model.LoyaltyBase;
 import org.opentmf.tmf658.model.ILoyaltyAction;
 
 /**
@@ -33,7 +35,7 @@ import org.opentmf.tmf658.model.ILoyaltyAction;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = LoyaltyAction.class
 )
-public class LoyaltyAction extends LoyaltyBase implements ILoyaltyAction {
+public class LoyaltyAction extends LoyaltyActionBase implements ILoyaltyAction {
 
   /**
    * DNext Access-Control RelatedParty List like ownership etc.
@@ -58,6 +60,8 @@ public class LoyaltyAction extends LoyaltyBase implements ILoyaltyAction {
    * The type of loyalty action.
    */
   private @SafeText String actionType;
+
+  private @SafeText String baseType;
 
   /**
    * The body if the request that is made when this action is executed. The body
@@ -99,6 +103,15 @@ public class LoyaltyAction extends LoyaltyBase implements ILoyaltyAction {
    * BusinessInteraction action type.
    */
   private @Valid ProductOfferingRef productOffering;
+
+  /**
+   * Version number of the entity.
+   */
+  private Integer revision;
+
+  private URI schemaLocation;
+
+  private @SafeText String type;
 
   /**
    * A string that identifies the version of the loyalty action.

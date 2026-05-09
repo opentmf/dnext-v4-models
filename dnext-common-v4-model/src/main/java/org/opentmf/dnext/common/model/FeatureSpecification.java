@@ -36,7 +36,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = FeatureSpecification.class
 )
 @Required(fields = {"name"})
-public class FeatureSpecification extends NamedEntity implements IFeatureSpecification {
+public class FeatureSpecification extends TaxDefinitionBase implements IFeatureSpecification {
 
   /**
    * Bundled feature specification.
@@ -72,11 +72,6 @@ public class FeatureSpecification extends NamedEntity implements IFeatureSpecifi
    * A flag indicating if the feature is enabled (true) or not (false).
    */
   private Boolean isEnabled;
-
-  /**
-   * The period for which this feature specification is valid.
-   */
-  private @Valid TimePeriod validFor;
 
   /**
    * Version of the feature specification.

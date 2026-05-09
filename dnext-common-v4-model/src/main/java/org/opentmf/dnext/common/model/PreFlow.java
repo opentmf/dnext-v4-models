@@ -11,7 +11,6 @@ import org.opentmf.commons.validation.constraints.SafeText;
  * <strong>Referring TMF artifacts:</strong>
  * <ul>
  *   <li>TMF-620: Product Catalog Management API</li>
- *   <li>TMF-common: common</li>
  * </ul>
  * </p>
  *

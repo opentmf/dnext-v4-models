@@ -11,11 +11,13 @@ import org.opentmf.dnext.common.model.AppointmentRef;
 import org.opentmf.dnext.common.model.BillingAccountRef;
 import org.opentmf.dnext.common.model.Characteristic;
 import org.opentmf.dnext.common.model.InflightOrderChangeUpdate;
+import org.opentmf.dnext.common.model.OrderItemRelationship;
+import org.opentmf.dnext.common.model.OrderTerm;
+import org.opentmf.dnext.common.model.ProductOfferingQualificationRef;
 import org.opentmf.dnext.common.model.ProductOfferingRef;
 import org.opentmf.dnext.common.model.ProductRefOrValue;
 import org.opentmf.dnext.customer.model.PaymentRef;
 import org.opentmf.dnext.customer.model.ProductOfferingQualificationItemRef;
-import org.opentmf.dnext.customer.model.ProductOfferingQualificationRef;
 
 /**
  * The ProductOrder to be updated.

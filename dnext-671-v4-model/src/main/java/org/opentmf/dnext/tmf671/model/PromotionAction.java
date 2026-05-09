@@ -2,12 +2,15 @@ package org.opentmf.dnext.tmf671.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
 import org.opentmf.dnext.common.model.EntityRef;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.tmf671.model.IPromotionAction;
 
 /**
@@ -36,7 +39,7 @@ import org.opentmf.tmf671.model.IPromotionAction;
     defaultImpl = PromotionAction.class
 )
 @Required(fields = {"actionType"})
-public class PromotionAction extends Entity implements IPromotionAction {
+public class PromotionAction extends Extensible implements IPromotionAction {
 
   /**
    * It refers to the entity which is impacted by the promotion action.  • When
@@ -61,4 +64,16 @@ public class PromotionAction extends Entity implements IPromotionAction {
    * of the reduced money.
    */
   private @SafeText String actionValue;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 }

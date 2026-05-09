@@ -1,12 +1,11 @@
 package org.opentmf.dnext.tmf666.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf666.model.IBillingCycleSpecificationRefOrValue;
 
 /**
@@ -34,53 +33,18 @@ import org.opentmf.tmf666.model.IBillingCycleSpecificationRefOrValue;
     defaultImpl = BillingCycleSpecificationRefOrValue.class
 )
 @Required(fields = {"isRef", "name"})
-public class BillingCycleSpecificationRefOrValue extends BillPresentationMediaRefOrValue implements IBillingCycleSpecificationRefOrValue {
+public class BillingCycleSpecificationRefOrValue extends BillingCycleSpecification implements IBillingCycleSpecificationRefOrValue {
 
   /**
-   * An offset of a billing/settlement date.
+   * g. The actual type of the target instance when needed for disambiguation.
    */
-  private Integer billingDateShift;
-
-  /**
-   * A billing time period. It can be recurring, for example: week, month, quarter
-   * of year, year.
-   */
-  private @SafeText String billingPeriod;
-
-  /**
-   * An offset of a date through which charges previously received by the billing
-   * system will appear on the bill.
-   */
-  private Integer chargeDateOffset;
-
-  /**
-   * An offset of a date through which credits previously received by the billing
-   * system will appear on the bill.
-   */
-  private Integer creditDateOffset;
+  @JsonProperty("@referredType")
+  private @SafeText String atReferredType;
 
   /**
    * An offset of a billing/settlement date.
    */
   private Integer dateShift;
 
-  /**
-   * Frequency of the billing cycle (monthly for instance).
-   */
-  private @SafeText String frequency;
-
-  /**
-   * An offset of a customer bill mailing date.
-   */
-  private Integer mailingDateOffset;
-
-  /**
-   * An offset of a payment due date.
-   */
-  private Integer paymentDueDateOffset;
-
-  /**
-   * . The period for which the billing specification cycle is valid.
-   */
-  private @Valid TimePeriod validFor;
+  private Boolean isRef;
 }

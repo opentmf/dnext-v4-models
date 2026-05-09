@@ -3,13 +3,16 @@ package org.opentmf.dnext.product.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.CharacteristicRelationship;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.product.model.IUsageCharacteristic;
 
 /**
@@ -37,7 +40,7 @@ import org.opentmf.product.model.IUsageCharacteristic;
     defaultImpl = UsageCharacteristic.class
 )
 @Required(fields = {"name", "value"})
-public class UsageCharacteristic extends NamedEntity implements IUsageCharacteristic {
+public class UsageCharacteristic extends Extensible implements IUsageCharacteristic {
 
   /**
    * List of: Another Characteristic that is related to the current
@@ -45,6 +48,23 @@ public class UsageCharacteristic extends NamedEntity implements IUsageCharacteri
    */
   @JsonProperty("characteristicRelationship")
   private List<@Valid CharacteristicRelationship> characteristicRelationships;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the characteristic.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
+
+  /**
+   * Name of the characteristic.
+   */
+  private @SafeText String name;
 
   /**
    * The value of the characteristic.

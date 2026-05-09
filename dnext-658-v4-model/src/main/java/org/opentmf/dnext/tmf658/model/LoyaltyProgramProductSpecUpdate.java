@@ -3,7 +3,6 @@ package org.opentmf.dnext.tmf658.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,11 +11,12 @@ import org.opentmf.dnext.common.model.AttachmentRefOrValue;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.ResourceSpecificationRef;
 import org.opentmf.dnext.common.model.ServiceSpecificationRef;
+import org.opentmf.dnext.common.model.SpecificationBase;
 import org.opentmf.dnext.common.model.TargetProductSchema;
 import org.opentmf.dnext.product.model.BundledProductSpecification;
-import org.opentmf.dnext.product.model.CatalogUpdateBase;
 import org.opentmf.dnext.product.model.ProductSpecificationCharacteristic;
 import org.opentmf.dnext.product.model.ProductSpecificationRelationship;
+import org.opentmf.tmf658.model.ILoyaltyProgramProductSpecUpdate;
 
 /**
  * The LoyaltyProgramProductSpec to be updated.
@@ -38,7 +38,7 @@ import org.opentmf.dnext.product.model.ProductSpecificationRelationship;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = LoyaltyProgramProductSpecUpdate.class
 )
-public class LoyaltyProgramProductSpecUpdate extends CatalogUpdateBase {
+public class LoyaltyProgramProductSpecUpdate extends SpecificationBase implements ILoyaltyProgramProductSpecUpdate {
 
   /**
    * DNext Access-Control RelatedParty List like ownership etc.
@@ -65,17 +65,6 @@ public class LoyaltyProgramProductSpecUpdate extends CatalogUpdateBase {
    */
   @JsonProperty("bundledProductSpecification")
   private List<@Valid BundledProductSpecification> bundledProductSpecifications;
-
-  /**
-   * isBundle determines whether a productSpecification represents a single
-   * productSpecification (false), or a bundle of productSpecification (true).
-   */
-  private Boolean isBundle;
-
-  /**
-   * Date and time of the last update.
-   */
-  private OffsetDateTime lastUpdate;
 
   /**
    * The condition of the product specification, such as active, inactive,
@@ -126,9 +115,4 @@ public class LoyaltyProgramProductSpecUpdate extends CatalogUpdateBase {
    * type of target product which is described by product specification.
    */
   private @Valid TargetProductSchema targetProductSchema;
-
-  /**
-   * Product specification version.
-   */
-  private @SafeText String version;
 }

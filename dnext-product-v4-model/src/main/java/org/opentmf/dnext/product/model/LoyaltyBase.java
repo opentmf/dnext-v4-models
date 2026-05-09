@@ -1,21 +1,24 @@
 package org.opentmf.dnext.product.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.constraints.Size;
 import java.net.URI;
-import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 
 /**
  * Synthesized abstract parent for 4 model classes.
  *
  * <p><br/>
- * <strong>Referring TMF artifacts:</strong>
+ * <strong>Direct descendants:</strong>
  * <ul>
- *   <li>TMF-658: Loyalty</li>
- *   <li>TMF-product: product</li>
+ *   <li>LoyaltyActionCreate (658)</li>
+ *   <li>LoyaltyActionUpdate (658)</li>
+ *   <li>LoyaltyRuleCreate (658)</li>
+ *   <li>LoyaltyRuleUpdate (658)</li>
  * </ul>
  * </p>
  *
@@ -29,36 +32,27 @@ import org.opentmf.dnext.common.model.Entity;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = LoyaltyBase.class
 )
-public abstract class LoyaltyBase extends Entity {
-
-  private @SafeText String baseType;
+public abstract class LoyaltyBase extends Extensible {
 
   /**
-   * Name of created by user.
+   * A user-friendly identifier of the loyalty execution point.
    */
-  private @SafeText String createdBy;
+  private @SafeText String commonName;
 
   /**
-   * Date of creation.
+   * A free-form description of the loyalty execution point.
    */
-  private OffsetDateTime createdDate;
+  private @SafeText String description;
 
   /**
-   * Version number of the entity.
+   * Hyperlink reference.
    */
-  private Integer revision;
-
-  private URI schemaLocation;
-
-  private @SafeText String type;
+  private URI href;
 
   /**
-   * Name of updated by user.
+   * Unique identifier of the entity.
    */
-  private @SafeText String updatedBy;
-
-  /**
-   * Date of update.
-   */
-  private OffsetDateTime updatedDate;
+  @SafeId
+  @Size(max = 100)
+  private String id;
 }

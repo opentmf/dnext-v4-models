@@ -1,7 +1,6 @@
 package org.opentmf.dnext.common.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IFeatureRelationship;
@@ -36,15 +35,10 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = FeatureRelationship.class
 )
 @Required(fields = {"relationshipType", "name"})
-public class FeatureRelationship extends NamedEntity implements IFeatureRelationship {
+public class FeatureRelationship extends TaxDefinitionBase implements IFeatureRelationship {
 
   /**
    * This is the type of the feature relationship.
    */
   private @SafeText String relationshipType;
-
-  /**
-   * The period for which this feature relationship is valid.
-   */
-  private @Valid TimePeriod validFor;
 }

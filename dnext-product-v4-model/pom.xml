@@ -5,29 +5,28 @@
   <parent>
     <groupId>org.opentmf.model</groupId>
     <artifactId>dnext-v4-models</artifactId>
-    <version>2.11.3-SNAPSHOT</version>
+    <version>2.12.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>dnext-product-v4-model</artifactId>
   <name>dnext-product-v4-model</name>
-  <version>2.11.3-SNAPSHOT</version>
   <description>
-    - TMF-620: Product Catalog Management API, version: 2.11.2
-    - TMF-637: Product Inventory Management API, version: 2.11.2
-    - TMF-658: Loyalty, version: 2.11.2
-    - TMF-671: Promotion Management API, version: 2.11.2
+    - TMF-620: Product Catalog Management API, version: 2.12.1
+    - TMF-637: Product Inventory Management API, version: 2.12.1
+    - TMF-658: Loyalty, version: 2.12.1
+    - TMF-671: Promotion Management API, version: 2.12.1
   </description>
 
   <dependencies>
     <dependency>
       <groupId>org.opentmf.model</groupId>
       <artifactId>dnext-common-v4-model</artifactId>
-      <version>2.11.3-SNAPSHOT</version>
+      <version>2.12.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opentmf.model</groupId>
       <artifactId>opentmf-product-v4-api</artifactId>
-      <version>4.1.0.10</version>
+      <version>${opentmf-product-v4-api.version}</version>
     </dependency>
   </dependencies>
 

@@ -8,6 +8,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.BundledProductOfferingPriceRelationship;
 import org.opentmf.dnext.common.model.ChannelRef;
 import org.opentmf.dnext.common.model.ConstraintRef;
 import org.opentmf.dnext.common.model.ExternalReference;
@@ -40,9 +41,6 @@ import org.opentmf.dnext.product.model.CatalogUpdateBase;
     defaultImpl = ProductOfferingPriceUpdate.class
 )
 public class ProductOfferingPriceUpdate extends CatalogUpdateBase {
-
-  @JsonProperty("aclRelatedParty")
-  private List<@Valid RelatedParty> aclRelatedParties;
 
   private @SafeText String advancedPricingMethod;
 
@@ -165,6 +163,12 @@ public class ProductOfferingPriceUpdate extends CatalogUpdateBase {
    * The period to repeat the application of the price Could be month, week...
    */
   private @SafeText String recurringChargePeriodType;
+
+  /**
+   * List of parties involved in this catalog.
+   */
+  @JsonProperty("relatedParty")
+  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * Indicates when the pricing should be handled. (ex. upfront payment, billing

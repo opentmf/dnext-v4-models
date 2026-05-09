@@ -3,11 +3,13 @@ package org.opentmf.dnext.common.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IPartyRole;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
  * The part played by a party in a given context.
@@ -34,14 +36,7 @@ import org.opentmf.commons.validation.constraints.Required;
     defaultImpl = PartyRole.class
 )
 @Required(fields = {"id"})
-public class PartyRole extends ProductBase implements IPartyRole {
-
-  /**
-   * List of: Account reference. An account may be a party account or a financial
-   * account.
-   */
-  @JsonProperty("account")
-  private List<@Valid AccountRef> accounts;
+public class PartyRole extends Partner implements IPartyRole {
 
   /**
    * List of: Related Entity reference. A related party defines party or party
@@ -50,53 +45,23 @@ public class PartyRole extends ProductBase implements IPartyRole {
   @JsonProperty("aclRelatedParty")
   private List<@Valid AclRelatedParty> aclRelatedParties;
 
-  @JsonProperty("agreement")
-  private List<@Valid AgreementRef> agreements;
+  /**
+   * Name of created by user.
+   */
+  private @SafeText String createdBy;
 
   /**
-   * List of: An attachment by value or by reference. An attachment complements
-   * the description of an element, for example through a document, a video, a
-   * picture.
+   * Date of creation.
    */
-  @JsonProperty("attachment")
-  private List<@Valid AttachmentRefOrValue> attachments;
-
-  /**
-   * Describes the characteristic of a party role.
-   */
-  @JsonProperty("characteristic")
-  private List<@Valid Characteristic> characteristics;
-
-  /**
-   * List of: Indicates the contact medium that could be used to contact the
-   * party.
-   */
-  @JsonProperty("contactMedium")
-  private List<@Valid ContactMedium> contactMediums;
-
-  /**
-   * List of: Credit profile for the party (containing credit scoring, ...). By
-   * default, only the current credit profile is retrieved. It can be used as a
-   * list to give the party credit profiles history, the first one in the list
-   * will be the current one.
-   */
-  @JsonProperty("creditProfile")
-  private List<@Valid CreditProfile> creditProfiles;
-
-  private @Valid RelatedParty engagedParty;
+  private OffsetDateTime createdDate;
 
   @JsonProperty("externalReference")
   private List<@Valid ExternalReference> externalReferences;
 
   /**
-   * List of: PaymentMethod reference. A payment method defines a specific mean of
-   * payment (e.g. direct debit).
+   * Version number of the entity.
    */
-  @JsonProperty("paymentMethod")
-  private List<@Valid PaymentMethodRef> paymentMethods;
-
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
+  private Integer revision;
 
   /**
    * Role type reference. A RoleType represents the type of a PartyRole, defined
@@ -105,7 +70,12 @@ public class PartyRole extends ProductBase implements IPartyRole {
   private @Valid RoleTypeRef roleType;
 
   /**
-   * The time period that the PartyRole is valid for.
+   * Name of updated by user.
    */
-  private @Valid TimePeriod validFor;
+  private @SafeText String updatedBy;
+
+  /**
+   * Date of update.
+   */
+  private OffsetDateTime updatedDate;
 }

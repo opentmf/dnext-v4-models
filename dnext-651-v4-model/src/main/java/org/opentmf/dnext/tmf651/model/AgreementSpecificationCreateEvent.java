@@ -1,14 +1,10 @@
 package org.opentmf.dnext.tmf651.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeId;
-import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.DNextEventBase;
+import org.opentmf.dnext.common.model.QuoteCreateEventBase;
 import org.opentmf.tmf651.model.IAgreementSpecificationCreateEvent;
 
 /**
@@ -25,41 +21,16 @@ import org.opentmf.tmf651.model.IAgreementSpecificationCreateEvent;
  */
 @Getter
 @Setter
-public class AgreementSpecificationCreateEvent extends DNextEventBase implements IAgreementSpecificationCreateEvent {
-
-  /**
-   * When subclassing, this defines the super-class.
-   */
-  @JsonProperty("@baseType")
-  private @SafeText String atBaseType;
-
-  /**
-   * A URI to a JSON-Schema file that defines additional attributes and
-   * relationships.
-   */
-  @JsonProperty("@schemaLocation")
-  private URI atSchemaLocation;
-
-  /**
-   * When subclassing, this defines the subclass Extensible name.
-   */
-  @JsonProperty("@type")
-  private @SafeText String atType;
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = AgreementSpecificationCreateEvent.class
+)
+public class AgreementSpecificationCreateEvent extends QuoteCreateEventBase implements IAgreementSpecificationCreateEvent {
 
   /**
    * The event data structure.
    */
   private @Valid AgreementSpecificationCreateEventPayload event;
-
-  /**
-   * Reference of the resource involved in the event.
-   */
-  private URI href;
-
-  /**
-   * Identifier of the resource involved in the event.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
 }

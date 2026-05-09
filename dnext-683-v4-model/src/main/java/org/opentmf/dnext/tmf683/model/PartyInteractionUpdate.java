@@ -9,13 +9,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
-import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.InteractionItem;
 import org.opentmf.dnext.common.model.InteractionRelationship;
+import org.opentmf.dnext.common.model.LoyaltyEarnCreateBase;
 import org.opentmf.dnext.common.model.Note;
 import org.opentmf.dnext.common.model.RelatedChannel;
-import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.tmf683.model.IPartyInteractionUpdate;
 
 /**
  * The PartyInteraction to be updated.
@@ -37,7 +37,7 @@ import org.opentmf.dnext.common.model.TimePeriod;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = PartyInteractionUpdate.class
 )
-public class PartyInteractionUpdate extends Extensible {
+public class PartyInteractionUpdate extends LoyaltyEarnCreateBase implements IPartyInteractionUpdate {
 
   /**
    * Complements the description of an element (for instance a product) through
@@ -56,11 +56,6 @@ public class PartyInteractionUpdate extends Extensible {
    * Date when the interaction is created in the system.
    */
   private OffsetDateTime creationDate;
-
-  /**
-   * Description of the interaction.
-   */
-  private @SafeText String description;
 
   /**
    * The period during which the interaction took place. Start and end will be
@@ -91,13 +86,6 @@ public class PartyInteractionUpdate extends Extensible {
    * Reason why the interaction happened.
    */
   private @SafeText String reason;
-
-  /**
-   * Related Entity reference. A related party defines party or party role linked
-   * to a specific entity.
-   */
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * Status of the interaction (opened, inProgress, completed).

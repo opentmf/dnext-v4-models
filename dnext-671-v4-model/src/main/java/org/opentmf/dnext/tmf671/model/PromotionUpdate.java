@@ -1,6 +1,7 @@
 package org.opentmf.dnext.tmf671.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -8,7 +9,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
+import org.opentmf.dnext.common.model.NamedEntity;
 import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.tmf671.model.IPromotionUpdate;
 
 /**
  * The Promotion to be updated.
@@ -24,7 +27,13 @@ import org.opentmf.dnext.common.model.TimePeriod;
  */
 @Getter
 @Setter
-public class PromotionUpdate {
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = PromotionUpdate.class
+)
+public class PromotionUpdate extends NamedEntity implements IPromotionUpdate {
 
   /**
    * List of: An attachment by value or by reference. An attachment complements
@@ -49,11 +58,6 @@ public class PromotionUpdate {
    * draft/test/waitForApproval/release/suspend/retirement.
    */
   private @SafeText String lifecycleStatus;
-
-  /**
-   * Name of promotion.
-   */
-  private @SafeText String name;
 
   /**
    * Type of promotion. The basic type are Award/Discount/Reduction.

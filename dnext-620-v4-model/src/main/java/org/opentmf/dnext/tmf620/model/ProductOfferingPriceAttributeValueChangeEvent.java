@@ -1,15 +1,10 @@
 package org.opentmf.dnext.tmf620.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeId;
-import org.opentmf.commons.validation.constraints.SafeJsonPath;
-import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.DNextEventBase;
+import org.opentmf.dnext.common.model.QuoteInformationRequiredEventBase;
 import org.opentmf.tmf620.model.IProductOfferingPriceAttributeValueChangeEvent;
 
 /**
@@ -26,47 +21,16 @@ import org.opentmf.tmf620.model.IProductOfferingPriceAttributeValueChangeEvent;
  */
 @Getter
 @Setter
-public class ProductOfferingPriceAttributeValueChangeEvent extends DNextEventBase implements IProductOfferingPriceAttributeValueChangeEvent {
-
-  /**
-   * When subclassing, this defines the super-class.
-   */
-  @JsonProperty("@baseType")
-  private @SafeText String atBaseType;
-
-  /**
-   * A URI to a JSON-Schema file that defines additional attributes and
-   * relationships.
-   */
-  @JsonProperty("@schemaLocation")
-  private URI atSchemaLocation;
-
-  /**
-   * When subclassing, this defines the subclass Extensible name.
-   */
-  @JsonProperty("@type")
-  private @SafeText String atType;
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = ProductOfferingPriceAttributeValueChangeEvent.class
+)
+public class ProductOfferingPriceAttributeValueChangeEvent extends QuoteInformationRequiredEventBase implements IProductOfferingPriceAttributeValueChangeEvent {
 
   /**
    * The event data structure.
    */
   private @Valid ProductOfferingPriceAttributeValueChangeEventPayload event;
-
-  /**
-   * The path identifying the object field concerned by this notification.
-   */
-  @SafeJsonPath
-  private String fieldPath;
-
-  /**
-   * Hyperlink reference.
-   */
-  private URI href;
-
-  /**
-   * Unique identifier of the entity.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
 }

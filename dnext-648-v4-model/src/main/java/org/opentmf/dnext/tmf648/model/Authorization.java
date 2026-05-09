@@ -3,13 +3,16 @@ package org.opentmf.dnext.tmf648.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.tmf648.model.IAuthorization;
 
@@ -39,7 +42,7 @@ import org.opentmf.tmf648.model.IAuthorization;
     defaultImpl = Authorization.class
 )
 @Required(fields = {"state"})
-public class Authorization extends NamedEntity implements IAuthorization {
+public class Authorization extends Extensible implements IAuthorization {
 
   @JsonProperty("approver")
   private List<@Valid RelatedParty> approvers;
@@ -48,6 +51,23 @@ public class Authorization extends NamedEntity implements IAuthorization {
    * Date when the authorization (approved or declined) was done.
    */
   private OffsetDateTime givenDate;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
+
+  /**
+   * Name of the required authorization.
+   */
+  private @SafeText String name;
 
   /**
    * Date when the authorization is requested for.

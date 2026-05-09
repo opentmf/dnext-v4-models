@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.PaymentMethodUpdate;
 
 /**
  * A check method of payment.
@@ -34,7 +35,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = CheckCreate.class
 )
 @Required(fields = {"atType"})
-public class CheckCreate extends OtherCreate {
+public class CheckCreate extends PaymentMethodUpdate {
 
   /**
    * Bank performing the payment of the check.

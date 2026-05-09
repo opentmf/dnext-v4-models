@@ -1,11 +1,17 @@
 package org.opentmf.dnext.tmf658.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.LoyaltyActionRef;
+import org.opentmf.dnext.common.model.LoyaltyConditionRef;
+import org.opentmf.dnext.common.model.LoyaltyEventTypeRef;
+import org.opentmf.dnext.product.model.LoyaltyBase;
+import org.opentmf.tmf658.model.ILoyaltyRuleUpdate;
 
 /**
  * The LoyaltyRule to be updated.
@@ -21,19 +27,15 @@ import org.opentmf.commons.validation.constraints.SafeText;
  */
 @Getter
 @Setter
-public class LoyaltyRuleUpdate {
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = LoyaltyRuleUpdate.class
+)
+public class LoyaltyRuleUpdate extends LoyaltyBase implements ILoyaltyRuleUpdate {
 
   private Boolean cnf;
-
-  /**
-   * A user-friendly identifier of the loyalty rule.
-   */
-  private @SafeText String commonName;
-
-  /**
-   * A free-form description of the rule.
-   */
-  private @SafeText String description;
 
   /**
    * This is a Boolean attribute that, if true, defines the condition clause of

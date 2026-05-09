@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import java.net.URI;
-import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +37,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = Attachment.class
 )
 @Required(fields = {"id"})
-public class Attachment extends NamedEntity implements IAttachment {
+public class Attachment extends AttachmentBase implements IAttachment {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -60,25 +59,9 @@ public class Attachment extends NamedEntity implements IAttachment {
   private @SafeText String content;
 
   /**
-   * Name of created by user.
-   */
-  private @SafeText String createdBy;
-
-  /**
-   * Date of creation.
-   */
-  private OffsetDateTime createdDate;
-
-  /**
    * A narrative text describing the content of the attachment.
    */
   private @SafeText String description;
-
-  /**
-   * External reference of the shopping cart or reference in other system.
-   */
-  @JsonProperty("externalReference")
-  private List<@Valid ExternalReference> externalReferences;
 
   /**
    * Attachment mime type such as extension file for video, picture and document.
@@ -86,24 +69,9 @@ public class Attachment extends NamedEntity implements IAttachment {
   private @SafeText String mimeType;
 
   /**
-   * Version number of the entity.
-   */
-  private Integer revision;
-
-  /**
    * The size of the attachment.
    */
   private @Valid Quantity size;
-
-  /**
-   * Name of updated by user.
-   */
-  private @SafeText String updatedBy;
-
-  /**
-   * Date of update.
-   */
-  private OffsetDateTime updatedDate;
 
   /**
    * Uniform Resource Locator, is a web page address (a subset of URI).

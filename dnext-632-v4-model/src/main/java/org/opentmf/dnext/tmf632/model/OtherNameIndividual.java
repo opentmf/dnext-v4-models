@@ -2,10 +2,13 @@ package org.opentmf.dnext.tmf632.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf632.model.IOtherNameIndividual;
 
@@ -30,7 +33,7 @@ import org.opentmf.tmf632.model.IOtherNameIndividual;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = OtherNameIndividual.class
 )
-public class OtherNameIndividual extends Entity implements IOtherNameIndividual {
+public class OtherNameIndividual extends Extensible implements IOtherNameIndividual {
 
   /**
    * e.g. Baron, Graf, Earl,….
@@ -69,6 +72,18 @@ public class OtherNameIndividual extends Entity implements IOtherNameIndividual 
    * First name.
    */
   private @SafeText String givenName;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Legal name or birth name (name one has for official purposes).

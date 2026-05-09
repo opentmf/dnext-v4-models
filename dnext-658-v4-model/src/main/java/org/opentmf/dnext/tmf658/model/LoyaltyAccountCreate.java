@@ -12,10 +12,12 @@ import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AccountBalance;
 import org.opentmf.dnext.common.model.AccountRelationship;
 import org.opentmf.dnext.common.model.Contact;
-import org.opentmf.dnext.common.model.Extensible;
+import org.opentmf.dnext.common.model.LoyaltyEarnCreateBase;
+import org.opentmf.dnext.common.model.LoyaltyProgramProductRef;
 import org.opentmf.dnext.common.model.Money;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.TaxExemptionCertificate;
+import org.opentmf.tmf658.model.ILoyaltyAccountCreate;
 
 /**
  * The LoyaltyAccount to be created.
@@ -42,7 +44,7 @@ import org.opentmf.dnext.common.model.TaxExemptionCertificate;
     defaultImpl = LoyaltyAccountCreate.class
 )
 @Required(fields = {"name"})
-public class LoyaltyAccountCreate extends Extensible {
+public class LoyaltyAccountCreate extends LoyaltyEarnCreateBase implements ILoyaltyAccountCreate {
 
   /**
    * List of: Balances linked to the account.
@@ -84,11 +86,6 @@ public class LoyaltyAccountCreate extends Extensible {
   private @Valid Money creditLimit;
 
   /**
-   * Detailed description of the party account.
-   */
-  private @SafeText String description;
-
-  /**
    * Date of last modification of the account.
    */
   private OffsetDateTime lastModified;
@@ -99,9 +96,6 @@ public class LoyaltyAccountCreate extends Extensible {
    * Name of the account.
    */
   private @SafeText String name;
-
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * Contains the lifecycle state such as: Active, Closed, Suspended and so on.

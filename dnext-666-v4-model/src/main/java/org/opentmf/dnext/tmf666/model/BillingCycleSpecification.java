@@ -1,7 +1,6 @@
 package org.opentmf.dnext.tmf666.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +28,7 @@ import org.opentmf.tmf666.model.IBillingCycleSpecification;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = BillingCycleSpecification.class
 )
-public class BillingCycleSpecification extends BillingCycleSpecificationCreate implements IBillingCycleSpecification {
+public class BillingCycleSpecification extends BillingCycleSpecificationUpdate implements IBillingCycleSpecification {
 
   /**
    * Name of created by user.
@@ -40,11 +39,6 @@ public class BillingCycleSpecification extends BillingCycleSpecificationCreate i
    * Date of creation.
    */
   private OffsetDateTime createdDate;
-
-  /**
-   * Reference of the billing cycle specification.
-   */
-  private URI href;
 
   /**
    * Version number of the entity.

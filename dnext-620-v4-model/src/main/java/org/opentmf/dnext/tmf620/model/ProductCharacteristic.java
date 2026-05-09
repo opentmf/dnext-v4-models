@@ -4,15 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import java.net.URI;
-import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.AttachmentBase;
 import org.opentmf.dnext.common.model.CategoryRef;
 import org.opentmf.dnext.common.model.CharacteristicValueSpecification;
-import org.opentmf.dnext.common.model.ExternalReference;
-import org.opentmf.dnext.common.model.NamedEntity;
 
 /**
  *
@@ -33,7 +31,7 @@ import org.opentmf.dnext.common.model.NamedEntity;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ProductCharacteristic.class
 )
-public class ProductCharacteristic extends NamedEntity {
+public class ProductCharacteristic extends AttachmentBase {
 
   /**
    * Category of the characteristic.
@@ -51,16 +49,6 @@ public class ProductCharacteristic extends NamedEntity {
   private Boolean configurable;
 
   /**
-   * Name of created by user.
-   */
-  private @SafeText String createdBy;
-
-  /**
-   * Date of creation.
-   */
-  private OffsetDateTime createdDate;
-
-  /**
    * Description of this entity.
    */
   private @SafeText String description;
@@ -71,12 +59,6 @@ public class ProductCharacteristic extends NamedEntity {
    * product..
    */
   private Boolean extensible;
-
-  /**
-   * External reference of the individual or reference in other system.
-   */
-  @JsonProperty("externalReference")
-  private List<@Valid ExternalReference> externalReferences;
 
   /**
    * If true, it indicates that the characteristic value can be changed.
@@ -122,21 +104,6 @@ public class ProductCharacteristic extends NamedEntity {
    * value of a characteristiC value.
    */
   private @SafeText String regex;
-
-  /**
-   * Version number of the entity.
-   */
-  private Integer revision;
-
-  /**
-   * Name of updated by user.
-   */
-  private @SafeText String updatedBy;
-
-  /**
-   * Date of update.
-   */
-  private OffsetDateTime updatedDate;
 
   /**
    * This (optional) field provides a link to the schema describing the value

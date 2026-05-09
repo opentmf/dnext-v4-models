@@ -3,8 +3,6 @@ package org.opentmf.dnext.common.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import jakarta.validation.Valid;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IAttachmentRefOrValue;
@@ -58,40 +56,15 @@ import org.opentmf.commons.validation.constraints.SafeText;
 )
 @JsonTypeName("Attachment")
 @Required(fields = {"id"})
-public class AttachmentRefOrValue extends AttachmentRef implements IAttachmentRefOrValue {
+public class AttachmentRefOrValue extends Attachment implements IAttachmentRefOrValue {
 
   /**
-   * Attachment type such as video, picture.
+   * The actual type of the target instance when needed for disambiguation.
    */
-  private @SafeText String attachmentType;
-
-  /**
-   * List of service/resourse categories associated with this catalog.
-   */
-  @JsonProperty("category")
-  private List<@Valid CategoryRef> categories;
-
-  /**
-   * The content of the attachment.
-   */
-  private @SafeText String content;
+  @JsonProperty("@referredType")
+  private @SafeText String atReferredType;
 
   private Boolean isRef;
-
-  /**
-   * Attachment mime type such as extension file for video, picture and document.
-   */
-  private @SafeText String mimeType;
-
-  /**
-   * The size of the attachment.
-   */
-  private @Valid Quantity size;
-
-  /**
-   * The period of time for which the attachment is valid.
-   */
-  private @Valid TimePeriod validFor;
 
   /**
    * The version of the attachment.

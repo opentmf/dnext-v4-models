@@ -7,7 +7,6 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.dnext.common.model.TimePeriod;
-import org.opentmf.tmf663.model.IShoppingCartCreate;
 
 /**
  * The ShoppingCart to be created.
@@ -29,7 +28,7 @@ import org.opentmf.tmf663.model.IShoppingCartCreate;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ShoppingCartCreate.class
 )
-public class ShoppingCartCreate extends ShoppingCartUpdate implements IShoppingCartCreate {
+public class ShoppingCartCreate extends ShoppingCartUpdate {
 
   /**
    * Total amount of the shopping cart, usually of money, that represents the

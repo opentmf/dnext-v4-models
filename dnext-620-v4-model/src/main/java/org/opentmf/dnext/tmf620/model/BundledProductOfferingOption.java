@@ -1,9 +1,12 @@
 package org.opentmf.dnext.tmf620.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.commons.validation.constraints.SafeId;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.tmf620.model.IBundledProductOfferingOption;
 
 /**
@@ -25,7 +28,19 @@ import org.opentmf.tmf620.model.IBundledProductOfferingOption;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = BundledProductOfferingOption.class
 )
-public class BundledProductOfferingOption extends Entity implements IBundledProductOfferingOption {
+public class BundledProductOfferingOption extends Extensible implements IBundledProductOfferingOption {
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Default number of product offerings that should

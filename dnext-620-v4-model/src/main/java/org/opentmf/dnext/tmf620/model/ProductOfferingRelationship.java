@@ -1,11 +1,11 @@
 package org.opentmf.dnext.tmf620.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.product.model.ProductSpecificationRelationship;
 import org.opentmf.tmf620.model.IProductOfferingRelationship;
 
 /**
@@ -33,7 +33,10 @@ import org.opentmf.tmf620.model.IProductOfferingRelationship;
     defaultImpl = ProductOfferingRelationship.class
 )
 @Required(fields = {"id"})
-public class ProductOfferingRelationship extends ProductOfferingPriceRelationship implements IProductOfferingRelationship {
+public class ProductOfferingRelationship extends ProductSpecificationRelationship implements IProductOfferingRelationship {
 
-  private @Valid TimePeriod validFor;
+  /**
+   * The association role for the source product offering.
+   */
+  private @SafeText String role;
 }

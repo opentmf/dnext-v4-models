@@ -3,7 +3,6 @@ package org.opentmf.dnext.tmf667.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +11,8 @@ import org.opentmf.dnext.common.model.AttachmentRefOrValue;
 import org.opentmf.dnext.common.model.CharacteristicSpecification;
 import org.opentmf.dnext.common.model.ConstraintRef;
 import org.opentmf.dnext.common.model.EntitySpecificationRelationship;
-import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.SpecificationBase;
 import org.opentmf.dnext.common.model.TargetEntitySchema;
-import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf667.model.IDocumentSpecificationRefOrValue;
 
 /**
@@ -39,7 +37,13 @@ import org.opentmf.tmf667.model.IDocumentSpecificationRefOrValue;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = DocumentSpecificationRefOrValue.class
 )
-public class DocumentSpecificationRefOrValue extends ConstraintRef implements IDocumentSpecificationRefOrValue {
+public class DocumentSpecificationRefOrValue extends SpecificationBase implements IDocumentSpecificationRefOrValue {
+
+  /**
+   * The actual type of the target instance when needed for disambiguation.
+   */
+  @JsonProperty("@referredType")
+  private @SafeText String atReferredType;
 
   /**
    * List of: An attachment by value or by reference. An attachment complements
@@ -56,34 +60,10 @@ public class DocumentSpecificationRefOrValue extends ConstraintRef implements ID
   private List<@Valid ConstraintRef> constraints;
 
   /**
-   * Description of the specification.
-   */
-  private @SafeText String description;
-
-  /**
    * Relationship to another specification.
    */
   @JsonProperty("entitySpecRelationship")
   private List<@Valid EntitySpecificationRelationship> entitySpecRelationships;
-
-  /**
-   * isBundle determines whether specification represents a single specification
-   * (false), or a bundle of specifications (true).
-   */
-  private Boolean isBundle;
-
-  /**
-   * Date and time of the last update of the specification.
-   */
-  private OffsetDateTime lastUpdate;
-
-  /**
-   * Used to indicate the current lifecycle status.
-   */
-  private @SafeText String lifecycleStatus;
-
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * List of characteristics that the entity can take.
@@ -96,6 +76,4 @@ public class DocumentSpecificationRefOrValue extends ConstraintRef implements ID
    * described by a specification.
    */
   private @Valid TargetEntitySchema targetEntitySchema;
-
-  private @Valid TimePeriod validFor;
 }

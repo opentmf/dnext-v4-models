@@ -11,9 +11,13 @@ import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.AppointmentRef;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
 import org.opentmf.dnext.common.model.Characteristic;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.RelatedEntityRefOrValue;
+import org.opentmf.dnext.common.model.ResourceRefOrValue;
+import org.opentmf.dnext.common.model.ResourceSpecificationRef;
 import org.opentmf.tmf652.model.IResourceOrderItem;
 
 /**
@@ -42,7 +46,18 @@ import org.opentmf.tmf652.model.IResourceOrderItem;
     defaultImpl = ResourceOrderItem.class
 )
 @Required(fields = {"resource", "action", "id"})
-public class ResourceOrderItem extends DetachedResourceOrderItemUpdate implements IResourceOrderItem {
+public class ResourceOrderItem extends Extensible implements IResourceOrderItem {
+
+  /**
+   * Can be "add", "modify", "no_change", "delete".
+   */
+  private @SafeText String action;
+
+  /**
+   * Refers an appointment, such as a Customer presentation or internal meeting or
+   * site visit.
+   */
+  private @Valid AppointmentRef appointment;
 
   /**
    * Complements the description of an element (for instance a resource) (for
@@ -77,6 +92,9 @@ public class ResourceOrderItem extends DetachedResourceOrderItemUpdate implement
   @JsonProperty("orderItemCharacteristic")
   private List<@Valid Characteristic> orderItemCharacteristics;
 
+  @JsonProperty("orderItemRelationship")
+  private List<@Valid ResourceOrderItemRelationship> orderItemRelationships;
+
   /**
    * An identified part of the order. A resource order is decomposed into one or
    * more order items.
@@ -84,8 +102,25 @@ public class ResourceOrderItem extends DetachedResourceOrderItemUpdate implement
   private @Valid ResourceOrderItem preInflightOrderChangeResourceOrderItem;
 
   /**
+   * Quantity ordered.
+   */
+  private Integer quantity;
+
+  /**
    * A list of related entity in relationship with this service order item.
    */
   @JsonProperty("relatedEntity")
   private List<@Valid RelatedEntityRefOrValue> relatedEntities;
+
+  private @Valid ResourceRefOrValue resource;
+
+  private @Valid ResourceSpecificationRef resourceSpecification;
+
+  /**
+   * State of the order item : described in the state machine diagram, can be 
+   * "acknowledged",     "rejected",     "pending",     "held",     "inProgress", 
+   * "cancelled",     "completed",     "failed",     "partial",    
+   * "assessingCancellation",     "pendingCancellation".
+   */
+  private @SafeText String state;
 }

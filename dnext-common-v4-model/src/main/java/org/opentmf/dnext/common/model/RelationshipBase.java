@@ -13,17 +13,15 @@ import org.opentmf.commons.validation.constraints.SafeText;
  * Synthesized abstract parent for 9 model classes.
  *
  * <p><br/>
- * <strong>Referring TMF artifacts:</strong>
+ * <strong>Direct descendants:</strong>
  * <ul>
- *   <li>TMF-620: Product Catalog Management API</li>
- *   <li>TMF-633: Service Catalog Management API</li>
- *   <li>TMF-634: Resource Catalog Management API</li>
- *   <li>TMF-638: Service Inventory Management API</li>
- *   <li>TMF-639: Resource Inventory Management API</li>
- *   <li>TMF-641: Service Ordering Management API</li>
- *   <li>TMF-651: Agreement Management API</li>
- *   <li>TMF-652: Resource Order Management API</li>
- *   <li>TMF-658: Loyalty</li>
+ *   <li>AgreementSpecificationRelationship (651)</li>
+ *   <li>CharacteristicSpecificationRelationship (633)</li>
+ *   <li>FeatureSpecificationCharacteristicRelationship (633, 634)</li>
+ *   <li>FeatureSpecificationRelationship (633, 634)</li>
+ *   <li>ProductOfferingPriceCharacteristicRelationship (620)</li>
+ *   <li>ProductSpecificationCharacteristicRelationship (620, 658)</li>
+ *   <li>ResourceSpecificationCharacteristicRelationship (634)</li>
  * </ul>
  * </p>
  *

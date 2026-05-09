@@ -1,14 +1,17 @@
 package org.opentmf.dnext.tmf658.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
+import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.CategoryRef;
+import org.opentmf.dnext.common.model.Partner;
+import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.tmf658.model.ILoyaltyProgramPartner;
 
 /**
@@ -36,7 +39,13 @@ import org.opentmf.tmf658.model.ILoyaltyProgramPartner;
     defaultImpl = LoyaltyProgramPartner.class
 )
 @Required(fields = {"name", "engagedParty"})
-public class LoyaltyProgramPartner extends LoyaltyProgramPartnerUpdate implements ILoyaltyProgramPartner {
+public class LoyaltyProgramPartner extends Partner implements ILoyaltyProgramPartner {
+
+  /**
+   * DNext Access-Control RelatedParty List like ownership etc.
+   */
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid RelatedParty> aclRelatedParties;
 
   /**
    * Name of created by user.
@@ -49,16 +58,11 @@ public class LoyaltyProgramPartner extends LoyaltyProgramPartnerUpdate implement
   private OffsetDateTime createdDate;
 
   /**
-   * Unique url identifying the partner as a resource.
+   * The partner catalog category reference maps to a category containing the
+   * partner product offerings.
    */
-  private URI href;
-
-  /**
-   * Unique identifier for the partner.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
+  @JsonProperty("partnerCatalog")
+  private List<@Valid CategoryRef> partnerCatalogs;
 
   /**
    * Version number of the entity.

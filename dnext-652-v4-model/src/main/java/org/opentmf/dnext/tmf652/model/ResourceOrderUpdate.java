@@ -3,18 +3,15 @@ package org.opentmf.dnext.tmf652.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
 import org.opentmf.dnext.common.model.Characteristic;
 import org.opentmf.dnext.common.model.CompletionCallback;
-import org.opentmf.dnext.common.model.NamedEntity;
-import org.opentmf.dnext.common.model.Note;
+import org.opentmf.dnext.common.model.QuoteUpdateBase;
 import org.opentmf.dnext.common.model.RelatedEntityRefOrValue;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.tmf652.model.IResourceOrderUpdate;
@@ -39,7 +36,7 @@ import org.opentmf.tmf652.model.IResourceOrderUpdate;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ResourceOrderUpdate.class
 )
-public class ResourceOrderUpdate extends NamedEntity implements IResourceOrderUpdate {
+public class ResourceOrderUpdate extends QuoteUpdateBase implements IResourceOrderUpdate {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -75,22 +72,9 @@ public class ResourceOrderUpdate extends NamedEntity implements IResourceOrderUp
   private @Valid CompletionCallback completionCallback;
 
   /**
-   * free-text description of the Resource Order.
-   */
-  private @SafeText String description;
-
-  /**
    * Date when the order was completed.
    */
   private OffsetDateTime expectedCompletionDate;
-
-  /**
-   * DEPRECATED: Use externalReference Instead. ID given by the consumer (to
-   * facilitate searches afterwards).
-   */
-  @SafeId
-  @Size(max = 100)
-  private String externalId;
 
   /**
    * List of: An identification of an entity that is owned by or originates in a
@@ -113,10 +97,9 @@ public class ResourceOrderUpdate extends NamedEntity implements IResourceOrderUp
   private Boolean isOngoingInflightOrderChange;
 
   /**
-   * List of: Extra information about a given entity.
+   * A string used to give a name to the Resource Order.
    */
-  @JsonProperty("note")
-  private List<@Valid Note> notes;
+  private @SafeText String name;
 
   /**
    * Characteristic of the given resourceOrder.
@@ -135,6 +118,8 @@ public class ResourceOrderUpdate extends NamedEntity implements IResourceOrderUp
    */
   private @SafeText String orderType;
 
+  private Boolean pointOfNoReturnIFOC;
+
   /**
    * A way that can be used by consumers to prioritize orders in OM system (from 0
    * to 4 : 0 is the highest priority, and 4 the lowest).
@@ -146,9 +131,6 @@ public class ResourceOrderUpdate extends NamedEntity implements IResourceOrderUp
    */
   @JsonProperty("relatedEntity")
   private List<@Valid RelatedEntityRefOrValue> relatedEntities;
-
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * Requested delivery date from the requester perspective.
@@ -164,9 +146,4 @@ public class ResourceOrderUpdate extends NamedEntity implements IResourceOrderUp
    * Date when the order was actually started.
    */
   private OffsetDateTime startDate;
-
-  /**
-   * The life cycle state of the resource.
-   */
-  private @SafeText String state;
 }

@@ -32,6 +32,9 @@ import org.opentmf.tmf634.model.IResourceCatalogUpdate;
 )
 public class ResourceCatalogUpdate extends ResourceBase implements IResourceCatalogUpdate {
 
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid RelatedParty> aclRelatedParties;
+
   /**
    * List of root categories contained in this catalog.
    */

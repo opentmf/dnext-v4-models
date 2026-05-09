@@ -1,7 +1,6 @@
 package org.opentmf.dnext.tmf632.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +36,7 @@ import org.opentmf.tmf632.model.IOrganization;
     defaultImpl = Organization.class
 )
 @Required(fields = {"tradingName", "id"})
-public class Organization extends OrganizationCreate implements IOrganization {
+public class Organization extends OrganizationUpdate implements IOrganization {
 
   /**
    * Name of created by user.
@@ -48,11 +47,6 @@ public class Organization extends OrganizationCreate implements IOrganization {
    * Date of creation.
    */
   private OffsetDateTime createdDate;
-
-  /**
-   * Hyperlink to access the organization.
-   */
-  private URI href;
 
   /**
    * Version number of the entity.

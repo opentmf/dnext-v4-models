@@ -12,15 +12,10 @@ import org.opentmf.dnext.common.model.AgreementRef;
 import org.opentmf.dnext.common.model.BillingAccountRef;
 import org.opentmf.dnext.common.model.Characteristic;
 import org.opentmf.dnext.common.model.Contact;
-import org.opentmf.dnext.common.model.ContactMedium;
-import org.opentmf.dnext.common.model.Entity;
 import org.opentmf.dnext.common.model.ExternalReference;
-import org.opentmf.dnext.common.model.Note;
 import org.opentmf.dnext.common.model.PriceAlteration;
-import org.opentmf.dnext.common.model.RelatedChannel;
 import org.opentmf.dnext.common.model.RelatedParty;
-import org.opentmf.dnext.customer.model.PaymentRef;
-import org.opentmf.tmf663.model.IShoppingCartUpdate;
+import org.opentmf.dnext.customer.model.CartItemBase;
 
 /**
  * The ShoppingCart to be updated.
@@ -42,7 +37,7 @@ import org.opentmf.tmf663.model.IShoppingCartUpdate;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ShoppingCartUpdate.class
 )
-public class ShoppingCartUpdate extends Entity implements IShoppingCartUpdate {
+public class ShoppingCartUpdate extends CartItemBase {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -72,42 +67,14 @@ public class ShoppingCartUpdate extends Entity implements IShoppingCartUpdate {
   private List<@Valid CartItem> cartItems;
 
   /**
-   * List of: Related channel to another entity. May be online web, mobile app,
-   * social ,etc.
-   */
-  @JsonProperty("channel")
-  private List<@Valid RelatedChannel> channels;
-
-  /**
    * List of: An individual or an organization used as a contact point for a given
    * account and accessed via some contact medium.
    */
   @JsonProperty("contact")
   private List<@Valid Contact> contacts;
 
-  /**
-   * List of: Indicates the contact medium that could be used to contact the
-   * party.
-   */
-  @JsonProperty("contactMedium")
-  private List<@Valid ContactMedium> contactMediums;
-
   @JsonProperty("externalReference")
   private List<@Valid ExternalReference> externalReferences;
-
-  /**
-   * List of: Extra information about a given entity.
-   */
-  @JsonProperty("note")
-  private List<@Valid Note> notes;
-
-  /**
-   * List of: If an immediate payment has been done at the product order
-   * submission, the payment information are captured and stored (as a reference)
-   * in the order.
-   */
-  @JsonProperty("payment")
-  private List<@Valid PaymentRef> payments;
 
   /**
    * List of: Is an amount, usually of money, that modifies the price charged for

@@ -1,7 +1,7 @@
 package org.opentmf.dnext.common.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IAgreementSpecificationRelationship;
@@ -28,12 +28,11 @@ import org.opentmf.commons.validation.constraints.SafeText;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = AgreementSpecificationRelationship.class
 )
-public class AgreementSpecificationRelationship extends EntityRef implements IAgreementSpecificationRelationship {
+public class AgreementSpecificationRelationship extends RelationshipBase implements IAgreementSpecificationRelationship {
 
   /**
-   * Type of relationship such as, substitution or dependency.
+   * The actual type of the target instance when needed for disambiguation.
    */
-  private @SafeText String relationshipType;
-
-  private @Valid TimePeriod validFor;
+  @JsonProperty("@referredType")
+  private @SafeText String atReferredType;
 }

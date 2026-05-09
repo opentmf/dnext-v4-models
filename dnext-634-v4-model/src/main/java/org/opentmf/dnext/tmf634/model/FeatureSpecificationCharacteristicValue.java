@@ -1,13 +1,11 @@
 package org.opentmf.dnext.tmf634.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Extensible;
-import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.dnext.common.model.CharacteristicValueSpecificationBase;
 
 /**
  * A number or text that can be assigned to a
@@ -35,7 +33,7 @@ import org.opentmf.dnext.common.model.TimePeriod;
     defaultImpl = FeatureSpecificationCharacteristicValue.class
 )
 @Required(fields = {"valueType"})
-public class FeatureSpecificationCharacteristicValue extends Extensible {
+public class FeatureSpecificationCharacteristicValue extends CharacteristicValueSpecificationBase {
 
   /**
    * A discrete value that the characteristic can take on, or the actual value of
@@ -54,23 +52,6 @@ public class FeatureSpecificationCharacteristicValue extends Extensible {
   private @SafeText String rangeInterval;
 
   /**
-   * A regular expression constraint for given value.
-   */
-  private @SafeText String regex;
-
-  /**
-   * A determinate quantity or magnitude of the kind designated, taken as a
-   * standard of comparison for others of the same kind, in assigning to them
-   * numerical values.
-   */
-  private @SafeText String unitOfMeasure;
-
-  /**
-   * The period of time for which a value is applicable.
-   */
-  private @Valid TimePeriod validFor;
-
-  /**
    * The low range value that a characteristic can take on.
    */
   private Integer valueFrom;
@@ -79,9 +60,4 @@ public class FeatureSpecificationCharacteristicValue extends Extensible {
    * The upper range value that a characteristic can take on.
    */
   private Integer valueTo;
-
-  /**
-   * A kind of value that the characteristic value can take on.
-   */
-  private @SafeText String valueType;
 }

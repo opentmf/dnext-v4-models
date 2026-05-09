@@ -1,10 +1,13 @@
 package org.opentmf.dnext.common.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IQuantity;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
@@ -47,13 +50,25 @@ import org.opentmf.commons.validation.constraints.SafeText;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = Quantity.class
 )
-public class Quantity extends Entity implements IQuantity {
+public class Quantity extends Extensible implements IQuantity {
 
   /**
    * A quantity of something, typically the total of a thing or
    * <br/>things in number, size, value, extent, or money.
    */
   private BigDecimal amount;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * The unit of measure for the quantity, such as meters, cubic

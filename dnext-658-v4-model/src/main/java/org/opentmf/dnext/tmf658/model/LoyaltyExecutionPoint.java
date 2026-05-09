@@ -1,12 +1,13 @@
 package org.opentmf.dnext.tmf658.model;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.product.model.LoyaltyBase;
+import org.opentmf.dnext.common.model.Addressable;
 import org.opentmf.tmf658.model.ILoyaltyExecutionPoint;
 
 /**
@@ -23,13 +24,26 @@ import org.opentmf.tmf658.model.ILoyaltyExecutionPoint;
  */
 @Getter
 @Setter
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    visible = true,
-    include = JsonTypeInfo.As.EXISTING_PROPERTY,
-    defaultImpl = LoyaltyExecutionPoint.class
-)
-public class LoyaltyExecutionPoint extends LoyaltyBase implements ILoyaltyExecutionPoint {
+public class LoyaltyExecutionPoint extends Addressable implements ILoyaltyExecutionPoint {
+
+  /**
+   * When subclassing, this defines the super-class.
+   */
+  @JsonProperty("@baseType")
+  private @SafeText String atBaseType;
+
+  /**
+   * A URI to a JSON-Schema file that defines additional attributes and
+   * relationships.
+   */
+  @JsonProperty("@schemaLocation")
+  private URI atSchemaLocation;
+
+  /**
+   * When subclassing, this defines the subclass Extensible name.
+   */
+  @JsonProperty("@type")
+  private @SafeText String atType;
 
   /**
    * The HTTP operation to be used when calling the endpoint.
@@ -44,6 +58,8 @@ public class LoyaltyExecutionPoint extends LoyaltyBase implements ILoyaltyExecut
    */
   private Object actionAttributes;
 
+  private @SafeText String baseType;
+
   /**
    * The body if the request that is made when this action i executed. The body is
    * assumed to be of type text/json. Any tokens denoted with {} will be replaced
@@ -56,6 +72,16 @@ public class LoyaltyExecutionPoint extends LoyaltyBase implements ILoyaltyExecut
    * A user-friendly identifier of the loyalty execution point.
    */
   private @SafeText String commonName;
+
+  /**
+   * Name of created by user.
+   */
+  private @SafeText String createdBy;
+
+  /**
+   * Date of creation.
+   */
+  private OffsetDateTime createdDate;
 
   /**
    * The timestamp that the action was applied.
@@ -87,6 +113,28 @@ public class LoyaltyExecutionPoint extends LoyaltyBase implements ILoyaltyExecut
    * point.
    */
   private @Valid LoyaltyProgramProduct loyaltyProgramProduct;
+
+  /**
+   * Version number of the entity.
+   */
+  private Integer revision;
+
+  private URI schemaLocation;
+
+  /**
+   * The type of loyalty action.
+   */
+  private @SafeText String type;
+
+  /**
+   * Name of updated by user.
+   */
+  private @SafeText String updatedBy;
+
+  /**
+   * Date of update.
+   */
+  private OffsetDateTime updatedDate;
 
   /**
    * A string that identifies the version of the loyalty action.

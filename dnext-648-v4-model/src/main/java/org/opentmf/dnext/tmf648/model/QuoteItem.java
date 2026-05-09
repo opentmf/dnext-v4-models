@@ -3,18 +3,22 @@ package org.opentmf.dnext.tmf648.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AppointmentRef;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
 import org.opentmf.dnext.common.model.Characteristic;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.Note;
 import org.opentmf.dnext.common.model.ProductOfferingRef;
 import org.opentmf.dnext.common.model.ProductRefOrValue;
+import org.opentmf.dnext.common.model.QuoteItemRelationship;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.customer.model.ProductOfferingQualificationItemRef;
 import org.opentmf.tmf648.model.IQuoteItem;
@@ -45,7 +49,7 @@ import org.opentmf.tmf648.model.IQuoteItem;
     defaultImpl = QuoteItem.class
 )
 @Required(fields = {"action", "id"})
-public class QuoteItem extends Entity implements IQuoteItem {
+public class QuoteItem extends Extensible implements IQuoteItem {
 
   /**
    * Action to be performed on this quote item (add, modify, remove, etc.).
@@ -63,6 +67,19 @@ public class QuoteItem extends Entity implements IQuoteItem {
    */
   @JsonProperty("attachment")
   private List<@Valid AttachmentRefOrValue> attachments;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Identifier of the quote item (generally it is a sequence number 01, 02, 03,
+   * ...).
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * A list of quote prices.

@@ -2,11 +2,14 @@ package org.opentmf.dnext.tmf666.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf666.model.IAccountTaxExemption;
 
@@ -35,13 +38,25 @@ import org.opentmf.tmf666.model.IAccountTaxExemption;
     defaultImpl = AccountTaxExemption.class
 )
 @Required(fields = {"validFor", "issuingJurisdiction"})
-public class AccountTaxExemption extends Entity implements IAccountTaxExemption {
+public class AccountTaxExemption extends Extensible implements IAccountTaxExemption {
 
   /**
    * Identifier of a document that shows proof of exemption from taxes for the
    * taxing jurisdiction.
    */
   private @SafeText String certificateNumber;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Name of the taxing jurisdiction for which taxes are exempt.

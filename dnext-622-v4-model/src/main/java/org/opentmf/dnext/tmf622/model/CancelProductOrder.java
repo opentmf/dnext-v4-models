@@ -1,12 +1,17 @@
 package org.opentmf.dnext.tmf622.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import java.net.URI;
+import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.CancelProductOrderBase;
+import org.opentmf.dnext.common.model.Note;
+import org.opentmf.dnext.common.model.ProductOrderRef;
 import org.opentmf.tmf622.model.ICancelProductOrder;
 
 /**
@@ -34,11 +39,17 @@ import org.opentmf.tmf622.model.ICancelProductOrder;
     defaultImpl = CancelProductOrder.class
 )
 @Required(fields = {"productOrder"})
-public class CancelProductOrder extends CancelProductOrderCreate implements ICancelProductOrder {
+public class CancelProductOrder extends CancelProductOrderBase implements ICancelProductOrder {
 
-  private @SafeText String createdBy;
+  /**
+   * Reason why the order is cancelled.
+   */
+  private @SafeText String cancellationReason;
 
-  private OffsetDateTime createdDate;
+  /**
+   * gracefulCancel.
+   */
+  private @SafeText String cancellationType;
 
   /**
    * Date when the order is cancelled.
@@ -46,15 +57,21 @@ public class CancelProductOrder extends CancelProductOrderCreate implements ICan
   private OffsetDateTime effectiveCancellationDate;
 
   /**
-   * Hyperlink to access the cancellation request.
+   * Extra information about a given entity.
    */
-  private URI href;
+  @JsonProperty("note")
+  private List<@Valid Note> notes;
+
+  /**
+   * ProductOrder (ProductOrder) .The product order which the recommendation is
+   * related with.
+   */
+  private @Valid ProductOrderRef productOrder;
+
+  /**
+   * Date when the submitter wants the order to be cancelled.
+   */
+  private OffsetDateTime requestedCancellationDate;
 
   private Integer revision;
-
-  private @SafeText String state;
-
-  private @SafeText String updatedBy;
-
-  private OffsetDateTime updatedDate;
 }

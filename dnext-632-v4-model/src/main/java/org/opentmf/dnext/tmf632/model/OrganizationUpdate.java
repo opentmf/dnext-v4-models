@@ -9,15 +9,10 @@ import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AclRelatedParty;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
-import org.opentmf.dnext.common.model.Characteristic;
-import org.opentmf.dnext.common.model.ContactMedium;
-import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.ExternalReference;
-import org.opentmf.dnext.common.model.MarketSegmentRef;
-import org.opentmf.dnext.common.model.PartyCreditProfile;
-import org.opentmf.dnext.common.model.RelatedParty;
-import org.opentmf.dnext.common.model.TaxExemptionCertificate;
 import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.dnext.partner.model.IndividualCreateBase;
+import org.opentmf.tmf632.model.IOrganizationUpdate;
 
 /**
  * The Organization to be updated.
@@ -39,7 +34,7 @@ import org.opentmf.dnext.common.model.TimePeriod;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = OrganizationUpdate.class
 )
-public class OrganizationUpdate extends Extensible {
+public class OrganizationUpdate extends IndividualCreateBase implements IOrganizationUpdate {
 
   /**
    * List of: Related Entity reference. A related party defines party or party
@@ -55,20 +50,6 @@ public class OrganizationUpdate extends Extensible {
    */
   @JsonProperty("attachment")
   private List<@Valid AttachmentRefOrValue> attachments;
-
-  /**
-   * List of: Indicates the contact medium that could be used to contact the
-   * party.
-   */
-  @JsonProperty("contactMedium")
-  private List<@Valid ContactMedium> contactMediums;
-
-  /**
-   * List of: An individual might be evaluated for its worthiness and this
-   * evaluation might be based on a credit rating given by a credit agency.
-   */
-  @JsonProperty("creditRating")
-  private List<@Valid PartyCreditProfile> creditRatings;
 
   private @Valid TimePeriod existsDuring;
 
@@ -90,9 +71,6 @@ public class OrganizationUpdate extends Extensible {
    * referential.
    */
   private Boolean isLegalEntity;
-
-  @JsonProperty("marketSegment")
-  private List<@Valid MarketSegmentRef> marketSegments;
 
   /**
    * Organization name (department name for example).
@@ -133,29 +111,6 @@ public class OrganizationUpdate extends Extensible {
    */
   @JsonProperty("otherName")
   private List<@Valid OtherNameOrganization> otherNames;
-
-  /**
-   * List of: Describes a given characteristic of an object or entity through a
-   * name/value pair.
-   */
-  @JsonProperty("partyCharacteristic")
-  private List<@Valid Characteristic> partyCharacteristics;
-
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
-
-  private @SafeText String status;
-
-  /**
-   * List of: A tax exemption certificate represents a tax exemption granted to a
-   * party (individual or organization) by a tax jurisdiction which may be a city,
-   * state, country,... An exemption has a certificate identifier (received from
-   * the jurisdiction that levied the tax) and a validity period. An exemption is
-   * per tax types and determines for each type of tax what portion of the tax is
-   * exempted (partial by percentage or complete) via the tax definition.
-   */
-  @JsonProperty("taxExemptionCertificate")
-  private List<@Valid TaxExemptionCertificate> taxExemptionCertificates;
 
   /**
    * Name that the organization (unit) trades under.

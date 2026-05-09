@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.Extensible;
+import org.opentmf.dnext.common.model.ResourceCreate;
 
 /**
  * The Bulk Resource to be created.
@@ -40,7 +41,7 @@ public class BulkResourceCreate extends Extensible {
   /**
    * The base part of the resource that will be present in all created entities.
    */
-  private @SafeText String baseResource;
+  private @Valid ResourceCreate baseResource;
 
   /**
    * An array of ResourceCharacteristicTemplate objects that will be used to
@@ -48,6 +49,12 @@ public class BulkResourceCreate extends Extensible {
    */
   @JsonProperty("bulkCharacteristic")
   private List<@Valid BulkCharacteristic> bulkCharacteristics;
+
+  /**
+   * The name of the resource characteristic to be used as resource ID instead of
+   * Auto ID generation.
+   */
+  private @SafeText String identifierCharacteristicName;
 
   /**
    * The number of resources that will be created.

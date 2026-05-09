@@ -14,15 +14,11 @@ import org.opentmf.dnext.common.model.AgreementRef;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
 import org.opentmf.dnext.common.model.BillingAccountRef;
 import org.opentmf.dnext.common.model.Characteristic;
-import org.opentmf.dnext.common.model.ContactMedium;
-import org.opentmf.dnext.common.model.Extensible;
-import org.opentmf.dnext.common.model.Note;
 import org.opentmf.dnext.common.model.PriceAlteration;
-import org.opentmf.dnext.common.model.RelatedChannel;
+import org.opentmf.dnext.common.model.ProductOfferingQualificationRef;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.TimePeriod;
-import org.opentmf.dnext.customer.model.PaymentRef;
-import org.opentmf.dnext.customer.model.ProductOfferingQualificationRef;
+import org.opentmf.dnext.customer.model.CartItemBase;
 
 /**
  * The Quote to be created.
@@ -44,7 +40,7 @@ import org.opentmf.dnext.customer.model.ProductOfferingQualificationRef;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = QuoteCreate.class
 )
-public class QuoteCreate extends Extensible {
+public class QuoteCreate extends CartItemBase {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -74,18 +70,6 @@ public class QuoteCreate extends Extensible {
   private @SafeText String category;
 
   /**
-   * A list of channels Could be Online or Offline store.
-   */
-  @JsonProperty("channel")
-  private List<@Valid RelatedChannel> channels;
-
-  /**
-   * Information contact related to the quote requester.
-   */
-  @JsonProperty("contactMedium")
-  private List<@Valid ContactMedium> contactMediums;
-
-  /**
    * Description of the quote.
    */
   private @SafeText String description;
@@ -113,31 +97,12 @@ public class QuoteCreate extends Extensible {
   private String externalId;
 
   /**
-   * Identifier for quote.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
-
-  /**
    * An indicator which when the value is "true" means that requester expects to
    * get quoting result immediately in the response. If the indicator is true then
    * the response code of 200 indicates the operation is successful otherwise a
    * task is created with a response 201.
    */
   private Boolean instantSyncQuote;
-
-  /**
-   * Free form text associated with the quote.
-   */
-  @JsonProperty("note")
-  private List<@Valid Note> notes;
-
-  /**
-   * A list of payment references.
-   */
-  @JsonProperty("payment")
-  private List<@Valid PaymentRef> payments;
 
   /**
    * List of: Is an amount, usually of money, that modifies the price charged for

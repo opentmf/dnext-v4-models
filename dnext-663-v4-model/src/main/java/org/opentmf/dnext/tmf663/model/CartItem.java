@@ -9,18 +9,15 @@ import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
+import org.opentmf.dnext.common.model.CartItemRelationship;
+import org.opentmf.dnext.common.model.CartTerm;
 import org.opentmf.dnext.common.model.Characteristic;
 import org.opentmf.dnext.common.model.Contact;
-import org.opentmf.dnext.common.model.ContactMedium;
-import org.opentmf.dnext.common.model.Entity;
-import org.opentmf.dnext.common.model.Note;
+import org.opentmf.dnext.common.model.ProductOfferingQualificationRef;
 import org.opentmf.dnext.common.model.ProductOfferingRef;
 import org.opentmf.dnext.common.model.ProductRefOrValue;
-import org.opentmf.dnext.common.model.RelatedChannel;
 import org.opentmf.dnext.common.model.RelatedEntityRefOrValue;
-import org.opentmf.dnext.customer.model.PaymentRef;
-import org.opentmf.dnext.customer.model.ProductOfferingQualificationRef;
-import org.opentmf.tmf663.model.ICartItem;
+import org.opentmf.dnext.customer.model.CartItemBase;
 
 /**
  * An identified part of the shopping cart. A shopping cart is decomposed into
@@ -53,7 +50,7 @@ import org.opentmf.tmf663.model.ICartItem;
     defaultImpl = CartItem.class
 )
 @Required(fields = {"action", "itemPrice", "id"})
-public class CartItem extends Entity implements ICartItem {
+public class CartItem extends CartItemBase {
 
   private @SafeText String action;
 
@@ -93,25 +90,11 @@ public class CartItem extends Entity implements ICartItem {
   private List<@Valid CartItemRelationship> cartItemRelationships;
 
   /**
-   * List of: Related channel to another entity. May be online web, mobile app,
-   * social ,etc.
-   */
-  @JsonProperty("channel")
-  private List<@Valid RelatedChannel> channels;
-
-  /**
    * List of: An individual or an organization used as a contact point for a given
    * account and accessed via some contact medium.
    */
   @JsonProperty("contact")
   private List<@Valid Contact> contacts;
-
-  /**
-   * List of: Indicates the contact medium that could be used to contact the
-   * party.
-   */
-  @JsonProperty("contactMedium")
-  private List<@Valid ContactMedium> contactMediums;
 
   /**
    * List of: An amount, usually of money, that represents the actual price paid
@@ -131,20 +114,6 @@ public class CartItem extends Entity implements ICartItem {
    */
   @JsonProperty("itemTotalPrice")
   private List<@Valid CartPrice> itemTotalPrices;
-
-  /**
-   * List of: Extra information about a given entity.
-   */
-  @JsonProperty("note")
-  private List<@Valid Note> notes;
-
-  /**
-   * List of: If an immediate payment has been done at the product order
-   * submission, the payment information are captured and stored (as a reference)
-   * in the order.
-   */
-  @JsonProperty("payment")
-  private List<@Valid PaymentRef> payments;
 
   /**
    * A product to be created defined by value or existing defined by reference.

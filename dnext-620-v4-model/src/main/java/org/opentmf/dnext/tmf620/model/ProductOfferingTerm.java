@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.CartTermBase;
 import org.opentmf.dnext.common.model.Duration;
-import org.opentmf.dnext.common.model.NamedEntity;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf620.model.IProductOfferingTerm;
 
@@ -29,12 +28,7 @@ import org.opentmf.tmf620.model.IProductOfferingTerm;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ProductOfferingTerm.class
 )
-public class ProductOfferingTerm extends NamedEntity implements IProductOfferingTerm {
-
-  /**
-   * Description of the productOfferingTerm.
-   */
-  private @SafeText String description;
+public class ProductOfferingTerm extends CartTermBase implements IProductOfferingTerm {
 
   /**
    * Duration of the productOfferingTerm.

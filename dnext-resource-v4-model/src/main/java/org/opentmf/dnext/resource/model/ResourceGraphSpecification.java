@@ -6,8 +6,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.CartTermBase;
 import org.opentmf.resource.model.IResourceGraphSpecification;
 
 /**
@@ -30,18 +29,13 @@ import org.opentmf.resource.model.IResourceGraphSpecification;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ResourceGraphSpecification.class
 )
-public class ResourceGraphSpecification extends NamedEntity implements IResourceGraphSpecification {
+public class ResourceGraphSpecification extends CartTermBase implements IResourceGraphSpecification {
 
   /**
    * Resource graph edge specifications.
    */
   @JsonProperty("connectionSpecification")
   private List<@Valid ConnectionSpecification> connectionSpecifications;
-
-  /**
-   * Description of this REST resource.
-   */
-  private @SafeText String description;
 
   /**
    * Relationships to other resource graph specifications.

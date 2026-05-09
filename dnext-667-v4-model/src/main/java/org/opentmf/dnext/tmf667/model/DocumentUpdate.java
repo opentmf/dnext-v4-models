@@ -11,11 +11,11 @@ import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
 import org.opentmf.dnext.common.model.CategoryRef;
 import org.opentmf.dnext.common.model.Characteristic;
+import org.opentmf.dnext.common.model.DocumentRef;
 import org.opentmf.dnext.common.model.ExternalIdentifier;
-import org.opentmf.dnext.common.model.ExternalReference;
-import org.opentmf.dnext.common.model.NamedEntity;
 import org.opentmf.dnext.common.model.RelatedEntity;
 import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.ServiceUpdateBase;
 import org.opentmf.tmf667.model.IDocumentUpdate;
 
 /**
@@ -38,7 +38,7 @@ import org.opentmf.tmf667.model.IDocumentUpdate;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = DocumentUpdate.class
 )
-public class DocumentUpdate extends NamedEntity implements IDocumentUpdate {
+public class DocumentUpdate extends ServiceUpdateBase implements IDocumentUpdate {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -75,11 +75,6 @@ public class DocumentUpdate extends NamedEntity implements IDocumentUpdate {
    */
   private OffsetDateTime creationDate;
 
-  /**
-   * free-text description of the document.
-   */
-  private @SafeText String description;
-
   @JsonProperty("document")
   private List<@Valid DocumentRef> documents;
 
@@ -98,18 +93,8 @@ public class DocumentUpdate extends NamedEntity implements IDocumentUpdate {
    */
   private @SafeText String documentType;
 
-  /**
-   * List of: An identification of an entity that is owned by or originates in a
-   * software system different from the current system.
-   */
   @JsonProperty("externalIdentifier")
   private List<@Valid ExternalIdentifier> externalIdentifiers;
-
-  /**
-   * External reference of the shopping cart or reference in other system.
-   */
-  @JsonProperty("externalReference")
-  private List<@Valid ExternalReference> externalReferences;
 
   /**
    * The date and time the document was last modified. A date and time formatted

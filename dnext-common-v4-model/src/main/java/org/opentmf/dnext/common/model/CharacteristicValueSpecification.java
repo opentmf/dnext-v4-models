@@ -2,11 +2,13 @@ package org.opentmf.dnext.common.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.ICharacteristicValueSpecification;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
@@ -38,10 +40,22 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = CharacteristicValueSpecification.class
 )
 @Required(fields = {"valueType", "value"})
-public class CharacteristicValueSpecification extends Entity implements ICharacteristicValueSpecification {
+public class CharacteristicValueSpecification extends CharacteristicValueSpecificationBase implements ICharacteristicValueSpecification {
 
   @JsonProperty("default")
   private Boolean defaultValue;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * If true, the Boolean Indicates if the value is the default value for a
@@ -55,24 +69,6 @@ public class CharacteristicValueSpecification extends Entity implements ICharact
    * "closedBottom" and "closedTop".
    */
   private @SafeText String rangeInterval;
-
-  /**
-   * A regular expression constraint for given value.
-   */
-  private @SafeText String regex;
-
-  /**
-   * A length, surface, volume, dry measure, liquid measure, money, weight, time,
-   * and the like. In general, a determinate quantity or magnitude of the kind
-   * designated, taken as a standard of comparison for others of the same kind, in
-   * assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot.
-   */
-  private @SafeText String unitOfMeasure;
-
-  /**
-   * The period of time for which a value is applicable.
-   */
-  private @Valid TimePeriod validFor;
 
   /**
    * A discrete value that the characteristic can take on, or the actual value of
@@ -89,10 +85,4 @@ public class CharacteristicValueSpecification extends Entity implements ICharact
    * The upper range value that a characteristic can take on.
    */
   private Integer valueTo;
-
-  /**
-   * A kind of value that the characteristic value can take on, such as numeric,
-   * text and so forth.
-   */
-  private @SafeText String valueType;
 }

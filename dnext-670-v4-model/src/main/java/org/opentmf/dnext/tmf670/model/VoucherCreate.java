@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.PaymentMethodUpdate;
 import org.opentmf.dnext.common.model.Quantity;
 
 /**
@@ -34,7 +35,7 @@ import org.opentmf.dnext.common.model.Quantity;
     defaultImpl = VoucherCreate.class
 )
 @Required(fields = {"atType"})
-public class VoucherCreate extends OtherCreate {
+public class VoucherCreate extends PaymentMethodUpdate {
 
   /**
    * Campaign this voucher belongs to.

@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.PaymentMethodUpdate;
 
 /**
  * A digital wallet method of payment.
@@ -34,7 +35,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = DigitalWalletCreate.class
 )
 @Required(fields = {"atType"})
-public class DigitalWalletCreate extends OtherCreate {
+public class DigitalWalletCreate extends PaymentMethodUpdate {
 
   /**
    * Organization, platform or currency backing the wallet (e.g.: PayPal, Yandex,

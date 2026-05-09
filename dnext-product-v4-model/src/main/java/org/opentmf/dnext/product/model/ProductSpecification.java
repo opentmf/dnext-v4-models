@@ -14,8 +14,8 @@ import org.opentmf.dnext.common.model.ProductSpecificationExtension;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.ResourceSpecificationRef;
 import org.opentmf.dnext.common.model.ServiceSpecificationRef;
+import org.opentmf.dnext.common.model.SpecificationBase;
 import org.opentmf.dnext.common.model.TargetProductSchema;
-import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.product.model.IProductSpecification;
 
 /**
@@ -37,7 +37,7 @@ import org.opentmf.product.model.IProductSpecification;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ProductSpecification.class
 )
-public class ProductSpecification extends BundledProductSpecification implements IProductSpecification {
+public class ProductSpecification extends SpecificationBase implements IProductSpecification {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -76,26 +76,10 @@ public class ProductSpecification extends BundledProductSpecification implements
   private OffsetDateTime createdDate;
 
   /**
-   * Description of this entity.
-   */
-  private @SafeText String description;
-
-  /**
    * External reference of the individual or reference in other system.
    */
   @JsonProperty("externalReference")
   private List<@Valid ExternalReference> externalReferences;
-
-  /**
-   * Bundle determines whether a
-   * <br/>productSpecification represents a single (false),or a bundle (true).
-   */
-  private Boolean isBundle;
-
-  /**
-   * Date and time of the last update.
-   */
-  private OffsetDateTime lastUpdate;
 
   private @Valid ProductSpecificationExtension pExtension;
 
@@ -127,14 +111,6 @@ public class ProductSpecification extends BundledProductSpecification implements
    */
   @JsonProperty("productSpecificationRelationship")
   private List<@Valid ProductSpecificationRelationship> productSpecificationRelationships;
-
-  /**
-   * A list of related party references (RelatedPartyRef [*]).
-   * <br/>A related party defines party or party role linked to a
-   * <br/>specific entity.
-   */
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * A list of resource specification references
@@ -173,9 +149,4 @@ public class ProductSpecification extends BundledProductSpecification implements
    * Date of update.
    */
   private OffsetDateTime updatedDate;
-
-  /**
-   * The period for which the entity is valid.
-   */
-  private @Valid TimePeriod validFor;
 }

@@ -8,8 +8,6 @@ import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
- * An identification of an entity that is owned by or originates in a software
- * system different from the current system.
  *
  * <p><br/>
  * <strong>Required:</strong> id<br/>
@@ -18,6 +16,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
  * <p><br/>
  * <strong>Referring TMF artifacts:</strong>
  * <ul>
+ *   <li>TMF-622: Product Ordering Management API</li>
  *   <li>TMF-667: Document Management API</li>
  * </ul>
  * </p>

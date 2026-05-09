@@ -8,9 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.CartPriceBase;
 import org.opentmf.dnext.common.model.Price;
 import org.opentmf.dnext.common.model.PriceAlteration;
-import org.opentmf.dnext.common.model.PriceBase;
+import org.opentmf.dnext.common.model.ProductOfferingPriceRef;
 import org.opentmf.tmf663.model.ICartPrice;
 
 /**
@@ -40,7 +41,7 @@ import org.opentmf.tmf663.model.ICartPrice;
     defaultImpl = CartPrice.class
 )
 @Required(fields = {"priceType"})
-public class CartPrice extends PriceBase implements ICartPrice {
+public class CartPrice extends CartPriceBase implements ICartPrice {
 
   /**
    * Provides all amounts (tax included, duty free, tax rate), used currency and
@@ -54,6 +55,8 @@ public class CartPrice extends PriceBase implements ICartPrice {
    */
   @JsonProperty("priceAlteration")
   private List<@Valid PriceAlteration> priceAlterations;
+
+  private @Valid ProductOfferingPriceRef productOfferingPrice;
 
   private @SafeText String unitOfMeasure;
 }

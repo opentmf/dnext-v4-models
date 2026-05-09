@@ -3,15 +3,20 @@ package org.opentmf.dnext.tmf652.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.CompletionCallback;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.Note;
 import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.ResourceOrderRef;
 import org.opentmf.tmf652.model.ICancelResourceOrderCreate;
 
 /**
@@ -39,7 +44,7 @@ import org.opentmf.tmf652.model.ICancelResourceOrderCreate;
     defaultImpl = CancelResourceOrderCreate.class
 )
 @Required(fields = {"resourceOrder"})
-public class CancelResourceOrderCreate extends Entity implements ICancelResourceOrderCreate {
+public class CancelResourceOrderCreate extends Extensible implements ICancelResourceOrderCreate {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -50,6 +55,23 @@ public class CancelResourceOrderCreate extends Entity implements ICancelResource
   private @SafeText String cancellationReason;
 
   private @SafeText String cancellationType;
+
+  /**
+   * The context provided in callbackContext field of completionCallback.
+   */
+  private @Valid CompletionCallback completionCallback;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * id of the cancellation request (this is not an order id).
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Extra information about a given entity.

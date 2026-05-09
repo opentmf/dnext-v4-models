@@ -10,8 +10,7 @@ import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.ConstraintRef;
 import org.opentmf.dnext.common.model.Quantity;
-import org.opentmf.dnext.common.model.ServiceSpecificationRef;
-import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.dnext.common.model.ServiceBase;
 import org.opentmf.tmf620.model.IProductOfferingPriceRefOrValue;
 
 /**
@@ -37,7 +36,13 @@ import org.opentmf.tmf620.model.IProductOfferingPriceRefOrValue;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ProductOfferingPriceRefOrValue.class
 )
-public class ProductOfferingPriceRefOrValue extends ServiceSpecificationRef implements IProductOfferingPriceRefOrValue {
+public class ProductOfferingPriceRefOrValue extends ServiceBase implements IProductOfferingPriceRefOrValue {
+
+  /**
+   * The actual type of the target instance when needed for disambiguation.
+   */
+  @JsonProperty("@referredType")
+  private @SafeText String atReferredType;
 
   /**
    * The Constraint resource represents a policy/rule applied to
@@ -47,19 +52,9 @@ public class ProductOfferingPriceRefOrValue extends ServiceSpecificationRef impl
   private List<@Valid ConstraintRef> constraints;
 
   /**
-   * Description of the productOfferingPrice.
-   */
-  private @SafeText String description;
-
-  /**
    * the last update time of this ProductOfferingPrice.
    */
   private OffsetDateTime lastUpdate;
-
-  /**
-   * the lifecycle status of this ProductOfferingPrice.
-   */
-  private @SafeText String lifecycleStatus;
 
   /**
    * Provides all amounts (tax included, duty free, tax rate), used currency and
@@ -93,6 +88,4 @@ public class ProductOfferingPriceRefOrValue extends ServiceSpecificationRef impl
   private Integer recurringChargePeriodLength;
 
   private @Valid Quantity unitOfMeasure;
-
-  private @Valid TimePeriod validFor;
 }

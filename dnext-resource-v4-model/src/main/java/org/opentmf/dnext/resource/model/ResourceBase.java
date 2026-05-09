@@ -1,25 +1,27 @@
 package org.opentmf.dnext.resource.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.time.OffsetDateTime;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.BundledResourceSpecification;
-import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.TimePeriod;
 
 /**
  * Synthesized abstract parent for 4 model classes.
  *
  * <p><br/>
- * <strong>Referring TMF artifacts:</strong>
+ * <strong>Direct descendants:</strong>
  * <ul>
- *   <li>TMF-634: Resource Catalog Management API</li>
- *   <li>TMF-resource: resource</li>
+ *   <li>ResourceCandidateCreate (634)</li>
+ *   <li>ResourceCandidateUpdate (634)</li>
+ *   <li>ResourceCatalogCreate (634)</li>
+ *   <li>ResourceCatalogUpdate (634)</li>
  * </ul>
  * </p>
  *
@@ -33,10 +35,7 @@ import org.opentmf.dnext.common.model.TimePeriod;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ResourceBase.class
 )
-public abstract class ResourceBase extends BundledResourceSpecification {
-
-  @JsonProperty("aclRelatedParty")
-  private List<@Valid RelatedParty> aclRelatedParties;
+public abstract class ResourceBase extends Extensible {
 
   /**
    * Description of this REST resource.
@@ -44,12 +43,36 @@ public abstract class ResourceBase extends BundledResourceSpecification {
   private @SafeText String description;
 
   /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of a resource candidate.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
+
+  /**
    * Date and time of the last update of this REST resource.
    */
   private OffsetDateTime lastUpdate;
 
   /**
+   * Used to indicate the current lifecycle status of the resource candidate.
+   */
+  private @SafeText String lifecycleStatus;
+
+  /**
+   * Name given to this REST resource.
+   */
+  private @SafeText String name;
+
+  /**
    * The period for which this REST resource is valid.
    */
   private @Valid TimePeriod validFor;
+
+  private @SafeText String version;
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.opentmf.model</groupId>
   <artifactId>dnext-v4-models</artifactId>
-  <version>2.11.3-SNAPSHOT</version>
+  <version>2.12.1-SNAPSHOT</version>
   <name>dnext-v4-models</name>
 
   <description>
@@ -79,8 +80,8 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
 
-    <spring-boot.version>4.0.4</spring-boot.version>
-    <opentmf-commons.version>2.1.0</opentmf-commons.version>
+    <spring-boot.version>4.0.6</spring-boot.version>
+    <opentmf-commons.version>2.2.0</opentmf-commons.version>
 
     <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
     <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
@@ -93,6 +94,41 @@
     <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
     <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
     <central-publishing-maven-plugin.version>0.10.0</central-publishing-maven-plugin.version>
+
+    <!-- Reference-project artifact versions; tracked via property so that
+         `mvn versions:display-property-updates` can flag upstream releases. -->
+    <opentmf-620-v4-api.version>4.1.0.11</opentmf-620-v4-api.version>
+    <opentmf-622-v4-api.version>4.0.0.11</opentmf-622-v4-api.version>
+    <opentmf-629-v4-api.version>4.0.0.11</opentmf-629-v4-api.version>
+    <opentmf-632-v4-api.version>4.0.0.11</opentmf-632-v4-api.version>
+    <opentmf-633-v4-api.version>4.0.0.11</opentmf-633-v4-api.version>
+    <opentmf-634-v4-api.version>4.1.0.11</opentmf-634-v4-api.version>
+    <opentmf-637-v4-api.version>4.0.0.11</opentmf-637-v4-api.version>
+    <opentmf-638-v4-api.version>4.0.0.11</opentmf-638-v4-api.version>
+    <opentmf-639-v4-api.version>4.0.0.11</opentmf-639-v4-api.version>
+    <opentmf-641-v4-api.version>4.1.0.11</opentmf-641-v4-api.version>
+    <opentmf-648-v4-api.version>4.0.0.11</opentmf-648-v4-api.version>
+    <opentmf-651-v4-api.version>4.0.0.11</opentmf-651-v4-api.version>
+    <opentmf-652-v4-api.version>4.0.0.11</opentmf-652-v4-api.version>
+    <opentmf-658-v4-api.version>4.0.0.11</opentmf-658-v4-api.version>
+    <opentmf-663-v4-api.version>4.0.0.11</opentmf-663-v4-api.version>
+    <opentmf-666-v4-api.version>4.0.0.11</opentmf-666-v4-api.version>
+    <opentmf-667-v4-api.version>4.0.0.11</opentmf-667-v4-api.version>
+    <opentmf-668-v4-api.version>4.0.0.11</opentmf-668-v4-api.version>
+    <opentmf-669-v4-api.version>4.0.0.11</opentmf-669-v4-api.version>
+    <opentmf-670-v4-api.version>4.0.0.11</opentmf-670-v4-api.version>
+    <opentmf-671-v4-api.version>4.1.0.11</opentmf-671-v4-api.version>
+    <opentmf-673-v4-api.version>4.0.0.11</opentmf-673-v4-api.version>
+    <opentmf-676-v4-api.version>4.0.0.11</opentmf-676-v4-api.version>
+    <opentmf-681-v4-api.version>4.0.0.11</opentmf-681-v4-api.version>
+    <opentmf-683-v4-api.version>4.0.0.11</opentmf-683-v4-api.version>
+    <opentmf-common-v4-api.version>4.2.0.11</opentmf-common-v4-api.version>
+    <opentmf-customer-v4-api.version>4.0.0.11</opentmf-customer-v4-api.version>
+    <opentmf-general-v4-api.version>4.1.0.11</opentmf-general-v4-api.version>
+    <opentmf-partner-v4-api.version>4.0.0.11</opentmf-partner-v4-api.version>
+    <opentmf-product-v4-api.version>4.1.0.11</opentmf-product-v4-api.version>
+    <opentmf-resource-v4-api.version>4.1.0.11</opentmf-resource-v4-api.version>
+    <opentmf-service-v4-api.version>4.2.0.11</opentmf-service-v4-api.version>
   </properties>
 
   <dependencyManagement>
@@ -109,14 +145,6 @@
 
   <dependencies>
     <!-- Compile Dependencies -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.validation</groupId>
-      <artifactId>jakarta.validation-api</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.opentmf.commons</groupId>
       <artifactId>opentmf-commons</artifactId>
@@ -179,15 +207,18 @@
         <version>${maven-enforcer-plugin.version}</version>
         <executions>
           <execution>
-            <id>enforce-maven</id>
+            <id>enforce-versions</id>
             <goals>
               <goal>enforce</goal>
             </goals>
             <configuration>
               <rules>
                 <requireMavenVersion>
-                  <version>3.6.3</version>
+                  <version>[3.9,3.10)</version>
                 </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>[17,18)</version>
+                </requireJavaVersion>
               </rules>
             </configuration>
           </execution>

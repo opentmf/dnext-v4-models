@@ -4,13 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.validation.Valid;
-import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.ExternalReference;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.AttachmentBase;
 import org.opentmf.general.model.IGeographicAddress;
 
 /**
@@ -36,7 +34,7 @@ import org.opentmf.general.model.IGeographicAddress;
     defaultImpl = GeographicAddress.class
 )
 @JsonTypeName("GeographicAddress")
-public class GeographicAddress extends NamedEntity implements IGeographicAddress {
+public class GeographicAddress extends AttachmentBase implements IGeographicAddress {
 
   /**
    * City that the address is in.
@@ -47,22 +45,6 @@ public class GeographicAddress extends NamedEntity implements IGeographicAddress
    * Country that the address is in.
    */
   private @SafeText String country;
-
-  /**
-   * Name of created by user.
-   */
-  private @SafeText String createdBy;
-
-  /**
-   * Date of creation.
-   */
-  private OffsetDateTime createdDate;
-
-  /**
-   * External reference of the shopping cart or reference in other system.
-   */
-  @JsonProperty("externalReference")
-  private List<@Valid ExternalReference> externalReferences;
 
   /**
    * A GeographicLocation is a pure-virtual super-class to the GeoJSON-aligned
@@ -95,11 +77,6 @@ public class GeographicAddress extends NamedEntity implements IGeographicAddress
    * delivery of mail (also known as zipcode).
    */
   private @SafeText String postcode;
-
-  /**
-   * Version number of the entity.
-   */
-  private Integer revision;
 
   /**
    * Geographic address update request state
@@ -150,14 +127,4 @@ public class GeographicAddress extends NamedEntity implements IGeographicAddress
    * parade, place, tarn, way, wharf.
    */
   private @SafeText String streetType;
-
-  /**
-   * Name of updated by user.
-   */
-  private @SafeText String updatedBy;
-
-  /**
-   * Date of update.
-   */
-  private OffsetDateTime updatedDate;
 }

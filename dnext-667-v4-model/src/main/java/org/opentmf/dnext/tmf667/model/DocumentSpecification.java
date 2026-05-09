@@ -4,19 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import java.net.URI;
-import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
 import org.opentmf.dnext.common.model.CharacteristicSpecification;
 import org.opentmf.dnext.common.model.ConstraintRef;
 import org.opentmf.dnext.common.model.EntitySpecificationRelationship;
-import org.opentmf.dnext.common.model.NamedEntity;
-import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.SpecificationBase;
 import org.opentmf.dnext.common.model.TargetEntitySchema;
-import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf667.model.IDocumentSpecification;
 
 /**
@@ -39,7 +35,7 @@ import org.opentmf.tmf667.model.IDocumentSpecification;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = DocumentSpecification.class
 )
-public class DocumentSpecification extends NamedEntity implements IDocumentSpecification {
+public class DocumentSpecification extends SpecificationBase implements IDocumentSpecification {
 
   /**
    * URL of the Document Specification.
@@ -62,34 +58,10 @@ public class DocumentSpecification extends NamedEntity implements IDocumentSpeci
   private List<@Valid ConstraintRef> constraints;
 
   /**
-   * A narrative that explains in detail what the document specification is.
-   */
-  private @SafeText String description;
-
-  /**
    * Relationship to another specification.
    */
   @JsonProperty("entitySpecRelationship")
   private List<@Valid EntitySpecificationRelationship> entitySpecRelationships;
-
-  /**
-   * isBundle determines whether specification represents a single specification
-   * (false), or a bundle of specifications (true).
-   */
-  private Boolean isBundle;
-
-  /**
-   * Date and time of the last update.
-   */
-  private OffsetDateTime lastUpdate;
-
-  /**
-   * Used to indicate the current lifecycle status.
-   */
-  private @SafeText String lifecycleStatus;
-
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * List of characteristics that the entity can take.
@@ -102,11 +74,4 @@ public class DocumentSpecification extends NamedEntity implements IDocumentSpeci
    * described by a specification.
    */
   private @Valid TargetEntitySchema targetEntitySchema;
-
-  private @Valid TimePeriod validFor;
-
-  /**
-   * A string, a version of the DocumentSpecification.
-   */
-  private @SafeText String version;
 }

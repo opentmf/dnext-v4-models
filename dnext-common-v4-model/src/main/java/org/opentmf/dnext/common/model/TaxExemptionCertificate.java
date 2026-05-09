@@ -3,11 +3,14 @@ package org.opentmf.dnext.common.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.ITaxExemptionCertificate;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
@@ -41,7 +44,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = TaxExemptionCertificate.class
 )
 @Required(fields = {"id"})
-public class TaxExemptionCertificate extends Entity implements ITaxExemptionCertificate {
+public class TaxExemptionCertificate extends Extensible implements ITaxExemptionCertificate {
 
   /**
    * The actual certificate contents, if such is supplied by the issuing
@@ -54,6 +57,18 @@ public class TaxExemptionCertificate extends Entity implements ITaxExemptionCert
    * taxing jurisdiction.
    */
   private @SafeText String certificateNumber;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Identifier of the tax exemption within list of the exemptions.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Name of the jurisdiction that issued the exemption.

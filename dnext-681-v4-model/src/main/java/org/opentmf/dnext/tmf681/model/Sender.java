@@ -2,10 +2,13 @@ package org.opentmf.dnext.tmf681.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.tmf681.model.ISender;
 
@@ -29,12 +32,29 @@ import org.opentmf.tmf681.model.ISender;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = Sender.class
 )
-public class Sender extends NamedEntity implements ISender {
+public class Sender extends Extensible implements ISender {
 
   /**
    * Sender address of email, if the communication type is email.
    */
   private @SafeText String email;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * ID of the sender.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
+
+  /**
+   * Name of the sender.
+   */
+  private @SafeText String name;
 
   private @Valid RelatedParty party;
 

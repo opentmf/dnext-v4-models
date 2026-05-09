@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.PaymentMethodUpdate;
 
 /**
  * A Tokenized Card method of payment.
@@ -32,7 +33,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = TokenizedCardCreate.class
 )
 @Required(fields = {"atType"})
-public class TokenizedCardCreate extends OtherCreate {
+public class TokenizedCardCreate extends PaymentMethodUpdate {
 
   /**
    * Card brand. Might be used for display purposes.
