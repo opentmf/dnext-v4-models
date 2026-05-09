@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.opentmf.model</groupId>
     <artifactId>dnext-v4-models</artifactId>
-    <version>2.12.1</version>
+    <version>2.12.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>dnext-product-v4-model</artifactId>
@@ -21,7 +21,7 @@
     <dependency>
       <groupId>org.opentmf.model</groupId>
       <artifactId>dnext-common-v4-model</artifactId>
-      <version>2.12.1</version>
+      <version>2.12.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opentmf.model</groupId>
