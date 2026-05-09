@@ -97,38 +97,38 @@
 
     <!-- Reference-project artifact versions; tracked via property so that
          `mvn versions:display-property-updates` can flag upstream releases. -->
-    <opentmf-620-v4-api.version>4.1.0.11-SNAPSHOT</opentmf-620-v4-api.version>
-    <opentmf-622-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-622-v4-api.version>
-    <opentmf-629-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-629-v4-api.version>
-    <opentmf-632-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-632-v4-api.version>
-    <opentmf-633-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-633-v4-api.version>
-    <opentmf-634-v4-api.version>4.1.0.11-SNAPSHOT</opentmf-634-v4-api.version>
-    <opentmf-637-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-637-v4-api.version>
-    <opentmf-638-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-638-v4-api.version>
-    <opentmf-639-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-639-v4-api.version>
-    <opentmf-641-v4-api.version>4.1.0.11-SNAPSHOT</opentmf-641-v4-api.version>
-    <opentmf-648-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-648-v4-api.version>
-    <opentmf-651-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-651-v4-api.version>
-    <opentmf-652-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-652-v4-api.version>
-    <opentmf-658-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-658-v4-api.version>
-    <opentmf-663-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-663-v4-api.version>
-    <opentmf-666-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-666-v4-api.version>
-    <opentmf-667-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-667-v4-api.version>
-    <opentmf-668-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-668-v4-api.version>
-    <opentmf-669-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-669-v4-api.version>
-    <opentmf-670-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-670-v4-api.version>
-    <opentmf-671-v4-api.version>4.1.0.11-SNAPSHOT</opentmf-671-v4-api.version>
-    <opentmf-673-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-673-v4-api.version>
-    <opentmf-676-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-676-v4-api.version>
-    <opentmf-681-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-681-v4-api.version>
-    <opentmf-683-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-683-v4-api.version>
-    <opentmf-common-v4-api.version>4.2.0.11-SNAPSHOT</opentmf-common-v4-api.version>
-    <opentmf-customer-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-customer-v4-api.version>
-    <opentmf-general-v4-api.version>4.1.0.11-SNAPSHOT</opentmf-general-v4-api.version>
-    <opentmf-partner-v4-api.version>4.0.0.11-SNAPSHOT</opentmf-partner-v4-api.version>
-    <opentmf-product-v4-api.version>4.1.0.11-SNAPSHOT</opentmf-product-v4-api.version>
-    <opentmf-resource-v4-api.version>4.1.0.11-SNAPSHOT</opentmf-resource-v4-api.version>
-    <opentmf-service-v4-api.version>4.2.0.11-SNAPSHOT</opentmf-service-v4-api.version>
+    <opentmf-620-v4-api.version>4.1.0.11</opentmf-620-v4-api.version>
+    <opentmf-622-v4-api.version>4.0.0.11</opentmf-622-v4-api.version>
+    <opentmf-629-v4-api.version>4.0.0.11</opentmf-629-v4-api.version>
+    <opentmf-632-v4-api.version>4.0.0.11</opentmf-632-v4-api.version>
+    <opentmf-633-v4-api.version>4.0.0.11</opentmf-633-v4-api.version>
+    <opentmf-634-v4-api.version>4.1.0.11</opentmf-634-v4-api.version>
+    <opentmf-637-v4-api.version>4.0.0.11</opentmf-637-v4-api.version>
+    <opentmf-638-v4-api.version>4.0.0.11</opentmf-638-v4-api.version>
+    <opentmf-639-v4-api.version>4.0.0.11</opentmf-639-v4-api.version>
+    <opentmf-641-v4-api.version>4.1.0.11</opentmf-641-v4-api.version>
+    <opentmf-648-v4-api.version>4.0.0.11</opentmf-648-v4-api.version>
+    <opentmf-651-v4-api.version>4.0.0.11</opentmf-651-v4-api.version>
+    <opentmf-652-v4-api.version>4.0.0.11</opentmf-652-v4-api.version>
+    <opentmf-658-v4-api.version>4.0.0.11</opentmf-658-v4-api.version>
+    <opentmf-663-v4-api.version>4.0.0.11</opentmf-663-v4-api.version>
+    <opentmf-666-v4-api.version>4.0.0.11</opentmf-666-v4-api.version>
+    <opentmf-667-v4-api.version>4.0.0.11</opentmf-667-v4-api.version>
+    <opentmf-668-v4-api.version>4.0.0.11</opentmf-668-v4-api.version>
+    <opentmf-669-v4-api.version>4.0.0.11</opentmf-669-v4-api.version>
+    <opentmf-670-v4-api.version>4.0.0.11</opentmf-670-v4-api.version>
+    <opentmf-671-v4-api.version>4.1.0.11</opentmf-671-v4-api.version>
+    <opentmf-673-v4-api.version>4.0.0.11</opentmf-673-v4-api.version>
+    <opentmf-676-v4-api.version>4.0.0.11</opentmf-676-v4-api.version>
+    <opentmf-681-v4-api.version>4.0.0.11</opentmf-681-v4-api.version>
+    <opentmf-683-v4-api.version>4.0.0.11</opentmf-683-v4-api.version>
+    <opentmf-common-v4-api.version>4.2.0.11</opentmf-common-v4-api.version>
+    <opentmf-customer-v4-api.version>4.0.0.11</opentmf-customer-v4-api.version>
+    <opentmf-general-v4-api.version>4.1.0.11</opentmf-general-v4-api.version>
+    <opentmf-partner-v4-api.version>4.0.0.11</opentmf-partner-v4-api.version>
+    <opentmf-product-v4-api.version>4.1.0.11</opentmf-product-v4-api.version>
+    <opentmf-resource-v4-api.version>4.1.0.11</opentmf-resource-v4-api.version>
+    <opentmf-service-v4-api.version>4.2.0.11</opentmf-service-v4-api.version>
   </properties>
 
   <dependencyManagement>
