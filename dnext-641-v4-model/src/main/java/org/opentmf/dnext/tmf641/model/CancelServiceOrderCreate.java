@@ -3,15 +3,20 @@ package org.opentmf.dnext.tmf641.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.CompletionCallback;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.Note;
 import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.ServiceOrderRef;
 import org.opentmf.tmf641.model.ICancelServiceOrderCreate;
 
 /**
@@ -39,7 +44,7 @@ import org.opentmf.tmf641.model.ICancelServiceOrderCreate;
     defaultImpl = CancelServiceOrderCreate.class
 )
 @Required(fields = {"serviceOrder"})
-public class CancelServiceOrderCreate extends Entity implements ICancelServiceOrderCreate {
+public class CancelServiceOrderCreate extends Extensible implements ICancelServiceOrderCreate {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -54,6 +59,24 @@ public class CancelServiceOrderCreate extends Entity implements ICancelServiceOr
    * gracefulCancel.
    */
   private @SafeText String cancellationType;
+
+  /**
+   * Attribute to define the callback information once the cancellation is
+   * completed.
+   */
+  private @Valid CompletionCallback completionCallback;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of a cancel service Order entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Extra information about a given entity.

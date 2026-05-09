@@ -1,14 +1,9 @@
 package org.opentmf.dnext.common.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
-import java.time.OffsetDateTime;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
  * InflightOrderChange is a request to submit an Inflight Order Change request
@@ -38,23 +33,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = InflightOrderChange.class
 )
 @Required(fields = {"changedProductOrder"})
-public class InflightOrderChange extends Entity {
-
-  @JsonProperty("aclRelatedParty")
-  private List<@Valid RelatedParty> aclRelatedParties;
-
-  private @SafeText String createdBy;
-
-  private OffsetDateTime createdDate;
+public class InflightOrderChange extends CancelProductOrderBase {
 
   private Integer revision;
-
-  /**
-   * Possible values for the status of the inflight order change.
-   */
-  private @SafeText String state;
-
-  private @SafeText String updatedBy;
-
-  private OffsetDateTime updatedDate;
 }

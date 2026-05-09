@@ -1,11 +1,14 @@
 package org.opentmf.dnext.tmf671.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.tmf671.model.IPromotionCriteria;
 
 /**
@@ -33,7 +36,7 @@ import org.opentmf.tmf671.model.IPromotionCriteria;
     defaultImpl = PromotionCriteria.class
 )
 @Required(fields = {"criteriaOperator", "criteriaParameter", "criteriaValue"})
-public class PromotionCriteria extends Entity implements IPromotionCriteria {
+public class PromotionCriteria extends Extensible implements IPromotionCriteria {
 
   /**
    * Logic operator of this criteria instruction: '=' or '>' or '<' or '>=' or
@@ -51,4 +54,16 @@ public class PromotionCriteria extends Entity implements IPromotionCriteria {
    * The value is filled for the comparison of the criteria.
    */
   private @SafeText String criteriaValue;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 }

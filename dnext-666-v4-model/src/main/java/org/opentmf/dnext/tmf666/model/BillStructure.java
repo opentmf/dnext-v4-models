@@ -3,11 +3,14 @@ package org.opentmf.dnext.tmf666.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.tmf666.model.IBillStructure;
 
 /**
@@ -30,7 +33,7 @@ import org.opentmf.tmf666.model.IBillStructure;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = BillStructure.class
 )
-public class BillStructure extends Entity implements IBillStructure {
+public class BillStructure extends Extensible implements IBillStructure {
 
   /**
    * A billing cycle specification ref or value
@@ -43,6 +46,18 @@ public class BillStructure extends Entity implements IBillStructure {
    * An attachment by value or by reference.
    */
   private @Valid BillFormatRefOrValue format;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Identifier of the bill structure.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   private @SafeText String preferredBillingCurrency;
 

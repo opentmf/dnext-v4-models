@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.RelatedParty;
-import org.opentmf.dnext.service.model.ServiceBase;
+import org.opentmf.dnext.common.model.ServiceBase;
 import org.opentmf.dnext.service.model.ServiceCategoryRef;
 import org.opentmf.tmf633.model.IServiceCatalogUpdate;
 
@@ -33,6 +33,9 @@ import org.opentmf.tmf633.model.IServiceCatalogUpdate;
     defaultImpl = ServiceCatalogUpdate.class
 )
 public class ServiceCatalogUpdate extends ServiceBase implements IServiceCatalogUpdate {
+
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid RelatedParty> aclRelatedParties;
 
   /**
    * Identifier of the type of catalog.

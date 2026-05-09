@@ -2,10 +2,13 @@ package org.opentmf.dnext.tmf666.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.Money;
 import org.opentmf.dnext.common.model.PaymentMethodRef;
 import org.opentmf.dnext.common.model.TimePeriod;
@@ -31,7 +34,19 @@ import org.opentmf.tmf666.model.IPaymentPlan;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = PaymentPlan.class
 )
-public class PaymentPlan extends Entity implements IPaymentPlan {
+public class PaymentPlan extends Extensible implements IPaymentPlan {
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * . Number of payments used to spread the global payment.

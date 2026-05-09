@@ -1,7 +1,6 @@
 package org.opentmf.dnext.tmf620.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,11 +37,6 @@ public class Category extends CategoryCreate implements ICategory {
    * Date of creation.
    */
   private OffsetDateTime createdDate;
-
-  /**
-   * Reference of the entity.
-   */
-  private URI href;
 
   /**
    * Version number of the entity.

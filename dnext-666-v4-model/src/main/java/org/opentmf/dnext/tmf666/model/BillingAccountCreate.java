@@ -8,7 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.AccountBalance;
 import org.opentmf.dnext.common.model.Characteristic;
+import org.opentmf.tmf666.model.IBillingAccountCreate;
 
 /**
  * The BillingAccount to be created.
@@ -35,7 +37,13 @@ import org.opentmf.dnext.common.model.Characteristic;
     defaultImpl = BillingAccountCreate.class
 )
 @Required(fields = {"name", "relatedParty"})
-public class BillingAccountCreate extends SettlementAccountCreate {
+public class BillingAccountCreate extends SettlementAccountUpdate implements IBillingAccountCreate {
+
+  /**
+   * Balances linked to the account.
+   */
+  @JsonProperty("accountBalance")
+  private List<@Valid AccountBalance> accountBalances;
 
   /**
    * A medium characteristic (MediumCharacteristic). Any additional

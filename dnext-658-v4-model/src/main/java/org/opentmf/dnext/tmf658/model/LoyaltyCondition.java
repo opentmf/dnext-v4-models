@@ -1,14 +1,11 @@
 package org.opentmf.dnext.tmf658.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
-import java.util.List;
+import java.net.URI;
+import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.RelatedParty;
-import org.opentmf.dnext.product.model.LoyaltyBase;
 import org.opentmf.tmf658.model.ILoyaltyCondition;
 
 /**
@@ -31,26 +28,36 @@ import org.opentmf.tmf658.model.ILoyaltyCondition;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = LoyaltyCondition.class
 )
-public class LoyaltyCondition extends LoyaltyBase implements ILoyaltyCondition {
+public class LoyaltyCondition extends LoyaltyConditionUpdate implements ILoyaltyCondition {
+
+  private @SafeText String baseType;
 
   /**
-   * DNext Access-Control RelatedParty List like ownership etc.
+   * Name of created by user.
    */
-  @JsonProperty("aclRelatedParty")
-  private List<@Valid RelatedParty> aclRelatedParties;
+  private @SafeText String createdBy;
 
   /**
-   * The attribute to evaluate.
+   * Date of creation.
    */
-  private @SafeText String attribute;
+  private OffsetDateTime createdDate;
 
   /**
-   * Comparison operator to be used in the evaluation.
+   * Version number of the entity.
    */
-  private @SafeText String operator;
+  private Integer revision;
+
+  private URI schemaLocation;
+
+  private @SafeText String type;
 
   /**
-   * The value of the attribute to be evaluated.
+   * Name of updated by user.
    */
-  private @SafeText String value;
+  private @SafeText String updatedBy;
+
+  /**
+   * Date of update.
+   */
+  private OffsetDateTime updatedDate;
 }

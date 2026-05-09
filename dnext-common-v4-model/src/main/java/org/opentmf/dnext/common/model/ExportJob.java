@@ -3,11 +3,13 @@ package org.opentmf.dnext.common.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IExportJob;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.commons.validation.constraints.SafeUrl;
 
 /**
  * Represents a task used to export resources to a file.
@@ -32,7 +34,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ExportJob.class
 )
-public class ExportJob extends ExportJobCreate implements IExportJob {
+public class ExportJob extends ImportJobCreate implements IExportJob {
 
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
@@ -62,12 +64,19 @@ public class ExportJob extends ExportJobCreate implements IExportJob {
   /**
    * Defines a group of assets (entities) which can be exported.
    */
-  private @SafeText String managedAssetGroup;
+  private @Valid AssetGroup managedAssetGroup;
 
   /**
    * name for the export job.
    */
   private @SafeText String name;
+
+  /**
+   * Used to scope the exported data.
+   */
+  @SafeUrl
+  @Size(max = 500)
+  private String query;
 
   /**
    * Requester identification details.

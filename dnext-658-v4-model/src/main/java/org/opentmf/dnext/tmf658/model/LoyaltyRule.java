@@ -1,14 +1,13 @@
 package org.opentmf.dnext.tmf658.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.tmf658.model.ILoyaltyRule;
@@ -27,26 +26,13 @@ import org.opentmf.tmf658.model.ILoyaltyRule;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = LoyaltyRule.class
+)
 public class LoyaltyRule extends LoyaltyRuleUpdate implements ILoyaltyRule {
-
-  /**
-   * When subclassing, this defines the super-class.
-   */
-  @JsonProperty("@baseType")
-  private @SafeText String atBaseType;
-
-  /**
-   * A URI to a JSON-Schema file that defines additional attributes and
-   * relationships.
-   */
-  @JsonProperty("@schemaLocation")
-  private URI atSchemaLocation;
-
-  /**
-   * When subclassing, this defines the subclass Extensible name.
-   */
-  @JsonProperty("@type")
-  private @SafeText String atType;
 
   /**
    * DNext Access-Control RelatedParty List like ownership etc.
@@ -65,18 +51,6 @@ public class LoyaltyRule extends LoyaltyRuleUpdate implements ILoyaltyRule {
    * Date of creation.
    */
   private OffsetDateTime createdDate;
-
-  /**
-   * A reference to the loyalty rule.
-   */
-  private URI href;
-
-  /**
-   * Unique identifier for the loyalty rule.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
 
   /**
    * Version number of the entity.

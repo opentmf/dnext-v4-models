@@ -107,8 +107,6 @@ public class ProductOfferingUpdate extends CatalogUpdate {
 
   private @Valid ProductOfferingExtension pExtension;
 
-  private @Valid ProductOfferingExtension pextension;
-
   /**
    * Place defines the places where the products are sold or delivered.
    */
@@ -193,20 +191,4 @@ public class ProductOfferingUpdate extends CatalogUpdate {
    * status attribute.
    */
   private @SafeText String statusReason;
-
-  public ProductOfferingExtension getPExtension() {
-    return pExtension;
-  }
-
-  public void setPExtension(ProductOfferingExtension pExtension) {
-    this.pExtension = pExtension;
-  }
-
-  public ProductOfferingExtension getPextension() {
-    return pextension;
-  }
-
-  public void setPextension(ProductOfferingExtension pextension) {
-    this.pextension = pextension;
-  }
 }

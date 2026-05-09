@@ -12,6 +12,7 @@ import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
+import org.opentmf.dnext.common.model.PaymentMethodUpdate;
 
 /**
  * Direct Debit is a fully automated payment instrument which is generally used
@@ -41,13 +42,35 @@ import org.opentmf.dnext.common.model.AttachmentRefOrValue;
     defaultImpl = DirectDebitCreate.class
 )
 @Required(fields = {"atType"})
-public class DirectDebitCreate extends BankAccountTransferCreate {
+public class DirectDebitCreate extends PaymentMethodUpdate {
+
+  /**
+   * The Business Identifier Code/Swift code of the financial institution where
+   * the account is located.
+   */
+  @JsonProperty("BIC")
+  private @SafeText String bIC;
+
+  /**
+   * The bank account number, this could refer to the iban or swift number.
+   */
+  private @SafeText String accountNumber;
+
+  /**
+   * The type of account number (e.g.: IBAN, SWIFT, ...).
+   */
+  private @SafeText String accountNumberType;
 
   /**
    * attachment.
    */
   @JsonProperty("attachment")
   private List<@Valid AttachmentRefOrValue> attachments;
+
+  /**
+   * The display name of the bank.
+   */
+  private @SafeText String bank;
 
   /**
    * The date on which the (e)Mandate has been cancelled by the Debtor or the
@@ -93,6 +116,11 @@ public class DirectDebitCreate extends BankAccountTransferCreate {
    * The type of mandate e.g., single-use(single)/multi-use(recurring).
    */
   private @SafeText String mandateType;
+
+  /**
+   * The owner of the bank account. This is also the account name.
+   */
+  private @SafeText String owner;
 
   /**
    * A reference that the party can later use to identify the direct debit.

@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.ResourceSpecificationRef;
 import org.opentmf.dnext.resource.model.ResourceBase;
 import org.opentmf.tmf634.model.IResourceCandidateUpdate;
@@ -31,6 +32,9 @@ import org.opentmf.tmf634.model.IResourceCandidateUpdate;
     defaultImpl = ResourceCandidateUpdate.class
 )
 public class ResourceCandidateUpdate extends ResourceBase implements IResourceCandidateUpdate {
+
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid RelatedParty> aclRelatedParties;
 
   /**
    * The categories in which this candidate is exposed.

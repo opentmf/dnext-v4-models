@@ -8,7 +8,8 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.CartTermBase;
+import org.opentmf.dnext.common.model.ServiceOrderItemRef;
 import org.opentmf.tmf641.model.IServiceOrderMilestone;
 
 /**
@@ -32,12 +33,7 @@ import org.opentmf.tmf641.model.IServiceOrderMilestone;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ServiceOrderMilestone.class
 )
-public class ServiceOrderMilestone extends NamedEntity implements IServiceOrderMilestone {
-
-  /**
-   * free-text description of the Milestone.
-   */
-  private @SafeText String description;
+public class ServiceOrderMilestone extends CartTermBase implements IServiceOrderMilestone {
 
   /**
    * A string represents the message of the milestone.

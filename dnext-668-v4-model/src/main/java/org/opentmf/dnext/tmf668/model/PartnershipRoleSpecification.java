@@ -7,9 +7,8 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AgreementSpecificationRef;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.CartTermBase;
 import org.opentmf.tmf668.model.IPartnershipRoleSpecification;
 
 /**
@@ -39,7 +38,7 @@ import org.opentmf.tmf668.model.IPartnershipRoleSpecification;
     defaultImpl = PartnershipRoleSpecification.class
 )
 @Required(fields = {"name"})
-public class PartnershipRoleSpecification extends NamedEntity implements IPartnershipRoleSpecification {
+public class PartnershipRoleSpecification extends CartTermBase implements IPartnershipRoleSpecification {
 
   /**
    * List of: AgreementSpecification reference. An AgreementSpecification
@@ -48,11 +47,6 @@ public class PartnershipRoleSpecification extends NamedEntity implements IPartne
    */
   @JsonProperty("agreementSpecification")
   private List<@Valid AgreementSpecificationRef> agreementSpecifications;
-
-  /**
-   * An explanatory text documenting the role specification.
-   */
-  private @SafeText String description;
 
   /**
    * Indicates whether billing operations will be associated to parties playing

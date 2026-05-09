@@ -6,6 +6,7 @@ import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.opentmf.dnext.common.model.Error;
 import org.opentmf.tmf641.model.IServiceOrderItemErrorMessage;
 
 /**
@@ -31,7 +32,7 @@ import org.opentmf.tmf641.model.IServiceOrderItemErrorMessage;
     defaultImpl = ServiceOrderItemErrorMessage.class
 )
 @JsonTypeName("ServiceOrderItemErrorMessage")
-public class ServiceOrderItemErrorMessage extends ErrorMessage implements IServiceOrderItemErrorMessage {
+public class ServiceOrderItemErrorMessage extends Error implements IServiceOrderItemErrorMessage {
 
   /**
    * Date when the error happened.

@@ -1,12 +1,15 @@
 package org.opentmf.dnext.tmf658.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.Entity;
 import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.tmf658.model.ILoyaltyConditionUpdate;
 
 /**
  * The LoyaltyCondition to be updated.
@@ -22,7 +25,13 @@ import org.opentmf.dnext.common.model.RelatedParty;
  */
 @Getter
 @Setter
-public class LoyaltyConditionUpdate {
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = LoyaltyConditionUpdate.class
+)
+public class LoyaltyConditionUpdate extends Entity implements ILoyaltyConditionUpdate {
 
   /**
    * DNext Access-Control RelatedParty List like ownership etc.

@@ -1,11 +1,13 @@
 package org.opentmf.dnext.tmf652.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.EntityRef;
 import org.opentmf.tmf652.model.IResourceOrder;
 
 /**
@@ -35,11 +37,13 @@ import org.opentmf.tmf652.model.IResourceOrder;
     defaultImpl = ResourceOrder.class
 )
 @Required(fields = {"orderItem"})
-public class ResourceOrder extends ChangedResourceOrder implements IResourceOrder {
+public class ResourceOrder extends ResourceOrderCreate implements IResourceOrder {
 
   private @SafeText String createdBy;
 
   private OffsetDateTime createdDate;
+
+  private @Valid EntityRef relatedInflightOrderChange;
 
   /**
    * Version number of the entity.

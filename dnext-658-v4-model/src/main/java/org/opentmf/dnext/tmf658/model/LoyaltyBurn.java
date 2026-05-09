@@ -1,13 +1,10 @@
 package org.opentmf.dnext.tmf658.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.tmf658.model.ILoyaltyBurn;
 
@@ -48,18 +45,6 @@ public class LoyaltyBurn extends LoyaltyBurnCreate implements ILoyaltyBurn {
    * Date of creation.
    */
   private OffsetDateTime createdDate;
-
-  /**
-   * Hyperlink reference.
-   */
-  private URI href;
-
-  /**
-   * unique identifier.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
 
   /**
    * Version number of the entity.

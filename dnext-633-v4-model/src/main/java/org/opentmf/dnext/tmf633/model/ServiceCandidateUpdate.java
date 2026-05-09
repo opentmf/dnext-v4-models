@@ -6,8 +6,9 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.ServiceBase;
 import org.opentmf.dnext.common.model.ServiceSpecificationRef;
-import org.opentmf.dnext.service.model.ServiceBase;
 import org.opentmf.dnext.service.model.ServiceCategoryRef;
 import org.opentmf.tmf633.model.IServiceCandidateUpdate;
 
@@ -32,6 +33,9 @@ import org.opentmf.tmf633.model.IServiceCandidateUpdate;
     defaultImpl = ServiceCandidateUpdate.class
 )
 public class ServiceCandidateUpdate extends ServiceBase implements IServiceCandidateUpdate {
+
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid RelatedParty> aclRelatedParties;
 
   /**
    * List of categories for this candidate.

@@ -7,10 +7,12 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.dnext.common.model.AgreementRef;
+import org.opentmf.dnext.common.model.AccountRef;
 import org.opentmf.dnext.common.model.CategoryRef;
-import org.opentmf.dnext.common.model.CustomerUpdateBase;
+import org.opentmf.dnext.common.model.CustomerBase;
+import org.opentmf.dnext.common.model.PaymentMethodRef;
 import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.tmf658.model.ILoyaltyProgramPartnerUpdate;
 
 /**
  * The LoyaltyProgramPartner to be updated.
@@ -37,16 +39,20 @@ import org.opentmf.dnext.common.model.RelatedParty;
     defaultImpl = LoyaltyProgramPartnerUpdate.class
 )
 @Required(fields = {"name", "engagedParty"})
-public class LoyaltyProgramPartnerUpdate extends CustomerUpdateBase {
+public class LoyaltyProgramPartnerUpdate extends CustomerBase implements ILoyaltyProgramPartnerUpdate {
+
+  /**
+   * List of: Account reference. An account may be a party account or a financial
+   * account.
+   */
+  @JsonProperty("account")
+  private List<@Valid AccountRef> accounts;
 
   /**
    * DNext Access-Control RelatedParty List like ownership etc.
    */
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
-
-  @JsonProperty("agreement")
-  private List<@Valid AgreementRef> agreements;
 
   /**
    * The reference to the party engaged in this partnership.
@@ -59,4 +65,11 @@ public class LoyaltyProgramPartnerUpdate extends CustomerUpdateBase {
    */
   @JsonProperty("partnerCatalog")
   private List<@Valid CategoryRef> partnerCatalogs;
+
+  /**
+   * List of: PaymentMethod reference. A payment method defines a specific mean of
+   * payment (e.g. direct debit).
+   */
+  @JsonProperty("paymentMethod")
+  private List<@Valid PaymentMethodRef> paymentMethods;
 }

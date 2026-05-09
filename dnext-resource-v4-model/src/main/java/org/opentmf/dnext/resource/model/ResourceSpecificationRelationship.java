@@ -8,8 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.NamedEntity;
-import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.dnext.common.model.FeatureRelationship;
 import org.opentmf.resource.model.IResourceSpecificationRelationship;
 
 /**
@@ -38,7 +37,7 @@ import org.opentmf.resource.model.IResourceSpecificationRelationship;
     defaultImpl = ResourceSpecificationRelationship.class
 )
 @Required(fields = {"relationshipType", "href", "id"})
-public class ResourceSpecificationRelationship extends NamedEntity implements IResourceSpecificationRelationship {
+public class ResourceSpecificationRelationship extends FeatureRelationship implements IResourceSpecificationRelationship {
 
   /**
    * A characteristic that refines the relationship. For example, consider the
@@ -69,20 +68,9 @@ public class ResourceSpecificationRelationship extends NamedEntity implements IR
   private Integer minimumQuantity;
 
   /**
-   * Type of relationship such as migration, substitution, dependency,
-   * exclusivity.
-   */
-  private @SafeText String relationshipType;
-
-  /**
    * The association role for this resource specification.
    */
   private @SafeText String role;
-
-  /**
-   * The period for which the ResourceSpecRelationship is valid.
-   */
-  private @Valid TimePeriod validFor;
 
   /**
    * The version given to the target resource specification instance.

@@ -1,12 +1,9 @@
 package org.opentmf.dnext.tmf681.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.tmf681.model.ICommunicationMessage;
 
@@ -35,7 +32,7 @@ import org.opentmf.tmf681.model.ICommunicationMessage;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = CommunicationMessage.class
 )
-public class CommunicationMessage extends CommunicationMessageCreate implements ICommunicationMessage {
+public class CommunicationMessage extends CommunicationMessageUpdate implements ICommunicationMessage {
 
   /**
    * Name of created by user.
@@ -48,21 +45,18 @@ public class CommunicationMessage extends CommunicationMessageCreate implements 
   private OffsetDateTime createdDate;
 
   /**
-   * Hypertext Reference of the Communication Message.
-   */
-  private URI href;
-
-  /**
-   * Unique identifier of Communication Message.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
-
-  /**
    * Version number of the entity.
    */
   private Integer revision;
+
+  /**
+   * Status of communication message
+   * <br/><p>Recommended values: initial, inProgress, completed, cancelled,
+   * failed.
+   *
+   * @see org.opentmf.dnext.tmf681.model.CommunicationMessageStateType
+   */
+  private @SafeText String state;
 
   /**
    * Name of updated by user.

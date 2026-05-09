@@ -2,12 +2,15 @@ package org.opentmf.dnext.product.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.Money;
 import org.opentmf.dnext.common.model.ProductRef;
 import org.opentmf.product.model.IRatedProductUsage;
@@ -33,11 +36,23 @@ import org.opentmf.product.model.IRatedProductUsage;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = RatedProductUsage.class
 )
-public class RatedProductUsage extends Entity implements IRatedProductUsage {
+public class RatedProductUsage extends Extensible implements IRatedProductUsage {
 
   private Boolean billed;
 
   private @Valid Money bucketValueConvertedInAmount;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Boolean indicating if usage have been billed or not.

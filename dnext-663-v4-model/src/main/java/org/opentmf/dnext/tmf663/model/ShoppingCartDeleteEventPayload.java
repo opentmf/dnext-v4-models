@@ -3,7 +3,6 @@ package org.opentmf.dnext.tmf663.model;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.tmf663.model.IShoppingCartDeleteEventPayload;
 
 /**
  * The event data structure.
@@ -19,7 +18,7 @@ import org.opentmf.tmf663.model.IShoppingCartDeleteEventPayload;
  */
 @Getter
 @Setter
-public class ShoppingCartDeleteEventPayload implements IShoppingCartDeleteEventPayload {
+public class ShoppingCartDeleteEventPayload {
 
   /**
    * Shopping Cart resource is used for the temporarily selection and reservation

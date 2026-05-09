@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.PaymentMethodUpdate;
 
 /**
  * A bank transfer method of payment.
@@ -32,7 +33,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = BankAccountTransferCreate.class
 )
 @Required(fields = {"atType"})
-public class BankAccountTransferCreate extends OtherCreate {
+public class BankAccountTransferCreate extends PaymentMethodUpdate {
 
   /**
    * The Business Identifier Code/Swift code of the financial institution where

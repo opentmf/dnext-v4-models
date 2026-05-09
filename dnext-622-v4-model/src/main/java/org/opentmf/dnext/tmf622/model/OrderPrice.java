@@ -8,9 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.BillingAccountRef;
+import org.opentmf.dnext.common.model.CartPriceBase;
 import org.opentmf.dnext.common.model.Price;
 import org.opentmf.dnext.common.model.PriceAlteration;
-import org.opentmf.dnext.common.model.PriceBase;
+import org.opentmf.dnext.common.model.ProductOfferingPriceRef;
 import org.opentmf.tmf622.model.IOrderPrice;
 
 /**
@@ -34,7 +35,7 @@ import org.opentmf.tmf622.model.IOrderPrice;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = OrderPrice.class
 )
-public class OrderPrice extends PriceBase implements IOrderPrice {
+public class OrderPrice extends CartPriceBase implements IOrderPrice {
 
   /**
    * BillingAccount reference. A BillingAccount is a detailed description of a
@@ -53,6 +54,8 @@ public class OrderPrice extends PriceBase implements IOrderPrice {
    */
   @JsonProperty("priceAlteration")
   private List<@Valid PriceAlteration> priceAlterations;
+
+  private @Valid ProductOfferingPriceRef productOfferingPrice;
 
   /**
    * Could be minutes, GB...

@@ -1,14 +1,10 @@
 package org.opentmf.dnext.tmf634.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeId;
-import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.DNextEventBase;
+import org.opentmf.dnext.common.model.QuoteCreateEventBase;
 import org.opentmf.tmf634.model.IResourceCatalogChangeEvent;
 
 /**
@@ -25,41 +21,16 @@ import org.opentmf.tmf634.model.IResourceCatalogChangeEvent;
  */
 @Getter
 @Setter
-public class ResourceCatalogChangeEvent extends DNextEventBase implements IResourceCatalogChangeEvent {
-
-  /**
-   * When subclassing, this defines the super-class.
-   */
-  @JsonProperty("@baseType")
-  private @SafeText String atBaseType;
-
-  /**
-   * A URI to a JSON-Schema file that defines additional attributes and
-   * relationships.
-   */
-  @JsonProperty("@schemaLocation")
-  private URI atSchemaLocation;
-
-  /**
-   * When subclassing, this defines the subclass Extensible name.
-   */
-  @JsonProperty("@type")
-  private @SafeText String atType;
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = ResourceCatalogChangeEvent.class
+)
+public class ResourceCatalogChangeEvent extends QuoteCreateEventBase implements IResourceCatalogChangeEvent {
 
   /**
    * The event data structure.
    */
   private @Valid ResourceCatalogChangeEventPayload event;
-
-  /**
-   * Hyperlink reference.
-   */
-  private URI href;
-
-  /**
-   * Unique identifier of the entity.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
 }

@@ -34,11 +34,16 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = AgreementSpecificationRef.class
 )
 @Required(fields = {"id"})
-public class AgreementSpecificationRef extends CategoryRef implements IAgreementSpecificationRef {
+public class AgreementSpecificationRef extends EntityRef implements IAgreementSpecificationRef {
 
   /**
    * A narrative that explains in detail what the agreement specification is
    * about.
    */
   private @SafeText String description;
+
+  /**
+   * Agreement Specifition version.
+   */
+  private @SafeText String version;
 }

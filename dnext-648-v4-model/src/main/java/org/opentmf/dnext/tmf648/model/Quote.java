@@ -3,14 +3,11 @@ package org.opentmf.dnext.tmf648.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.tmf648.model.IQuote;
 
@@ -53,15 +50,6 @@ public class Quote extends QuoteUpdate implements IQuote {
    * Date of creation.
    */
   private OffsetDateTime createdDate;
-
-  /**
-   * Reference of the entity.
-   */
-  private URI href;
-
-  @SafeId
-  @Size(max = 100)
-  private String id;
 
   /**
    * Date and time of the last update.

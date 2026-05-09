@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.dnext.common.model.RelatedParty;
 import org.opentmf.dnext.common.model.ResourceSpecificationRef;
 import org.opentmf.dnext.resource.model.ResourceBase;
 import org.opentmf.tmf634.model.IResourceCandidateCreate;
@@ -37,6 +38,9 @@ import org.opentmf.tmf634.model.IResourceCandidateCreate;
 )
 @Required(fields = {"name", "id"})
 public class ResourceCandidateCreate extends ResourceBase implements IResourceCandidateCreate {
+
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid RelatedParty> aclRelatedParties;
 
   /**
    * The categories in which this candidate is exposed.

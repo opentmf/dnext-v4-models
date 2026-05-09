@@ -1,7 +1,6 @@
 package org.opentmf.dnext.tmf632.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +35,7 @@ import org.opentmf.tmf632.model.IIndividual;
     defaultImpl = Individual.class
 )
 @Required(fields = {"id"})
-public class Individual extends IndividualCreate implements IIndividual {
+public class Individual extends IndividualUpdate implements IIndividual {
 
   /**
    * Name of created by user.
@@ -47,11 +46,6 @@ public class Individual extends IndividualCreate implements IIndividual {
    * Date of creation.
    */
   private OffsetDateTime createdDate;
-
-  /**
-   * Hyperlink to access the individual.
-   */
-  private URI href;
 
   /**
    * Version number of the entity.

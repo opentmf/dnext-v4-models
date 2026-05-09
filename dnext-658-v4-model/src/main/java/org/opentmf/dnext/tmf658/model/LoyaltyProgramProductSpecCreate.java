@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.tmf658.model.ILoyaltyProgramProductSpecCreate;
 
 /**
  * The LoyaltyProgramProductSpec to be created.
@@ -30,7 +31,7 @@ import org.opentmf.commons.validation.constraints.Required;
     defaultImpl = LoyaltyProgramProductSpecCreate.class
 )
 @Required(fields = {"name", "productNumber"})
-public class LoyaltyProgramProductSpecCreate extends LoyaltyProgramProductSpecUpdate {
+public class LoyaltyProgramProductSpecCreate extends LoyaltyProgramProductSpecUpdate implements ILoyaltyProgramProductSpecCreate {
 
   /**
    * A narrative that explains in detail what the product specification is.

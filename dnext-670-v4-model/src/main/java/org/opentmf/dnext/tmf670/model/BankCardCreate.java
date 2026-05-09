@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.PaymentMethodUpdate;
 
 /**
  * A bank card method of payment.
@@ -32,7 +33,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = BankCardCreate.class
 )
 @Required(fields = {"atType"})
-public class BankCardCreate extends OtherCreate {
+public class BankCardCreate extends PaymentMethodUpdate {
 
   /**
    * The bank that issued the card.

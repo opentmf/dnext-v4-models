@@ -1,14 +1,22 @@
 package org.opentmf.dnext.tmf658.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
+import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.AccountBalance;
+import org.opentmf.dnext.common.model.AccountRelationship;
+import org.opentmf.dnext.common.model.BillFormatBase;
+import org.opentmf.dnext.common.model.Contact;
+import org.opentmf.dnext.common.model.LoyaltyProgramProductRef;
+import org.opentmf.dnext.common.model.Money;
+import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.TaxExemptionCertificate;
 import org.opentmf.tmf658.model.ILoyaltyAccount;
 
 /**
@@ -36,42 +44,70 @@ import org.opentmf.tmf658.model.ILoyaltyAccount;
     defaultImpl = LoyaltyAccount.class
 )
 @Required(fields = {"name"})
-public class LoyaltyAccount extends LoyaltyAccountUpdate implements ILoyaltyAccount {
+public class LoyaltyAccount extends BillFormatBase implements ILoyaltyAccount {
 
   /**
-   * Name of created by user.
+   * List of: Balances linked to the account.
    */
-  private @SafeText String createdBy;
+  @JsonProperty("accountBalance")
+  private List<@Valid AccountBalance> accountBalances;
 
   /**
-   * Date of creation.
+   * List of: Significant connection between accounts. For instance an aggregating
+   * account for a list of shop branches each having its own billing account.
    */
-  private OffsetDateTime createdDate;
+  @JsonProperty("accountRelationship")
+  private List<@Valid AccountRelationship> accountRelationships;
 
   /**
-   * A reference to the loyalty members loyalty account.
+   * A categorization of an account, such as individual, joint, and so forth,
+   * whose instances share some of the same characteristics. Note: for flexibility
+   * we use a String here but an implementation may use an enumeration with a
+   * limited list of valid values.
    */
-  private URI href;
+  private @SafeText String accountType;
 
   /**
-   * Unique identifier for the account.
+   * DNext Access-Control RelatedParty List like ownership etc.
    */
-  @SafeId
-  @Size(max = 100)
-  private String id;
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid RelatedParty> aclRelatedParties;
 
   /**
-   * Version number of the entity.
+   * List of: An individual or an organization used as a contact point for a given
+   * account and accessed via some contact medium.
    */
-  private Integer revision;
+  @JsonProperty("contact")
+  private List<@Valid Contact> contacts;
 
   /**
-   * Name of updated by user.
+   * The maximum amount of money that may be charged on an account.
    */
-  private @SafeText String updatedBy;
+  private @Valid Money creditLimit;
 
   /**
-   * Date of update.
+   * Date of last modification of the account.
    */
-  private OffsetDateTime updatedDate;
+  private OffsetDateTime lastModified;
+
+  private @Valid LoyaltyProgramProductRef loyaltyProgramProduct;
+
+  @JsonProperty("relatedParty")
+  private List<@Valid RelatedParty> relatedParties;
+
+  /**
+   * Contains the lifecycle state such as: Active, Closed, Suspended and so on.
+   */
+  private @SafeText String state;
+
+  /**
+   * List of: A tax exemption certificate represents a tax exemption granted to a
+   * party (individual or organization) by a tax jurisdiction which may be a city,
+   * state, country,... An exemption has a certificate identifier (received from
+   * the jurisdiction that levied the tax) and a validity period. An exemption is
+   * per tax types and determines for each type of tax what portion of the tax is
+   * exempted (partial by percentage or complete) via the tax definition.
+   */
+  @JsonProperty("taxExemption")
+  private List<@Valid TaxExemptionCertificate> taxExemptions;
 }

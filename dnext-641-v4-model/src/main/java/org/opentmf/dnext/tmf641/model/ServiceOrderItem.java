@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
+import java.net.URI;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AppointmentRef;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
 import org.opentmf.dnext.common.model.Characteristic;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.RelatedEntityRefOrValue;
 import org.opentmf.dnext.common.model.ServiceRefOrValue;
 import org.opentmf.tmf641.model.IServiceOrderItem;
@@ -42,7 +43,7 @@ import org.opentmf.tmf641.model.IServiceOrderItem;
     defaultImpl = ServiceOrderItem.class
 )
 @Required(fields = {"service", "action"})
-public class ServiceOrderItem extends Entity implements IServiceOrderItem {
+public class ServiceOrderItem extends Extensible implements IServiceOrderItem {
 
   /**
    * The action to be carried out on the Service. Can be: add, modify, delete,
@@ -67,6 +68,15 @@ public class ServiceOrderItem extends Entity implements IServiceOrderItem {
    */
   @JsonProperty("errorMessage")
   private List<@Valid ServiceOrderItemErrorMessage> errorMessages;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Characteristic of the given serviceOrderItem.

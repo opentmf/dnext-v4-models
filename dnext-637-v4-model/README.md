@@ -6,7 +6,7 @@
 <dependency>
     <groupId>org.opentmf.model</groupId>
     <artifactId>dnext-637-v4-model</artifactId>
-    <version>2.11.2</version>
+    <version>2.12.1</version>
 </dependency>
 ```
 

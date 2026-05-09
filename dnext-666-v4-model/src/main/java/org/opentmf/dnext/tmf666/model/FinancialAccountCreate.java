@@ -1,11 +1,10 @@
 package org.opentmf.dnext.tmf666.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
+import org.opentmf.tmf666.model.IFinancialAccountCreate;
 
 /**
  * The FinancialAccount to be created.
@@ -32,12 +31,5 @@ import org.opentmf.commons.validation.constraints.SafeId;
     defaultImpl = FinancialAccountCreate.class
 )
 @Required(fields = {"name"})
-public class FinancialAccountCreate extends FinancialAccountUpdate {
-
-  /**
-   * Unique identifier of the financial account.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
+public class FinancialAccountCreate extends FinancialAccountUpdate implements IFinancialAccountCreate {
 }

@@ -1,13 +1,11 @@
 package org.opentmf.dnext.tmf658.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.tmf658.model.ILoyaltyProgramMember;
 
@@ -29,27 +27,14 @@ import org.opentmf.tmf658.model.ILoyaltyProgramMember;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = LoyaltyProgramMember.class
+)
 @Required(fields = {"name", "roleType"})
 public class LoyaltyProgramMember extends LoyaltyProgramMemberUpdate implements ILoyaltyProgramMember {
-
-  /**
-   * When subclassing, this defines the super-class.
-   */
-  @JsonProperty("@baseType")
-  private @SafeText String atBaseType;
-
-  /**
-   * A URI to a JSON-Schema file that defines additional attributes and
-   * relationships.
-   */
-  @JsonProperty("@schemaLocation")
-  private URI atSchemaLocation;
-
-  /**
-   * When subclassing, this defines the subclass Extensible name.
-   */
-  @JsonProperty("@type")
-  private @SafeText String atType;
 
   private @SafeText String baseType;
 
@@ -62,18 +47,6 @@ public class LoyaltyProgramMember extends LoyaltyProgramMemberUpdate implements 
    * Date of creation.
    */
   private OffsetDateTime createdDate;
-
-  /**
-   * A reference to the loyalty program member.
-   */
-  private URI href;
-
-  /**
-   * Unique identifier for the loyalty program member.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
 
   /**
    * Version number of the entity.

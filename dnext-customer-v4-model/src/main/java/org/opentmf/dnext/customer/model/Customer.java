@@ -3,23 +3,20 @@ package org.opentmf.dnext.customer.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.customer.model.ICustomer;
 import org.opentmf.dnext.common.model.AccountRef;
 import org.opentmf.dnext.common.model.AclRelatedParty;
-import org.opentmf.dnext.common.model.AgreementRef;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
-import org.opentmf.dnext.common.model.Characteristic;
-import org.opentmf.dnext.common.model.ContactMedium;
-import org.opentmf.dnext.common.model.CreditProfile;
+import org.opentmf.dnext.common.model.CustomerBase;
 import org.opentmf.dnext.common.model.ExternalReference;
 import org.opentmf.dnext.common.model.PaymentMethodRef;
-import org.opentmf.dnext.common.model.ProductBase;
 import org.opentmf.dnext.common.model.RelatedParty;
-import org.opentmf.dnext.common.model.TimePeriod;
 
 /**
  *
@@ -45,7 +42,7 @@ import org.opentmf.dnext.common.model.TimePeriod;
     defaultImpl = Customer.class
 )
 @Required(fields = {"name", "href", "id", "engagedParty"})
-public class Customer extends ProductBase implements ICustomer {
+public class Customer extends CustomerBase implements ICustomer {
 
   /**
    * A list of account references.
@@ -61,34 +58,20 @@ public class Customer extends ProductBase implements ICustomer {
   private List<@Valid AclRelatedParty> aclRelatedParties;
 
   /**
-   * A list of agreement references.
-   */
-  @JsonProperty("agreement")
-  private List<@Valid AgreementRef> agreements;
-
-  /**
    * A list of attachment references.
    */
   @JsonProperty("attachment")
   private List<@Valid AttachmentRefOrValue> attachments;
 
   /**
-   * A list of characteristics.
+   * Name of created by user.
    */
-  @JsonProperty("characteristic")
-  private List<@Valid Characteristic> characteristics;
+  private @SafeText String createdBy;
 
   /**
-   * A list of contact mediums.
+   * Date of creation.
    */
-  @JsonProperty("contactMedium")
-  private List<@Valid ContactMedium> contactMediums;
-
-  /**
-   * A list of credit profiles.
-   */
-  @JsonProperty("creditProfile")
-  private List<@Valid CreditProfile> creditProfiles;
+  private OffsetDateTime createdDate;
 
   /**
    * A related party (RelatedParty). The party - an organization or an individual
@@ -109,14 +92,17 @@ public class Customer extends ProductBase implements ICustomer {
   private List<@Valid PaymentMethodRef> paymentMethods;
 
   /**
-   * A list of related parties (RelatedParty [*]). Related Entity reference. A
-   * related party defines party or party role linked to a specific entity.
+   * Version number of the entity.
    */
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
+  private Integer revision;
 
   /**
-   * A time period. The time period that the Customer is valid for.
+   * Name of updated by user.
    */
-  private @Valid TimePeriod validFor;
+  private @SafeText String updatedBy;
+
+  /**
+   * Date of update.
+   */
+  private OffsetDateTime updatedDate;
 }

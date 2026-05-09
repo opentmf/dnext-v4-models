@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.CartTermBase;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf671.model.IPromotionPattern;
 
@@ -37,7 +37,7 @@ import org.opentmf.tmf671.model.IPromotionPattern;
     defaultImpl = PromotionPattern.class
 )
 @Required(fields = {"criteriaGroup", "action"})
-public class PromotionPattern extends NamedEntity implements IPromotionPattern {
+public class PromotionPattern extends CartTermBase implements IPromotionPattern {
 
   /**
    * List of: Action of the promotion. When the customer meets the conditions in
@@ -57,11 +57,6 @@ public class PromotionPattern extends NamedEntity implements IPromotionPattern {
    * Logical relation followed by the criteria group.
    */
   private @SafeText String criteriaGroupLogicalRelationship;
-
-  /**
-   * Small description to clarify the pattern details.
-   */
-  private @SafeText String description;
 
   /**
    * Priority. Smaller number means high.

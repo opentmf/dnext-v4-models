@@ -2,11 +2,14 @@ package org.opentmf.dnext.tmf632.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf632.model.ILanguageAbility;
 
@@ -35,7 +38,19 @@ import org.opentmf.tmf632.model.ILanguageAbility;
     defaultImpl = LanguageAbility.class
 )
 @Required(fields = {"languageCode", "languageName"})
-public class LanguageAbility extends Entity implements ILanguageAbility {
+public class LanguageAbility extends Extensible implements ILanguageAbility {
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * A “true” value specifies whether the language is considered by the individual

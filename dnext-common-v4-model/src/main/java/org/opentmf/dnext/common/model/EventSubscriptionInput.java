@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IEventSubscriptionInput;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeQuery;
+import org.opentmf.commons.validation.constraints.SafeUrl;
 
 /**
  * Sets the communication endpoint address the service instance must use to
@@ -69,7 +69,7 @@ public class EventSubscriptionInput extends Entity implements IEventSubscription
   /**
    * additional data to be passed.
    */
-  @SafeQuery
+  @SafeUrl
   @Size(max = 500)
   private String query;
 }

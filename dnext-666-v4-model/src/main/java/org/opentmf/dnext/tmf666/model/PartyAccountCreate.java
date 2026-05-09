@@ -1,15 +1,10 @@
 package org.opentmf.dnext.tmf666.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
-import org.opentmf.dnext.common.model.AccountBalance;
+import org.opentmf.tmf666.model.IPartyAccountCreate;
 
 /**
  * The PartyAccount to be created.
@@ -36,18 +31,5 @@ import org.opentmf.dnext.common.model.AccountBalance;
     defaultImpl = PartyAccountCreate.class
 )
 @Required(fields = {"name", "relatedParty"})
-public class PartyAccountCreate extends SettlementAccountUpdate {
-
-  /**
-   * Balances linked to the account.
-   */
-  @JsonProperty("accountBalance")
-  private List<@Valid AccountBalance> accountBalances;
-
-  /**
-   * Unique identifier of the party account.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
+public class PartyAccountCreate extends BillingAccountCreate implements IPartyAccountCreate {
 }

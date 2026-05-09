@@ -1,10 +1,13 @@
 package org.opentmf.dnext.common.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.ITargetProductSchema;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 
 /**
  *
@@ -35,5 +38,17 @@ import org.opentmf.commons.validation.constraints.Required;
     defaultImpl = TargetProductSchema.class
 )
 @Required(fields = {"atType", "atSchemaLocation"})
-public class TargetProductSchema extends Entity implements ITargetProductSchema {
+public class TargetProductSchema extends Extensible implements ITargetProductSchema {
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 }

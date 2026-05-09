@@ -6,8 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeId;
-import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.CartTermBase;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf620.model.IPricingLogicAlgorithm;
 
@@ -30,12 +29,7 @@ import org.opentmf.tmf620.model.IPricingLogicAlgorithm;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = PricingLogicAlgorithm.class
 )
-public class PricingLogicAlgorithm extends NamedEntity implements IPricingLogicAlgorithm {
-
-  /**
-   * Description of this entity.
-   */
-  private @SafeText String description;
+public class PricingLogicAlgorithm extends CartTermBase implements IPricingLogicAlgorithm {
 
   /**
    * id of corresponding PricingLogicAlgorithm specification.

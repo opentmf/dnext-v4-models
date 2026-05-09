@@ -3,7 +3,6 @@ package org.opentmf.dnext.tmf620.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
@@ -101,11 +100,6 @@ public class ProductOffering extends CatalogCreate implements IProductOffering {
    */
   @JsonProperty("externalReference")
   private List<@Valid ExternalReference> externalReferences;
-
-  /**
-   * Reference of the entity.
-   */
-  private URI href;
 
   /**
    * Bundle determines whether a productOffering

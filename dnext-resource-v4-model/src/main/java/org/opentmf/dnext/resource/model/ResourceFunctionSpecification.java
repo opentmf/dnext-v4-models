@@ -3,12 +3,9 @@ package org.opentmf.dnext.resource.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.BundledResourceFunctionSpecification;
 import org.opentmf.resource.model.IResourceFunctionSpecification;
 
 /**
@@ -31,7 +28,7 @@ import org.opentmf.resource.model.IResourceFunctionSpecification;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ResourceFunctionSpecification.class
 )
-public class ResourceFunctionSpecification extends ResourceSpecificationBase implements IResourceFunctionSpecification {
+public class ResourceFunctionSpecification extends LogicalResourceSpecification implements IResourceFunctionSpecification {
 
   /**
    * A type of ResourceFunctionSpecification that belongs to a grouping of
@@ -53,29 +50,4 @@ public class ResourceFunctionSpecification extends ResourceSpecificationBase imp
    */
   @JsonProperty("connectivitySpecification")
   private List<@Valid ResourceGraphSpecification> connectivitySpecifications;
-
-  /**
-   * Name of created by user.
-   */
-  private @SafeText String createdBy;
-
-  /**
-   * Date of creation.
-   */
-  private OffsetDateTime createdDate;
-
-  /**
-   * Version number of the entity.
-   */
-  private Integer revision;
-
-  /**
-   * Name of updated by user.
-   */
-  private @SafeText String updatedBy;
-
-  /**
-   * Date of update.
-   */
-  private OffsetDateTime updatedDate;
 }

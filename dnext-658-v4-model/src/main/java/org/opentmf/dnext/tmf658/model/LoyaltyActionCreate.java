@@ -1,14 +1,17 @@
 package org.opentmf.dnext.tmf658.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.PartnershipRef;
 import org.opentmf.dnext.common.model.ProductOfferingRef;
 import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.product.model.LoyaltyBase;
 
 /**
  * The LoyaltyAction to be created.
@@ -28,8 +31,14 @@ import org.opentmf.dnext.common.model.RelatedParty;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = LoyaltyActionCreate.class
+)
 @Required(fields = {"endpoint", "action"})
-public class LoyaltyActionCreate {
+public class LoyaltyActionCreate extends LoyaltyBase {
 
   /**
    * DNext Access-Control RelatedParty List like ownership etc.
@@ -62,16 +71,6 @@ public class LoyaltyActionCreate {
    * attributes in the loyalty event request.
    */
   private @SafeText String body;
-
-  /**
-   * A user-friendly identifier of the loyalty execution point.
-   */
-  private @SafeText String commonName;
-
-  /**
-   * A free-form description of the loyalty execution point.
-   */
-  private @SafeText String description;
 
   /**
    * The endpoint to call to trigger a BusinessInteraction, CustomerOrder or

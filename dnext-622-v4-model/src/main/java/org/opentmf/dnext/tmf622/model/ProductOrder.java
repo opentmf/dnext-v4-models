@@ -2,13 +2,10 @@ package org.opentmf.dnext.tmf622.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.EntityRef;
 import org.opentmf.tmf622.model.IProductOrder;
@@ -45,18 +42,6 @@ public class ProductOrder extends ProductOrderUpdate implements IProductOrder {
   private @SafeText String createdBy;
 
   private OffsetDateTime createdDate;
-
-  /**
-   * Hyperlink to access the order.
-   */
-  private URI href;
-
-  /**
-   * ID created on repository side (OM system).
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
 
   /**
    * Date when the order was created.

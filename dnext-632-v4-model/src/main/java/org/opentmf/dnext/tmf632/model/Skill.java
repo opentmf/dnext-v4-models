@@ -2,11 +2,14 @@ package org.opentmf.dnext.tmf632.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.TimePeriod;
 import org.opentmf.tmf632.model.ISkill;
 
@@ -38,7 +41,7 @@ import org.opentmf.tmf632.model.ISkill;
     defaultImpl = Skill.class
 )
 @Required(fields = {"skillName", "skillCode"})
-public class Skill extends Entity implements ISkill {
+public class Skill extends Extensible implements ISkill {
 
   /**
    * A free text comment linked to the evaluation done.
@@ -49,6 +52,18 @@ public class Skill extends Entity implements ISkill {
    * Level of expertise in a skill evaluated for an individual.
    */
   private @SafeText String evaluatedLevel;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * Code of the skill.

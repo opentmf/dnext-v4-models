@@ -7,9 +7,8 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AclRelatedParty;
-import org.opentmf.dnext.common.model.NamedEntity;
+import org.opentmf.dnext.common.model.CartTermBase;
 import org.opentmf.tmf668.model.IPartnershipSpecificationCreate;
 
 /**
@@ -37,7 +36,7 @@ import org.opentmf.tmf668.model.IPartnershipSpecificationCreate;
     defaultImpl = PartnershipSpecificationCreate.class
 )
 @Required(fields = {"name"})
-public class PartnershipSpecificationCreate extends NamedEntity implements IPartnershipSpecificationCreate {
+public class PartnershipSpecificationCreate extends CartTermBase implements IPartnershipSpecificationCreate {
 
   /**
    * List of: Related Entity reference. A related party defines party or party
@@ -45,11 +44,6 @@ public class PartnershipSpecificationCreate extends NamedEntity implements IPart
    */
   @JsonProperty("aclRelatedParty")
   private List<@Valid AclRelatedParty> aclRelatedParties;
-
-  /**
-   * An explanatory text regarding this partnership specification.
-   */
-  private @SafeText String description;
 
   /**
    * The list of roles specifications a engaged party will be able to play for

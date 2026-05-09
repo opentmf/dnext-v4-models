@@ -1,12 +1,14 @@
 package org.opentmf.dnext.common.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.constraints.Size;
 import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.IImportJobCreate;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
@@ -34,7 +36,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = ImportJobCreate.class
 )
 @Required(fields = {"url"})
-public class ImportJobCreate extends Entity implements IImportJobCreate {
+public class ImportJobCreate extends Extensible implements IImportJobCreate {
 
   /**
    * Date at which the job was completed.
@@ -55,6 +57,18 @@ public class ImportJobCreate extends Entity implements IImportJobCreate {
    * Reason for failure if status is failed.
    */
   private @SafeText String errorLog;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * URL of the root resource where the content of the file specified by the

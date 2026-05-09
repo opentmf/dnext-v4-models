@@ -18,11 +18,12 @@ import org.opentmf.dnext.common.model.Characteristic;
 import org.opentmf.dnext.common.model.Contact;
 import org.opentmf.dnext.common.model.ContactMedium;
 import org.opentmf.dnext.common.model.EntityRef;
+import org.opentmf.dnext.common.model.ProductOfferingQualificationRef;
+import org.opentmf.dnext.common.model.QuoteRef;
 import org.opentmf.dnext.common.model.RelatedChannel;
 import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.ShoppingCartRef;
 import org.opentmf.dnext.customer.model.PaymentRef;
-import org.opentmf.dnext.customer.model.ProductOfferingQualificationRef;
-import org.opentmf.dnext.customer.model.ShoppingCartRef;
 
 /**
  * Note that this is the returned object in case of GET operations.
@@ -166,7 +167,11 @@ public class ChangedProductOrder extends CancelProductOrderUpdate {
   @JsonProperty("payment")
   private List<@Valid PaymentRef> payments;
 
+  private Boolean pointOfNoChange;
+
   private Boolean pointOfNoReturn;
+
+  private Boolean pointOfNoReturnIFOC;
 
   /**
    * A way that can be used by consumers to prioritize orders in OM system (from 0

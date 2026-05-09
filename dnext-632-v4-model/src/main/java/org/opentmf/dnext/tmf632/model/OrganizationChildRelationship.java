@@ -2,11 +2,15 @@ package org.opentmf.dnext.tmf632.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Entity;
+import org.opentmf.dnext.common.model.Extensible;
+import org.opentmf.dnext.common.model.OrganizationRef;
 import org.opentmf.tmf632.model.IOrganizationChildRelationship;
 
 /**
@@ -34,7 +38,19 @@ import org.opentmf.tmf632.model.IOrganizationChildRelationship;
     defaultImpl = OrganizationChildRelationship.class
 )
 @Required(fields = {"relationshipType", "organization"})
-public class OrganizationChildRelationship extends Entity implements IOrganizationChildRelationship {
+public class OrganizationChildRelationship extends Extensible implements IOrganizationChildRelationship {
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   private @Valid OrganizationRef organization;
 

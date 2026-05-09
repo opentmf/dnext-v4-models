@@ -37,7 +37,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = PaymentMethod.class
 )
 @Required(fields = {"atType", "name"})
-public class PaymentMethod extends ProductBase implements IPaymentMethod {
+public class PaymentMethod extends LoyaltyActionBase implements IPaymentMethod {
 
   /**
    * Reference to the accounts that are linked to the payment method. May be a
@@ -65,6 +65,11 @@ public class PaymentMethod extends ProductBase implements IPaymentMethod {
   private Boolean isPreferred;
 
   /**
+   * Friendly name assigned to the payment method.
+   */
+  private @SafeText String name;
+
+  /**
    * Reference to the customer or party that owns that payment method or can use
    * it.
    */
@@ -77,9 +82,24 @@ public class PaymentMethod extends ProductBase implements IPaymentMethod {
   private @Valid RelatedPlace relatedPlace;
 
   /**
+   * Version number of the entity.
+   */
+  private Integer revision;
+
+  /**
+   * Status of the payment method.
+   */
+  private @SafeText String status;
+
+  /**
    * The last time the payment method status changed.
    */
   private OffsetDateTime statusDate;
+
+  /**
+   * The reason for the last status change.
+   */
+  private @SafeText String statusReason;
 
   /**
    * Date interval in which the payment method is valid.

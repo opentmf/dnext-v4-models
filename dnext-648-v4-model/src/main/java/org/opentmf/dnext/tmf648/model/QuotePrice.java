@@ -7,9 +7,10 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.CartPriceBase;
 import org.opentmf.dnext.common.model.Price;
 import org.opentmf.dnext.common.model.PriceAlteration;
-import org.opentmf.dnext.common.model.PriceBase;
+import org.opentmf.dnext.common.model.ProductOfferingPriceRef;
 import org.opentmf.tmf648.model.IQuotePrice;
 
 /**
@@ -32,7 +33,7 @@ import org.opentmf.tmf648.model.IQuotePrice;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = QuotePrice.class
 )
-public class QuotePrice extends PriceBase implements IQuotePrice {
+public class QuotePrice extends CartPriceBase implements IQuotePrice {
 
   /**
    * Provides all amounts (tax included, duty free, tax rate), used currency and
@@ -46,6 +47,13 @@ public class QuotePrice extends PriceBase implements IQuotePrice {
    */
   @JsonProperty("priceAlteration")
   private List<@Valid PriceAlteration> priceAlterations;
+
+  /**
+   * An amount, usually of money, that is asked for or allowed when a
+   * ProductOffering is bought, rented, or leased. The price is valid for a
+   * defined period of time.
+   */
+  private @Valid ProductOfferingPriceRef productOfferingPrice;
 
   /**
    * Unit of Measure if price depending on it (Gb, SMS volume, etc..).

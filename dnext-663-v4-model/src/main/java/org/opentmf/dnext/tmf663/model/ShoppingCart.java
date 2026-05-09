@@ -9,9 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
+import org.opentmf.dnext.common.model.ProductOfferingQualificationRef;
 import org.opentmf.dnext.common.model.RelatedEntityRefOrValue;
-import org.opentmf.dnext.customer.model.ProductOfferingQualificationRef;
-import org.opentmf.tmf663.model.IShoppingCart;
 
 /**
  * Shopping Cart resource is used for the temporarily selection and reservation
@@ -38,7 +37,7 @@ import org.opentmf.tmf663.model.IShoppingCart;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = ShoppingCart.class
 )
-public class ShoppingCart extends ShoppingCartCreate implements IShoppingCart {
+public class ShoppingCart extends ShoppingCartCreate {
 
   /**
    * Complements the description of an element (for instance a product) through

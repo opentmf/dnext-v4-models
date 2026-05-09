@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.BillPresentationMediaUpdate;
 import org.opentmf.dnext.common.model.TimePeriod;
+import org.opentmf.tmf666.model.IBillingCycleSpecificationUpdate;
 
 /**
  * The BillingCycleSpecification to be updated.
@@ -33,7 +35,7 @@ import org.opentmf.dnext.common.model.TimePeriod;
     defaultImpl = BillingCycleSpecificationUpdate.class
 )
 @Required(fields = {"name"})
-public class BillingCycleSpecificationUpdate extends BillPresentationMediaUpdate {
+public class BillingCycleSpecificationUpdate extends BillPresentationMediaUpdate implements IBillingCycleSpecificationUpdate {
 
   /**
    * An offset of a billing/settlement date. The offset is expressed as number of

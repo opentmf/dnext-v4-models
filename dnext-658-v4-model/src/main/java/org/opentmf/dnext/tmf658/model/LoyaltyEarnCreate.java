@@ -9,13 +9,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Extensible;
+import org.opentmf.dnext.common.model.LoyaltyEarnCreateBase;
 import org.opentmf.dnext.common.model.LoyaltyProgramMemberRef;
+import org.opentmf.dnext.common.model.LoyaltyProgramProductRef;
 import org.opentmf.dnext.common.model.Money;
 import org.opentmf.dnext.common.model.RelatedParty;
+import org.opentmf.dnext.common.model.UsageSpecificationRef;
 import org.opentmf.dnext.product.model.RatedProductUsage;
 import org.opentmf.dnext.product.model.UsageCharacteristic;
-import org.opentmf.dnext.product.model.UsageSpecificationRef;
+import org.opentmf.tmf658.model.ILoyaltyEarnCreate;
 
 /**
  * The LoyaltyEarn to be created.
@@ -42,18 +44,13 @@ import org.opentmf.dnext.product.model.UsageSpecificationRef;
     defaultImpl = LoyaltyEarnCreate.class
 )
 @Required(fields = {"quantity", "loyaltyProgramProduct", "loyaltyProgramMember", "description"})
-public class LoyaltyEarnCreate extends Extensible {
+public class LoyaltyEarnCreate extends LoyaltyEarnCreateBase implements ILoyaltyEarnCreate {
 
   /**
    * DNext Access-Control RelatedParty List like ownership etc.
    */
   @JsonProperty("aclRelatedParty")
   private List<@Valid RelatedParty> aclRelatedParties;
-
-  /**
-   * A description detailing the earn event.
-   */
-  private @SafeText String description;
 
   /**
    * Reference to the loyalty program member earning the loyalty currency.
@@ -77,9 +74,6 @@ public class LoyaltyEarnCreate extends Extensible {
    */
   @JsonProperty("ratedProductUsage")
   private List<@Valid RatedProductUsage> ratedProductUsages;
-
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
 
   /**
    * Status values for LoyaltyBurn

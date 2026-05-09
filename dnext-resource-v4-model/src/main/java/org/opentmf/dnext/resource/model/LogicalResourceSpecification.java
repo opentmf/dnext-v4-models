@@ -1,11 +1,11 @@
 package org.opentmf.dnext.resource.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
+import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.dnext.common.model.ResourceSpecificationExtension;
+import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.resource.model.ILogicalResourceSpecification;
 
 /**
@@ -35,7 +35,30 @@ import org.opentmf.resource.model.ILogicalResourceSpecification;
     defaultImpl = LogicalResourceSpecification.class
 )
 @Required(fields = {"atType"})
-public class LogicalResourceSpecification extends ResourceSpecification implements ILogicalResourceSpecification {
+public class LogicalResourceSpecification extends ResourceSpecificationUpdate implements ILogicalResourceSpecification {
 
-  private @Valid ResourceSpecificationExtension pextension;
+  /**
+   * Name of created by user.
+   */
+  private @SafeText String createdBy;
+
+  /**
+   * Date of creation.
+   */
+  private OffsetDateTime createdDate;
+
+  /**
+   * Version number of the entity.
+   */
+  private Integer revision;
+
+  /**
+   * Name of updated by user.
+   */
+  private @SafeText String updatedBy;
+
+  /**
+   * Date of update.
+   */
+  private OffsetDateTime updatedDate;
 }

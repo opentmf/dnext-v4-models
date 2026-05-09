@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.Characteristic;
+import org.opentmf.dnext.common.model.CommunicationMessageTemplateRef;
 import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.RelatedParty;
 

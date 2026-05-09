@@ -1,10 +1,8 @@
 package org.opentmf.dnext.common.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
-import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
  *
@@ -21,40 +19,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
  */
 @Getter
 @Setter
-public class FulfillmentSpecification {
-
-  /**
-   * Add FulfillmentSpecification.
-   */
-  private @SafeText String add;
-
-  /**
-   * Delete FulfillmentSpecification.
-   */
-  private @SafeText String delete;
-
-  /**
-   * Modify FulfillmentSpecification.
-   */
-  private @SafeText String modify;
-
-  /**
-   * Modify Migration FulfillmentSpecification.
-   */
-  @JsonProperty("modify.Migration")
-  private @SafeText String modifyMigration;
-
-  /**
-   * Modify Relocation FulfillmentSpecification.
-   */
-  @JsonProperty("modify.Relocation")
-  private @SafeText String modifyRelocation;
-
-  /**
-   * Modify Takeover FulfillmentSpecification.
-   */
-  @JsonProperty("modify.Takeover")
-  private @SafeText String modifyTakeover;
+public class FulfillmentSpecification extends PreFlow {
 
   /**
    * Post Flow FulfillmentSpecification.
@@ -65,21 +30,4 @@ public class FulfillmentSpecification {
    * Pre Flow FulfillmentSpecification.
    */
   private @Valid PreFlow preFlow;
-
-  /**
-   * Status Change FulfillmentSpecification.
-   */
-  private @SafeText String statusChange;
-
-  /**
-   * Status Change Resume FulfillmentSpecification.
-   */
-  @JsonProperty("statusChange.Resume")
-  private @SafeText String statusChangeResume;
-
-  /**
-   * Status Change Suspend FulfillmentSpecification.
-   */
-  @JsonProperty("statusChange.Suspend")
-  private @SafeText String statusChangeSuspend;
 }

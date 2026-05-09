@@ -1,12 +1,14 @@
 package org.opentmf.dnext.common.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.validation.constraints.Size;
 import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.opentmf.common.model.IError;
 import org.opentmf.commons.validation.constraints.Required;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
@@ -57,11 +59,23 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = Error.class
 )
 @Required(fields = {"reason", "code"})
-public class Error extends Entity implements IError {
+public class Error extends Extensible implements IError {
 
   private @SafeText String baseType;
 
   private @SafeText String code;
+
+  /**
+   * Hyperlink reference.
+   */
+  private URI href;
+
+  /**
+   * Unique identifier of the entity.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   private @SafeText String message;
 

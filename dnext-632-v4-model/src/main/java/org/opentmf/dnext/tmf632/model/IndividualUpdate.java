@@ -10,15 +10,10 @@ import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
 import org.opentmf.dnext.common.model.AclRelatedParty;
 import org.opentmf.dnext.common.model.AttachmentRefOrValue;
-import org.opentmf.dnext.common.model.Characteristic;
-import org.opentmf.dnext.common.model.ContactMedium;
-import org.opentmf.dnext.common.model.Extensible;
 import org.opentmf.dnext.common.model.ExternalReference;
 import org.opentmf.dnext.common.model.IndividualIdentification;
-import org.opentmf.dnext.common.model.MarketSegmentRef;
-import org.opentmf.dnext.common.model.PartyCreditProfile;
-import org.opentmf.dnext.common.model.RelatedParty;
-import org.opentmf.dnext.common.model.TaxExemptionCertificate;
+import org.opentmf.dnext.partner.model.IndividualCreateBase;
+import org.opentmf.tmf632.model.IIndividualUpdate;
 
 /**
  * The Individual to be updated.
@@ -40,7 +35,7 @@ import org.opentmf.dnext.common.model.TaxExemptionCertificate;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = IndividualUpdate.class
 )
-public class IndividualUpdate extends Extensible {
+public class IndividualUpdate extends IndividualCreateBase implements IIndividualUpdate {
 
   /**
    * List of: Related Entity reference. A related party defines party or party
@@ -68,23 +63,9 @@ public class IndividualUpdate extends Extensible {
   private OffsetDateTime birthDate;
 
   /**
-   * List of: Indicates the contact medium that could be used to contact the
-   * party.
-   */
-  @JsonProperty("contactMedium")
-  private List<@Valid ContactMedium> contactMediums;
-
-  /**
    * Country where the individual was born.
    */
   private @SafeText String countryOfBirth;
-
-  /**
-   * List of: An individual might be evaluated for its worthiness and this
-   * evaluation might be based on a credit rating given by a credit agency.
-   */
-  @JsonProperty("creditRating")
-  private List<@Valid PartyCreditProfile> creditRatings;
 
   /**
    * Date of death.
@@ -168,9 +149,6 @@ public class IndividualUpdate extends Extensible {
    */
   private @SafeText String maritalStatus;
 
-  @JsonProperty("marketSegment")
-  private List<@Valid MarketSegmentRef> marketSegments;
-
   /**
    * Middles name or initial.
    */
@@ -189,13 +167,6 @@ public class IndividualUpdate extends Extensible {
   private List<@Valid OtherNameIndividual> otherNames;
 
   /**
-   * List of: Describes a given characteristic of an object or entity through a
-   * name/value pair.
-   */
-  @JsonProperty("partyCharacteristic")
-  private List<@Valid Characteristic> partyCharacteristics;
-
-  /**
    * Reference to the place where the individual was born.
    */
   private @SafeText String placeOfBirth;
@@ -206,9 +177,6 @@ public class IndividualUpdate extends Extensible {
    */
   private @SafeText String preferredGivenName;
 
-  @JsonProperty("relatedParty")
-  private List<@Valid RelatedParty> relatedParties;
-
   /**
    * List of: Skills evaluated for an individual with a level and possibly with a
    * limited validity when an obsolescence is defined (Ex: the first-aid
@@ -217,19 +185,6 @@ public class IndividualUpdate extends Extensible {
    */
   @JsonProperty("skill")
   private List<@Valid Skill> skills;
-
-  private @SafeText String status;
-
-  /**
-   * List of: A tax exemption certificate represents a tax exemption granted to a
-   * party (individual or organization) by a tax jurisdiction which may be a city,
-   * state, country,... An exemption has a certificate identifier (received from
-   * the jurisdiction that levied the tax) and a validity period. An exemption is
-   * per tax types and determines for each type of tax what portion of the tax is
-   * exempted (partial by percentage or complete) via the tax definition.
-   */
-  @JsonProperty("taxExemptionCertificate")
-  private List<@Valid TaxExemptionCertificate> taxExemptionCertificates;
 
   /**
    * Useful for titles (aristocratic, social,...) Pr, Dr, Sir, ...

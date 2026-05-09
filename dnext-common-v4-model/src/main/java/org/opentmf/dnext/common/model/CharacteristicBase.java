@@ -2,21 +2,23 @@ package org.opentmf.dnext.common.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
+import org.opentmf.commons.validation.constraints.SafeId;
 import org.opentmf.commons.validation.constraints.SafeText;
 
 /**
  * Synthesized abstract parent for 4 model classes.
  *
  * <p><br/>
- * <strong>Referring TMF artifacts:</strong>
+ * <strong>Direct descendants:</strong>
  * <ul>
- *   <li>TMF-620: Product Catalog Management API</li>
- *   <li>TMF-633: Service Catalog Management API</li>
- *   <li>TMF-634: Resource Catalog Management API</li>
- *   <li>TMF-658: Loyalty</li>
- *   <li>TMF-667: Document Management API</li>
+ *   <li>CharacteristicSpecification (633, 667)</li>
+ *   <li>ProductSpecificationCharacteristic (620, 658)</li>
+ *   <li>ProductSpecificationCharacteristicValueUse (620)</li>
+ *   <li>ResourceSpecificationCharacteristic (634)</li>
  * </ul>
  * </p>
  *
@@ -30,7 +32,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = CharacteristicBase.class
 )
-public abstract class CharacteristicBase extends NamedEntity {
+public abstract class CharacteristicBase extends Extensible {
 
   /**
    * Characteristic value type such as simple, choice, range.
@@ -54,6 +56,18 @@ public abstract class CharacteristicBase extends NamedEntity {
    * resource.
    */
   private Boolean extensible;
+
+  /**
+   * Reference of the entity.
+   */
+  private URI href;
+
+  /**
+   * Unique ID for the characteristic.
+   */
+  @SafeId
+  @Size(max = 100)
+  private String id;
 
   /**
    * An indicator that specifies if a value is unique for the specification.
@@ -85,6 +99,12 @@ public abstract class CharacteristicBase extends NamedEntity {
    * the value for the minCardinality.
    */
   private Integer minCardinality;
+
+  /**
+   * A word, term, or phrase by which this characteristic specification is known
+   * and distinguished from other characteristic specifications.
+   */
+  private @SafeText String name;
 
   /**
    * A rule or principle represented in regular expression used to derive the

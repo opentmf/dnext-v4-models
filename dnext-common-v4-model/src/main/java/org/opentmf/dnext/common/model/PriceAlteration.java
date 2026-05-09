@@ -38,7 +38,7 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = PriceAlteration.class
 )
 @Required(fields = {"price", "priceType"})
-public class PriceAlteration extends PriceBase implements IPriceAlteration {
+public class PriceAlteration extends CartPriceBase implements IPriceAlteration {
 
   /**
    * type of alteration such as Discount.
@@ -62,6 +62,8 @@ public class PriceAlteration extends PriceBase implements IPriceAlteration {
    * on the order item price.
    */
   private Integer priority;
+
+  private @Valid ProductOfferingPriceRef productOfferingPrice;
 
   /**
    * Could be minutes, GB...

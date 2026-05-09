@@ -1,11 +1,17 @@
 package org.opentmf.dnext.tmf641.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.CancelProductOrderBase;
+import org.opentmf.dnext.common.model.CompletionCallback;
+import org.opentmf.dnext.common.model.Note;
+import org.opentmf.dnext.common.model.ServiceOrderRef;
 import org.opentmf.tmf641.model.ICancelServiceOrder;
 
 /**
@@ -28,17 +34,30 @@ import org.opentmf.tmf641.model.ICancelServiceOrder;
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
     defaultImpl = CancelServiceOrder.class
 )
-public class CancelServiceOrder extends CancelServiceOrderCreate implements ICancelServiceOrder {
+public class CancelServiceOrder extends CancelProductOrderBase implements ICancelServiceOrder {
+
+  /**
+   * Reason why the order is cancelled.
+   */
+  private @SafeText String cancellationReason;
+
+  /**
+   * Attribute to define the cancellation type ethier immediateCancel or
+   * gracefulCancel.
+   */
+  private @SafeText String cancellationType;
+
+  /**
+   * Attribute to define the callback information once the cancellation is
+   * completed.
+   */
+  private @Valid CompletionCallback completionCallback;
 
   /**
    * an optional message describing the completion of the task if it is done as
    * expected or it is denied for a reason (like order in an state of PoNR).
    */
   private @SafeText String completionMessage;
-
-  private @SafeText String createdBy;
-
-  private OffsetDateTime createdDate;
 
   /**
    * Date when the order is cancelled.
@@ -50,15 +69,22 @@ public class CancelServiceOrder extends CancelServiceOrderCreate implements ICan
    */
   private @Valid ErrorMessage errorMessage;
 
+  /**
+   * Extra information about a given entity.
+   */
+  @JsonProperty("note")
+  private List<@Valid Note> notes;
+
+  /**
+   * Date when the submitter wants the order to be cancelled.
+   */
+  private OffsetDateTime requestedCancellationDate;
+
   private Integer revision;
 
   /**
-   * Tracks the lifecycle status of the cancellation request, such as
-   * Acknowledged, Rejected, InProgress, Pending and so on.
+   * Service Order reference. Useful to understand the which was the Service order
+   * through which the service was instantiated in the service inventory.
    */
-  private @SafeText String state;
-
-  private @SafeText String updatedBy;
-
-  private OffsetDateTime updatedDate;
+  private @Valid ServiceOrderRef serviceOrder;
 }

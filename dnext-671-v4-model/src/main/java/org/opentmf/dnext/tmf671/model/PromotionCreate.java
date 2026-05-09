@@ -1,15 +1,13 @@
 package org.opentmf.dnext.tmf671.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeId;
-import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.tmf671.model.IPromotionCreate;
 
 /**
  *
@@ -28,33 +26,14 @@ import org.opentmf.commons.validation.constraints.SafeText;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    visible = true,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    defaultImpl = PromotionCreate.class
+)
 @Required(fields = {"name"})
-public class PromotionCreate extends PromotionUpdate {
-
-  /**
-   * The base type for use in polymorphic collections.
-   */
-  @JsonProperty("@baseType")
-  private @SafeText String atBaseType;
-
-  /**
-   * A link to the schema describing a resource (for type extension).
-   */
-  @JsonProperty("@schemaLocation")
-  private URI atSchemaLocation;
-
-  /**
-   * The class type of the actual resource (for type extension).
-   */
-  @JsonProperty("@type")
-  private @SafeText String atType;
-
-  /**
-   * A unique identifier for the activity record.
-   */
-  @SafeId
-  @Size(max = 100)
-  private String id;
+public class PromotionCreate extends PromotionUpdate implements IPromotionCreate {
 
   /**
    * List of: Contains the conditions and benefits of the promotion toan eligible

@@ -1,7 +1,7 @@
 package org.opentmf.dnext.common.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.common.model.ITaxDefinition;
@@ -36,7 +36,13 @@ import org.opentmf.commons.validation.constraints.SafeText;
     defaultImpl = TaxDefinition.class
 )
 @Required(fields = {"id", "taxType"})
-public class TaxDefinition extends EntityRef implements ITaxDefinition {
+public class TaxDefinition extends TaxDefinitionBase implements ITaxDefinition {
+
+  /**
+   * The actual type of the target instance when needed for disambiguation.
+   */
+  @JsonProperty("@referredType")
+  private @SafeText String atReferredType;
 
   /**
    * Level of the jurisdiction that levies the tax.
@@ -52,11 +58,4 @@ public class TaxDefinition extends EntityRef implements ITaxDefinition {
    * Type of the tax.
    */
   private @SafeText String taxType;
-
-  /**
-   * The period of time for which the tax applies, might be set for example if it
-   * is known that the jurisdiction will cease to apply the tax after a certain
-   * date.
-   */
-  private @Valid TimePeriod validFor;
 }

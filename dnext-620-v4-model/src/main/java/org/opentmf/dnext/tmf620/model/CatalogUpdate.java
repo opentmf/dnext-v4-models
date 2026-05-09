@@ -32,12 +32,15 @@ import org.opentmf.dnext.product.model.CatalogUpdateBase;
 )
 public class CatalogUpdate extends CatalogUpdateBase {
 
-  @JsonProperty("aclRelatedParty")
-  private List<@Valid RelatedParty> aclRelatedParties;
-
   /**
    * List of root categories contained in this catalog.
    */
   @JsonProperty("category")
   private List<@Valid CategoryRef> categories;
+
+  /**
+   * List of parties involved in this catalog.
+   */
+  @JsonProperty("relatedParty")
+  private List<@Valid RelatedParty> relatedParties;
 }

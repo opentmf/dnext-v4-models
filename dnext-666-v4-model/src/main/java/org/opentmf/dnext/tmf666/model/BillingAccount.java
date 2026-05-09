@@ -1,14 +1,11 @@
 package org.opentmf.dnext.tmf666.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.Valid;
-import java.util.List;
+import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
 import org.opentmf.commons.validation.constraints.SafeText;
-import org.opentmf.dnext.common.model.Characteristic;
 import org.opentmf.tmf666.model.IBillingAccount;
 
 /**
@@ -37,18 +34,30 @@ import org.opentmf.tmf666.model.IBillingAccount;
     defaultImpl = BillingAccount.class
 )
 @Required(fields = {"name", "relatedParty"})
-public class BillingAccount extends SettlementAccount implements IBillingAccount {
+public class BillingAccount extends BillingAccountCreate implements IBillingAccount {
 
   /**
-   * List of: Describes a given characteristic of an object or entity through a
-   * name/value pair.
+   * Name of created by user.
    */
-  @JsonProperty("characteristic")
-  private List<@Valid Characteristic> characteristics;
+  private @SafeText String createdBy;
 
   /**
-   * . Indicates whether the account follows a specific payment option such as
-   * prepaid or postpaid.
+   * Date of creation.
    */
-  private @SafeText String ratingType;
+  private OffsetDateTime createdDate;
+
+  /**
+   * Version number of the entity.
+   */
+  private Integer revision;
+
+  /**
+   * Name of updated by user.
+   */
+  private @SafeText String updatedBy;
+
+  /**
+   * Date of update.
+   */
+  private OffsetDateTime updatedDate;
 }

@@ -1,11 +1,14 @@
 package org.opentmf.dnext.tmf668.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.opentmf.commons.validation.constraints.Required;
-import org.opentmf.commons.validation.constraints.SafeText;
+import org.opentmf.dnext.common.model.AclRelatedParty;
+import org.opentmf.dnext.common.model.BillFormatBase;
 import org.opentmf.tmf668.model.IPartnershipSpecification;
 
 /**
@@ -35,30 +38,19 @@ import org.opentmf.tmf668.model.IPartnershipSpecification;
     defaultImpl = PartnershipSpecification.class
 )
 @Required(fields = {"name"})
-public class PartnershipSpecification extends PartnershipSpecificationUpdate implements IPartnershipSpecification {
+public class PartnershipSpecification extends BillFormatBase implements IPartnershipSpecification {
 
   /**
-   * Name of created by user.
+   * List of: Related Entity reference. A related party defines party or party
+   * role linked to a specific entity.
    */
-  private @SafeText String createdBy;
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid AclRelatedParty> aclRelatedParties;
 
   /**
-   * Date of creation.
+   * The list of roles specifications a engaged party will be able to play for
+   * this kind of partnership.
    */
-  private OffsetDateTime createdDate;
-
-  /**
-   * Version number of the entity.
-   */
-  private Integer revision;
-
-  /**
-   * Name of updated by user.
-   */
-  private @SafeText String updatedBy;
-
-  /**
-   * Date of update.
-   */
-  private OffsetDateTime updatedDate;
+  @JsonProperty("roleSpecification")
+  private List<@Valid PartnershipRoleSpecification> roleSpecifications;
 }

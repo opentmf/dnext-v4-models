@@ -38,6 +38,9 @@ import org.opentmf.tmf634.model.IResourceCatalogCreate;
 @Required(fields = {"name", "id"})
 public class ResourceCatalogCreate extends ResourceBase implements IResourceCatalogCreate {
 
+  @JsonProperty("aclRelatedParty")
+  private List<@Valid RelatedParty> aclRelatedParties;
+
   /**
    * List of root categories contained in this catalog.
    */
